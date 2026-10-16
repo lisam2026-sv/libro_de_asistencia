@@ -1,7 +1,7 @@
 /* Libro de Asistencia — trabajo sin conexión.
    La app se guarda en el teléfono o la computadora; las librerías de QR,
    reconocimiento facial y las fuentes se guardan la primera vez que se usan. */
-const VERSION = 'libro-asistencia-v3';
+const VERSION = 'libro-asistencia-v4';
 const APP = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './icon-maskable-512.png', './apple-touch-icon.png'];
 const EXTERNOS = ['cdn.jsdelivr.net', 'fonts.googleapis.com', 'fonts.gstatic.com'];
 
