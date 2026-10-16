@@ -1,0 +1,1572 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Libro de Asistencia Escolar</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="theme-color" content="#0E1530">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Asistencia">
+<meta name="application-name" content="Libro de Asistencia">
+<meta name="format-detection" content="telephone=no">
+<meta name="description" content="Control de asistencia escolar: pase de lista, ingreso con QR o rostro, justificaciones y reportes.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAEo0lEQVR4nO3dLW4dSRiG0fZocFikAd5BSKDxwIDwWcfAYMNZR3hAYHA2kB0EzC4y6ErWVSbqn/r5+u1zcNQuuR5Vym3fqodXr9/+WCDEb7MHAC0JmiiCJoqgiSJoogiaKIImiqCJImiiCJoogiaKoIkiaKIImiiCJsrvswdwxOPT8+whxPr+9cPsIezycKY/8BfwPGcJvHzQIq6nctxlgxZyfRXDLhe0kM+nUthlghby+VUIu8RrOzFnqDCPU1foCt8A+pi1Wk9bocWcbdb8TglazNcwY56HBy3maxk930ODFvM1jZz3YUGL+dpGzf+QoMXMsozpoHvQYual3j10DVrM/EzPLkr8phBa6Ra01Zlf6dVHl6DFzBo9OrHlIErzoK3ObNG6l1N/SPb/fPnj46p/9+e/f3UeCaM1XaGtzuzRsht7aKI023JccXX+9uldk+e8ef+5yXOWZVm+fXr3d4vnvHn/+Z8Wz1nr8em5yYcCIvfQvbUK+f55R8JuFfL980aHfZQtx0atY27x7NYxj3p2D02Cvsp2o2fMe7/GiOBGRd2iIys0UQS90ojVeevXGrkdOMvWQ9BEORz0VfbPjHG0Jys0UQRNFEETRdBEETRRBE0UQRNF0EQRNFEETRRBE0XQRBE0UQRNFEGv1PKT2a2+1sgPsJ7lw7KCJoqgNxixSm/9GiNWzrOszssi6M16Rr332T2DO1PMy+KgmV1u4VU6OekW3llPTmpF0AeM/EFxrbOG2IotB1EETRRBE0XQRBE0UQRNFK/tDqj4zrfSu/EZBL1DxdPyK94qMIMtx0YVT8uveKvALILeoOJp+RVvFZhJ0EQR9EoVT8uveKvAbIImiqCJImiiCJoogiaKoIkiaKIImiiCJoqgiSJoogiaKIImiqCJImiiCJoogiaKoFeqeP1DxWsyZhM0UQS9QcXrHypekzGToDeqeP1DxWsyZnFy0g4Vr3+oeE3GDII+oOL1D2cNsRVbDqIImiiCJoqgiSJoogiaKF7bHVDxnW/FMY0k6B0qXv9QcUwz2HJsVPH6h4pjmkXQG1S8/qHimGYSNFEEvVLF6x8qjmk2QRNF0EQRNFEETRRBE0XQRBE0UQRNFEETRdBEETRRBE0UQRNF0EQRNFEETRRBr1TxtPyKY5pN0EQR9AYVT8uvOKaZDgf9/euHFuM4jYqn5Vcc015He3LQzA4VT8uvOKYZBH1AxUmvOKaR7KGJ0iToq+2j6aNFR1ZoogiaKM2Ctu3giFb9WKGJ8vDq9dsfLR/4+PTc8nFcQMv/3a3QRGketL00W7TuxQpNlC5BW6VZo0cn3VZoUfMrvfqw5SBK16Ct0vxMzy66r9Ci5qXePQzZcoiaZRnTwbA9tKivbdT8D/2hUNTXNHLeh7/lEPW1jJ7vKa/tRH0NM+Z52ntoUWebNb/N/3x0D39ymmP2QlXiN4Wzvwm0UWEeS6zQL1mtz6dCyDflgr4Rdn2VQr4pG/SNsOupGPJN+aBfEvc8lSN+6VRB3xN4P2cJ+N6pg4Z7JV7bQSuCJoqgiSJoogiaKIImiqCJImiiCJoogiaKoIkiaKIImiiCJsp/75twYFXrCxoAAAAASUVORK5CYII=">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAGJElEQVR4nO3dq24cSRjF8ZpRsJmlBXkDE8PghQHh+xwLgwPzHOEGgcGBJnmDgJXM/AIOWHXUnsylu+u71Zz/jyaqaWnO6aq+eGrXirm5vX/JPgb4eX563GUfw1zqwRB2tJZbivAPJvQ4J7oMYR9G8LFGVBHcP4Tgo4d3EdwGJ/iw5FUE80EJPjxZF2FvORjhhzfrjJm0ieAjg8Vs0D0DEH5kscheVwEIP7L1ZnBzAQg/qujJ4qYCEH5UszWTqwtA+FHVlmyuKgDhR3VrM7q4AIQfo1iT1UUFIPwYzdLMXnyQMEr43777lH0Icn5+/5h9CBddelg2bAEIfD0VC9FVgGrhJ/TjqFSGcyU4+Q9Vwk/ox1ehDKdKULYABP/6ZBbhVAGO3gUi/PCQ+b2eyvTRVmQVgODryJgNjs0Cf8wAhB8RMr7vY9n+oxHRBSD4iJwNDmeBVzMA4UeGyBwcZtz0b4LXIPyYy8rD7wJEnv0JP46JysU86+EzAOHHOdH5CC0A4ccSkTnZtxaz/CH8WMM7L1PmQ2YAwo8tInKTdhcIqMC9AJz90cM7P64FIPyw4Jmjffabn0CWm9v7F7cZgLM/LHnlyaUAhB8ePHL1xnzEgr799WXR//v7v3+cjwTVmM8AnP3hyTpfPAeANIklUKQfD+/Nxrr78NVsrMmPh/f/Wo119+HrZ6uxsuwsb4NWXf5EXANYBv+QRREsg38oowhWf0XGEsiAZ/gtxvcMf8T4nihAJ+/w935OVDhHLYFZAaouf3CdrPLGDNAh6uy/9fOiz8ojzgIUANIoAKSZFID1PzJY5I4ZANIoAKRRAEijAJBGASCNAkAaBYA0CgBpFADSKACkUQBIowCQRgEgjQJAGgWANAoAaRSgg8cPV1l+XvTv9Yz4Q1kUANIoQKeoWWDr50SdlUc8+7dGAUx4l6B3fO9wjhr+1vhxXDNTSKv+OO4UUn4c9zUKYCz6wnitawitJZZAkEYBII0CQBoFgDQKAGkUANK4DWqs+n32qs8pslAAIx6bQ0xjWhTBYzOPacyRi8ASyED1Teiqb+KXiQJ0qr4JXfVN/LJRAEijAB2qb0JXfRO/CigApFEASKMAkEYBII0CQBoFgDQKAGkUANIoAKRRAEijAJBGASCNAkAaBYA0CgBpFADSKACkUQBIowAdqu/BVX0PswooAKRRgE7V9+CqvodZNgpgoPoeXNX3MMvETyMaqb4HV/U9zLJQAGPV9+C6htBaYgkEaRQA0igApFEASKMAkEYBII0CQBrPAYxVf9BU/fiiUQAj1Tehq358WVgCGai+CV3148tEATpV34Su+vFlowCQRgE6VN+ErvrxVUABII0CQBoFgDQKAGkUANIoAKRRAEijAJBGASCNAkAaBYA0CgBpFADSKACkUQBIowCQRgEgjQJAGgXoUH0TuurHVwEFgDQK0Kn6JnTVjy+bSQF+fv9oMcywqm9CV/34trLIHT+NaKT6JnTVjy8LBTBWPRTVjy8a1wCQZlYA9esAxLLKGzMApFEASDMtAMsgRLDMGTMApFEASNvd3N6/WA/69t0n6yGB1pr9MpsZANJcCsDFMDx45Gr//PS4Mx+1UQLY8sjT89PjjiUQpLkWgFkAFjxz5D4DUAL08M4PSyBI27f2/8WA54cwC2ALz9xMmQ+bASgB1ojKS+gSiBJgicic/C6A9zJoQglwTkQ+5llPuQimBDgmIxevChA1C7RGCfBaVB4OM556G5QSoLXcHBw943u8In0Jr1DriQ7+sRVOmQdhzAZaqnzfJ9f8GbPAhNngemUF/9T1bZkZYK7K2QG2Kn6vZ+/6ZM4CE2aD8WUH/9zdzYu3PSuUYEIZxpEd+smlW/tDFWCOMtRTJfRz3QVorW4J5ihEvIqBn1vyYHfxk98RSgBMlr7VsPguUORrEkCPNVlddRuUEqC6tRld/RyAEqCqLdnc9CCMEqCarZnc/CSYEqCKnix2vQpBCZCtN4Pd7wJRAmSxyJ5peHlWgAiWJ13Tt0GZDeDNOmNugWU2gCWvk6v7GZsioIf3qiJsyUIRsEbUcjp8zU4RcE70dWTqRStlQGu5N0/K3bWhFNet2p3CX+96P0fxcv/fAAAAAElFTkSuQmCC">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: barra lateral fija color tinta + área de trabajo; el registro mensual imita la cuadrícula del libro con su margen rojo; el control de entrada es un escenario oscuro de cámara. */
+:root{
+  --bg:#F3F5FA; --surface:#FFFFFF; --surface-2:#F8F9FC; --sunk:#ECEFF6; --ink:#111830; --ink-2:#39435F; --muted:#677190; --line:#E1E5EE; --line-2:#CBD2E0;
+  --accent:#2A4DB5; --accent-2:#1F3D99; --accent-ink:#FFFFFF; --accent-soft:#E4E9FA; --margin:#C8423A;
+  --p:#1F7A4A; --p-soft:#DCF1E4; --a:#C23B33; --a-soft:#F9E1DE; --t:#9A600A; --t-soft:#F7EACF; --j:#6550B0; --j-soft:#EAE5F8;
+  --side-bg:#0E1530; --side-ink:#D3DAEE; --side-muted:#7E8AAE; --side-hover:#18224A; --side-active:#22306A; --side-line:#1E2850;
+  --stage:#0A0F1F; --stage-ink:#E6EBF8; --stage-line:#26304F;
+  --sh-1:0 1px 2px rgba(17,24,48,.05),0 1px 3px rgba(17,24,48,.05);
+  --sh-2:0 12px 32px -10px rgba(17,24,48,.18),0 2px 6px rgba(17,24,48,.05);
+  --f-display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --f-body:'Figtree','Segoe UI',system-ui,-apple-system,sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,'Cascadia Mono',Consolas,monospace;
+  --r:12px; --r-lg:16px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0B0F18; --surface:#131925; --surface-2:#171E2C; --sunk:#0F141F; --ink:#E7EBF5; --ink-2:#C2C9DB; --muted:#8B95AE; --line:#222B3C; --line-2:#2F3A50;
+  --accent:#8CA6F2; --accent-2:#A4B9F6; --accent-ink:#0D1530; --accent-soft:#1C2647; --margin:#E2716A;
+  --p:#5DC08B; --p-soft:#15301F; --a:#EE8077; --a-soft:#3A1B1A; --t:#E4B05A; --t-soft:#36290F; --j:#AE9DF0; --j-soft:#262042;
+  --side-bg:#080C18; --side-hover:#121A33; --side-active:#1B2650; --side-line:#161E38;
+  --sh-1:0 1px 2px rgba(0,0,0,.35); --sh-2:0 14px 36px -12px rgba(0,0,0,.6); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0B0F18; --surface:#131925; --surface-2:#171E2C; --sunk:#0F141F; --ink:#E7EBF5; --ink-2:#C2C9DB; --muted:#8B95AE; --line:#222B3C; --line-2:#2F3A50;
+  --accent:#8CA6F2; --accent-2:#A4B9F6; --accent-ink:#0D1530; --accent-soft:#1C2647; --margin:#E2716A;
+  --p:#5DC08B; --p-soft:#15301F; --a:#EE8077; --a-soft:#3A1B1A; --t:#E4B05A; --t-soft:#36290F; --j:#AE9DF0; --j-soft:#262042;
+  --side-bg:#080C18; --side-hover:#121A33; --side-active:#1B2650; --side-line:#161E38;
+  --sh-1:0 1px 2px rgba(0,0,0,.35); --sh-2:0 14px 36px -12px rgba(0,0,0,.6); color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{min-height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5;margin:0;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.12;letter-spacing:-.015em}
+h1{font-size:clamp(1.55rem,1.2rem + 1.2vw,2rem);font-weight:700}
+h2{font-size:1.12rem;font-weight:700}
+h3{font-size:.98rem;font-weight:700}
+p{margin:0}
+svg{flex-shrink:0}
+.num{font-variant-numeric:tabular-nums}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.small{font-size:.84rem}
+.eyebrow{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+::selection{background:var(--accent-soft)}
+
+/* ---------- Armazón ---------- */
+.app{display:grid;grid-template-columns:268px minmax(0,1fr);min-height:100vh}
+.side{position:sticky;top:0;height:100vh;overflow-y:auto;background:var(--side-bg);color:var(--side-ink);display:flex;flex-direction:column;gap:22px;
+  padding-block:22px 18px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:16px;z-index:40}
+.brand{display:flex;gap:11px;align-items:center;padding:0 6px}
+.brand-t{font-family:var(--f-display);font-weight:700;font-size:1.06rem;line-height:1.1;color:#fff}
+.brand-s{font-size:.76rem;color:var(--side-muted);margin-top:2px}
+.nav{display:flex;flex-direction:column;gap:16px;flex:1}
+.nav-g{display:flex;flex-direction:column;gap:2px}
+.nav-l{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--side-muted);font-weight:600;padding:0 10px 6px}
+.nav a{display:flex;align-items:center;gap:11px;padding:9px 10px;border-radius:9px;color:var(--side-ink);text-decoration:none;font-weight:500;font-size:.93rem;transition:background .15s}
+.nav a svg{opacity:.75}
+.nav a:hover{background:var(--side-hover)}
+.nav a[aria-current="page"]{background:var(--side-active);color:#fff;font-weight:600}
+.nav a[aria-current="page"] svg{opacity:1;color:#9FB4F5}
+.nav a .badge{margin-left:auto}
+.badge{font-family:var(--f-mono);font-size:.7rem;font-weight:600;min-width:22px;text-align:center;padding:1px 7px;border-radius:99px;background:#E25B52;color:#fff;line-height:1.5}
+.me{display:flex;align-items:center;gap:10px;padding:12px 8px 0;border-top:1px solid var(--side-line)}
+.me-n{font-weight:600;font-size:.88rem;line-height:1.2;color:#fff}
+.me-r{font-size:.76rem;color:var(--side-muted)}
+.me .icon-btn{margin-left:auto;color:var(--side-muted)}
+.me .icon-btn:hover{background:var(--side-hover);color:#fff}
+.main{min-width:0;display:flex;flex-direction:column;gap:22px;padding-block:18px 56px;padding-left:32px;padding-right:max(32px,env(safe-area-inset-right,0px));max-width:1440px;width:100%}
+.top{display:flex;align-items:center;gap:10px;min-height:40px}
+.top-date{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:.86rem;font-weight:500}
+.top-sp{flex:1}
+.top .menu-btn{display:none}
+.scrim{display:none}
+.head{display:flex;flex-wrap:wrap;gap:14px 20px;align-items:flex-end;justify-content:space-between}
+.head-t{display:flex;flex-direction:column;gap:5px;min-width:0}
+.head-t p{color:var(--muted);max-width:68ch}
+
+@media (max-width:980px){
+  .app{grid-template-columns:minmax(0,1fr)}
+  .side{position:fixed;inset:0 auto 0 0;width:min(288px,86vw);transform:translateX(-102%);transition:transform .22s ease;padding-top:max(22px,env(safe-area-inset-top,0px))}
+  .app.nav-open .side{transform:none;box-shadow:var(--sh-2)}
+  .app.nav-open .scrim{display:block;position:fixed;inset:0;background:rgba(8,12,24,.5);z-index:39}
+  .top .menu-btn{display:inline-grid}
+  .main{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));gap:18px}
+}
+
+/* ---------- Componentes ---------- */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px;display:flex;flex-direction:column;gap:16px;min-width:0;box-shadow:var(--sh-1)}
+.panel-h{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.panel-h .head-t{gap:3px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:20px;align-items:start}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:14px}
+.metric{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:16px 18px;display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:start;box-shadow:var(--sh-1)}
+.metric-l{font-size:.8rem;color:var(--muted);font-weight:600}
+.metric-v{font-family:var(--f-display);font-size:2.1rem;font-weight:700;line-height:1.08;font-variant-numeric:tabular-nums;letter-spacing:-.02em;grid-column:1}
+.metric-v small{font-size:1rem;color:var(--muted);font-weight:600}
+.metric-s{font-size:.8rem;color:var(--muted);grid-column:1/-1}
+.metric-i{grid-row:1/3;grid-column:2;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent)}
+.metric-i.p{background:var(--p-soft);color:var(--p)}.metric-i.a{background:var(--a-soft);color:var(--a)}.metric-i.t{background:var(--t-soft);color:var(--t)}
+.ring{grid-row:1/3;grid-column:2;--v:0;width:52px;height:52px;border-radius:50%;background:conic-gradient(var(--rc,var(--p)) calc(var(--v)*1%),var(--sunk) 0);display:grid;place-items:center}
+.ring::after{content:"";width:38px;height:38px;border-radius:50%;background:var(--surface)}
+.btn{font:inherit;font-weight:600;font-size:.88rem;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:8px 14px;border-radius:9px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink);cursor:pointer;text-decoration:none;white-space:nowrap;transition:background .15s,border-color .15s,box-shadow .15s;box-shadow:var(--sh-1)}
+.btn:hover{background:var(--surface-2);border-color:var(--muted)}
+.btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn-primary:hover{background:var(--accent-2);border-color:var(--accent-2)}
+.btn-danger{background:var(--a);border-color:var(--a);color:#fff}
+.btn-danger:hover{background:var(--a);filter:brightness(1.07)}
+.btn-ghost{border-color:transparent;background:transparent;box-shadow:none}
+.btn-ghost:hover{background:var(--sunk);border-color:transparent}
+.btn-sm{padding:5px 10px;font-size:.8rem;border-radius:8px}
+.btn-lg{padding:11px 18px;font-size:.95rem}
+.icon-btn{display:inline-grid;place-items:center;width:36px;height:36px;border-radius:9px;border:0;background:transparent;color:var(--muted);cursor:pointer}
+.icon-btn:hover{background:var(--sunk);color:var(--ink)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field label,.lbl{font-size:.78rem;font-weight:600;color:var(--ink-2)}
+.hint{font-size:.76rem;color:var(--muted)}
+input,select,textarea{font:inherit;font-size:.92rem;color:var(--ink);background:var(--surface);border:1px solid var(--line-2);border-radius:9px;padding:8px 11px;min-width:0;max-width:100%;transition:border-color .15s,box-shadow .15s}
+input:hover,select:hover,textarea:hover{border-color:var(--muted)}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+input[type="checkbox"]{width:17px;height:17px;accent-color:var(--accent);box-shadow:none}
+textarea{min-height:120px;font-family:var(--f-mono);font-size:.84rem}
+.search{position:relative;display:flex;align-items:center}
+.search svg{position:absolute;left:11px;color:var(--muted);pointer-events:none}
+.search input{padding-left:36px;width:100%}
+.check{display:flex;gap:9px;align-items:flex-start;font-size:.9rem;line-height:1.35}
+.check input{margin-top:1px}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:14px}
+.form .full{grid-column:1/-1}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:.75rem;font-weight:600;padding:2px 9px;border-radius:99px;white-space:nowrap;background:var(--sunk);color:var(--muted);line-height:1.6}
+.chip::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.85}
+.chip.nodot::before{display:none}
+.chip-ok{background:var(--p-soft);color:var(--p)}.chip-warn{background:var(--t-soft);color:var(--t)}.chip-crit{background:var(--a-soft);color:var(--a)}.chip-j{background:var(--j-soft);color:var(--j)}.chip-acc{background:var(--accent-soft);color:var(--accent)}
+.via{display:inline-flex;align-items:center;gap:4px;font-size:.72rem;font-weight:600;color:var(--muted);font-family:var(--f-mono)}
+.note{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:var(--r);background:var(--t-soft);color:var(--ink);font-size:.88rem;line-height:1.45}
+.note svg{color:var(--t);margin-top:1px}
+.note-info{background:var(--accent-soft)}.note-info svg{color:var(--accent)}
+.demo{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;padding:11px 14px 11px 16px;border-radius:var(--r);background:var(--accent-soft);font-size:.88rem;border:1px solid color-mix(in srgb,var(--accent) 22%,transparent)}
+.empty{padding:32px 16px;text-align:center;color:var(--muted);display:flex;flex-direction:column;gap:8px;align-items:center}
+.empty svg{color:var(--line-2)}
+.empty b{color:var(--ink)}
+.av{width:34px;height:34px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;font-size:.74rem;font-weight:700;background:var(--accent-soft);color:var(--accent);object-fit:cover;letter-spacing:.02em}
+.av-lg{width:64px;height:64px;font-size:1.2rem}
+.who{display:flex;align-items:center;gap:10px;min-width:0}
+.who>div{min-width:0}
+
+/* Tablas */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface);box-shadow:var(--sh-1)}
+.panel .tbl-wrap{box-shadow:none}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:.88rem}
+th{font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:600;text-align:left;padding:10px 14px;background:var(--surface-2);border-bottom:1px solid var(--line);white-space:nowrap;position:sticky;top:0;z-index:1}
+td{padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+tbody tr{transition:background .12s}
+tbody tr:hover{background:var(--surface-2)}
+tr:last-child td{border-bottom:0}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+td.c,th.c{text-align:center}
+tfoot td{font-weight:700;background:var(--surface-2);border-top:1px solid var(--line)}
+.linkbtn{font:inherit;color:var(--ink);font-weight:600;background:none;border:0;padding:0;cursor:pointer;text-align:left}
+.linkbtn:hover{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.pctbar{display:flex;align-items:center;gap:9px;min-width:130px}
+.pctbar-t{flex:1;height:6px;border-radius:99px;background:var(--sunk);overflow:hidden}
+.pctbar-f{height:100%;border-radius:99px;background:var(--p)}
+.pctbar-f.warn{background:var(--t)}.pctbar-f.crit{background:var(--a)}
+
+/* Segmentados y pestañas */
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);overflow-x:auto}
+.tabs button{font:inherit;font-weight:600;font-size:.9rem;display:inline-flex;align-items:center;gap:7px;padding:10px 14px;border:0;background:none;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer;white-space:nowrap}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+.pill-tabs{display:inline-flex;padding:4px;border-radius:12px;background:var(--sunk);gap:2px;flex-wrap:wrap}
+.pill-tabs button{font:inherit;font-weight:600;font-size:.86rem;display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:9px;border:0;background:none;color:var(--muted);cursor:pointer}
+.pill-tabs button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--sh-1)}
+
+/* Pase de lista */
+.counts{display:flex;flex-wrap:wrap;gap:8px}
+.count{display:flex;align-items:baseline;gap:7px;padding:6px 12px;border-radius:9px;font-weight:600;font-size:.84rem}
+.count b{font-family:var(--f-mono);font-size:1.05rem}
+.k-P{background:var(--p-soft);color:var(--p)}.k-A{background:var(--a-soft);color:var(--a)}.k-T{background:var(--t-soft);color:var(--t)}.k-J{background:var(--j-soft);color:var(--j)}
+.roll{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface);overflow:hidden;box-shadow:var(--sh-1)}
+.roll-r{display:grid;grid-template-columns:30px minmax(0,1fr) auto minmax(0,270px);gap:14px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line);border-left:3px solid transparent}
+.roll-r:last-child{border-bottom:0}
+.roll-r.is-A{background:color-mix(in srgb,var(--a-soft) 50%,transparent);border-left-color:var(--a)}
+.roll-r.is-T{background:color-mix(in srgb,var(--t-soft) 50%,transparent);border-left-color:var(--t)}
+.roll-r.is-J{background:color-mix(in srgb,var(--j-soft) 50%,transparent);border-left-color:var(--j)}
+.roll-n{font-family:var(--f-mono);color:var(--muted);font-size:.82rem;text-align:right}
+.roll-name{font-weight:600;line-height:1.25}
+.roll-sub{font-size:.76rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center;margin-top:2px}
+.seg{display:inline-flex;border:1px solid var(--line-2);border-radius:10px;overflow:hidden;background:var(--surface)}
+.seg button{font:inherit;font-family:var(--f-mono);font-weight:600;width:42px;height:36px;border:0;border-right:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;transition:background .12s}
+.seg button:last-child{border-right:0}
+.seg button:hover:not(:disabled){background:var(--sunk);color:var(--ink)}
+.seg button:disabled{cursor:not-allowed}
+.seg button[aria-pressed="true"][data-v="P"]{background:var(--p);color:#fff}
+.seg button[aria-pressed="true"][data-v="A"]{background:var(--a);color:#fff}
+.seg button[aria-pressed="true"][data-v="T"]{background:var(--t);color:#fff}
+.seg button[aria-pressed="true"][data-v="J"]{background:var(--j);color:#fff}
+.roll-x{display:flex;gap:6px;min-width:0}
+.roll-x input{flex:1;padding:6px 9px;font-size:.84rem}
+.roll-x input[type="time"]{flex:0 0 110px}
+.savebar{position:sticky;bottom:max(14px,env(safe-area-inset-bottom,0px));display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:12px 14px 12px 18px;border-radius:var(--r-lg);background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh-2);z-index:5}
+@media (max-width:760px){.roll-r{grid-template-columns:26px minmax(0,1fr);row-gap:8px;padding:10px 12px}.roll-r .seg,.roll-r .roll-x{grid-column:2}}
+
+/* Registro mensual */
+.reg{font-size:.8rem}
+.reg th,.reg td{padding:5px 6px;border-right:1px solid var(--line)}
+.reg th.d,.reg td.d{text-align:center;width:30px;min-width:30px;font-family:var(--f-mono)}
+.reg td.name{white-space:nowrap;border-right:2px solid var(--margin);position:sticky;left:0;background:var(--surface);z-index:1}
+.reg th.name{border-right:2px solid var(--margin);position:sticky;left:0;z-index:2}
+.reg tbody tr:hover td.name{background:var(--surface-2)}
+.reg tfoot td.name{background:var(--surface-2)}
+.reg .wd{display:block;font-size:.64rem;color:var(--muted);font-weight:500}
+.c-P{color:var(--p)}.c-A{color:var(--a);background:var(--a-soft);font-weight:700}.c-T{color:var(--t);background:var(--t-soft);font-weight:700}.c-J{color:var(--j);background:var(--j-soft);font-weight:700}
+.c-0{color:var(--line-2)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}
+
+/* Gráfico */
+.bars{display:grid;grid-template-columns:30px minmax(0,1fr);gap:8px}
+.bars-y{display:flex;flex-direction:column;justify-content:space-between;font-family:var(--f-mono);font-size:.68rem;color:var(--muted);text-align:right;height:160px;margin-top:-6px;padding-bottom:0}
+.bars-plot{position:relative;height:160px;display:flex;align-items:flex-end;gap:8px;border-bottom:1px solid var(--line-2);
+  background:linear-gradient(var(--line),var(--line)) 0 0/100% 1px no-repeat,linear-gradient(var(--line),var(--line)) 0 50%/100% 1px no-repeat}
+.bar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;min-width:0}
+.bar-f{width:100%;max-width:38px;border-radius:6px 6px 0 0;background:linear-gradient(to top,var(--accent),color-mix(in srgb,var(--accent) 70%,var(--surface)))}
+.bar-f.warn{background:var(--t)}
+.bar-v{font-family:var(--f-mono);font-size:.68rem;color:var(--ink-2);margin-bottom:4px;font-weight:600}
+.bars-x{grid-column:2;display:flex;gap:8px}
+.bars-x span{flex:1;text-align:center;font-family:var(--f-mono);font-size:.66rem;color:var(--muted);min-width:0}
+
+.list{display:flex;flex-direction:column}
+.list-r{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+.list-r:last-child{border-bottom:0}
+.list-r>div{min-width:0}
+
+/* ---------- Control de entrada ---------- */
+.kiosk{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(300px,1fr);gap:20px;align-items:start}
+.stage-wrap{display:flex;flex-direction:column;gap:12px;min-width:0}
+.stage{position:relative;border-radius:20px;overflow:hidden;background:var(--stage);aspect-ratio:4/3;max-width:100%;color:var(--stage-ink);box-shadow:var(--sh-2)}
+.stage video,.stage canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.stage.mirror video,.stage.mirror canvas{transform:scaleX(-1)}
+.stage-idle{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:24px;
+  background:radial-gradient(120% 80% at 50% 0%,#18224A 0%,var(--stage) 60%)}
+.stage-idle p{color:#AEB8D6;max-width:40ch;font-size:.92rem}
+.stage-idle svg{color:#7F95DA}
+.frame{position:absolute;inset:16% 22%;pointer-events:none}
+.stage.face .frame{inset:12% 28%;border-radius:44% 44% 40% 40%;border:2px dashed rgba(255,255,255,.35)}
+.frame i{position:absolute;width:34px;height:34px;border:3px solid #fff;opacity:.9}
+.frame i:nth-child(1){top:0;left:0;border-right:0;border-bottom:0;border-radius:10px 0 0 0}
+.frame i:nth-child(2){top:0;right:0;border-left:0;border-bottom:0;border-radius:0 10px 0 0}
+.frame i:nth-child(3){bottom:0;left:0;border-right:0;border-top:0;border-radius:0 0 0 10px}
+.frame i:nth-child(4){bottom:0;right:0;border-left:0;border-top:0;border-radius:0 0 10px 0}
+.stage.face .frame i{display:none}
+.scanline{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#8FB0FF,transparent);box-shadow:0 0 12px #8FB0FF;top:50%}
+@media (prefers-reduced-motion:no-preference){.scanline{animation:scan 2.2s ease-in-out infinite}@keyframes scan{0%,100%{top:4%}50%{top:96%}}}
+.stage-status{position:absolute;left:14px;bottom:14px;right:14px;display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:.8rem;pointer-events:none}
+.stage-status span{background:rgba(6,10,22,.72);backdrop-filter:blur(6px);padding:5px 11px;border-radius:99px;color:#DCE3F6}
+.flash{position:absolute;inset:0;pointer-events:none;opacity:0}
+.flash.on{animation:flash .7s ease-out}
+@keyframes flash{0%{opacity:.55}100%{opacity:0}}
+.wedge{display:flex;gap:8px;align-items:center}
+.wedge .search{flex:1}
+.k-side{display:flex;flex-direction:column;gap:16px;min-width:0}
+.clock{display:flex;flex-direction:column;gap:2px}
+.clock-t{font-family:var(--f-display);font-size:clamp(2.6rem,2rem + 2vw,3.6rem);font-weight:700;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.result{border-radius:var(--r-lg);padding:18px;display:flex;gap:16px;align-items:center;border:1px solid var(--line);background:var(--surface);min-height:112px;box-shadow:var(--sh-1);transition:background .2s,border-color .2s}
+.result .av{width:72px;height:72px;font-size:1.3rem}
+.result-n{font-family:var(--f-display);font-size:1.25rem;font-weight:700;line-height:1.15}
+.result.r-P{background:var(--p-soft);border-color:color-mix(in srgb,var(--p) 40%,transparent)}
+.result.r-T{background:var(--t-soft);border-color:color-mix(in srgb,var(--t) 40%,transparent)}
+.result.r-err{background:var(--a-soft);border-color:color-mix(in srgb,var(--a) 40%,transparent)}
+.result.r-ya{background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 30%,transparent)}
+.result-s{font-weight:700;font-size:.95rem}
+.r-P .result-s{color:var(--p)}.r-T .result-s{color:var(--t)}.r-err .result-s{color:var(--a)}.r-ya .result-s{color:var(--accent)}
+@media (prefers-reduced-motion:no-preference){.result.pop{animation:pop .35s ease-out}@keyframes pop{0%{transform:scale(.97)}60%{transform:scale(1.01)}100%{transform:none}}}
+.progress{height:8px;border-radius:99px;background:var(--sunk);overflow:hidden;display:flex}
+.progress i{display:block;height:100%}
+.kiosk-full{position:fixed;inset:0;z-index:60;background:var(--bg);overflow:auto;padding:max(20px,env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) 20px max(20px,env(safe-area-inset-left,0px))}
+@media (max-width:900px){.kiosk{grid-template-columns:minmax(0,1fr)}}
+
+/* Carnets */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:16px}
+.carnet{aspect-ratio:85.6/54;max-width:100%;border-radius:14px;overflow:hidden;background:#fff;color:#111830;border:1px solid #D9DEEA;display:grid;grid-template-rows:auto 1fr auto;box-shadow:var(--sh-1);-webkit-print-color-adjust:exact;print-color-adjust:exact;break-inside:avoid}
+.carnet-h{background:#0E1530;color:#fff;padding:7px 12px;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.7rem;font-weight:600;letter-spacing:.02em}
+.carnet-h b{font-family:var(--f-display);font-size:.82rem;letter-spacing:0}
+.carnet-b{display:grid;grid-template-columns:minmax(0,1fr) 34%;gap:10px;padding:10px 12px;align-items:center;min-height:0}
+.carnet-b .av{width:46px;height:46px;font-size:.9rem;background:#E4E9FA;color:#2A4DB5}
+.carnet-n{font-family:var(--f-display);font-weight:700;font-size:.92rem;line-height:1.12;margin-top:6px}
+.carnet-g{font-size:.72rem;color:#4A5370;margin-top:2px}
+.carnet-nie{font-family:var(--f-mono);font-size:.68rem;color:#4A5370;margin-top:4px}
+.carnet-qr svg{width:100%;height:auto;display:block}
+.carnet-f{font-size:.6rem;color:#677190;padding:4px 12px 6px;border-top:1px dashed #D9DEEA;display:flex;justify-content:space-between}
+
+/* Diálogos */
+dialog{border:1px solid var(--line);border-radius:18px;padding:0;background:var(--surface);color:var(--ink);width:min(660px,calc(100vw - 32px));max-height:calc(100vh - 48px);box-shadow:var(--sh-2)}
+dialog::backdrop{background:rgba(8,12,26,.55);backdrop-filter:blur(2px)}
+@media (prefers-reduced-motion:no-preference){dialog[open]{animation:dlg .18s ease-out}@keyframes dlg{from{transform:translateY(8px) scale(.99);opacity:0}}}
+.dlg{padding:24px;display:flex;flex-direction:column;gap:16px}
+.dlg-actions{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+#dlg2{width:min(460px,calc(100vw - 32px))}
+
+/* ---------- Acceso ---------- */
+.login{min-height:100vh;min-height:100dvh;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);background:var(--bg)}
+.login-art{position:relative;overflow:hidden;isolation:isolate;background:var(--side-bg);color:#fff;display:flex;flex-direction:column;justify-content:space-between;gap:36px;
+  padding-top:max(36px,env(safe-area-inset-top,0px));padding-bottom:max(36px,env(safe-area-inset-bottom,0px));padding-left:max(48px,env(safe-area-inset-left,0px));padding-right:48px}
+.la-glow{position:absolute;inset:-25%;z-index:-3;background:radial-gradient(38% 32% at 80% 24%,rgba(70,108,224,.5),transparent 70%),radial-gradient(30% 28% at 12% 88%,rgba(200,66,58,.2),transparent 70%)}
+.la-grid{position:absolute;right:-60px;top:52%;transform:translateY(-50%) rotate(-9deg);display:grid;grid-template-columns:repeat(12,30px);gap:8px;z-index:-2;
+  -webkit-mask-image:radial-gradient(closest-side,#000 45%,transparent);mask-image:radial-gradient(closest-side,#000 45%,transparent)}
+.la-grid i{width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.06)}
+.la-grid i.on{background:var(--c)}
+.la-margin{position:absolute;top:96px;bottom:0;left:calc(max(48px,env(safe-area-inset-left,0px)) + 14px);width:2px;background:linear-gradient(#E8655C,rgba(232,101,92,.15));transform-origin:top;z-index:-1}
+.la-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.la-pill{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);font-family:var(--f-mono);font-size:.82rem;color:#D7DEF4;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.la-pill i{width:7px;height:7px;border-radius:50%;background:#5DC08B;box-shadow:0 0 0 0 rgba(93,192,139,.6)}
+.la-mid{display:flex;flex-direction:column;gap:26px;padding-left:44px}
+.la-kicker{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:#93A3D6;font-weight:600}
+.login-big{font-family:var(--f-display);font-weight:800;font-size:clamp(2.6rem,1.4rem + 3.4vw,4.6rem);line-height:.96;letter-spacing:-.04em;max-width:10.5ch;color:#fff}
+.login-big em{font-style:normal;color:#9FB4F5}
+.login-big .w{display:inline-block}
+.la-scan{display:flex;align-items:center;gap:16px;width:min(380px,100%);padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.la-qr{position:relative;width:58px;height:58px;border-radius:12px;display:grid;place-items:center;background:#fff;color:#0E1530;overflow:hidden;flex-shrink:0}
+.la-line{position:absolute;left:4px;right:4px;height:2px;top:50%;background:#2A4DB5;box-shadow:0 0 10px #2A4DB5}
+.la-st{display:flex;align-items:center;gap:8px;font-size:.95rem;transition:opacity .25s,transform .25s}
+.la-st.x{opacity:0;transform:translateY(4px)}
+.la-dot{width:8px;height:8px;border-radius:50%;background:#8CA6F2;flex-shrink:0}
+.la-st.p .la-dot{background:#5DC08B}.la-st.t .la-dot{background:#E4B05A}
+.la-sub{font-size:.8rem;color:#93A3D6;margin-top:2px;transition:opacity .25s}
+.la-sub.x{opacity:0}
+.login-feats{list-style:none;margin:0;padding:0 0 0 44px;display:flex;flex-direction:column;gap:12px;color:#B8C2E0;font-size:.92rem;max-width:46ch}
+.login-feats li{display:flex;gap:11px;align-items:center}
+.login-feats svg{color:#9FB4F5}
+.login-form{position:relative;display:grid;place-items:center;padding-top:max(72px,env(safe-area-inset-top,0px));padding-bottom:max(36px,env(safe-area-inset-bottom,0px));padding-left:24px;padding-right:max(24px,env(safe-area-inset-right,0px))}
+.login-tools{position:absolute;top:max(18px,env(safe-area-inset-top,0px));right:max(18px,env(safe-area-inset-right,0px));display:flex;gap:8px;align-items:center}
+.login-card{width:min(400px,100%);display:flex;flex-direction:column;gap:22px}
+.login-card .lt{font-size:1.9rem}
+.lform{display:flex;flex-direction:column;gap:14px}
+.fl{position:relative}
+.fl input{width:100%;height:56px;padding:22px 46px 7px 44px;font-size:1rem;border-radius:12px;background:var(--surface)}
+.fl label{position:absolute;left:45px;top:17px;font-size:.96rem;color:var(--muted);pointer-events:none;transition:top .16s ease,font-size .16s ease,color .16s ease;font-weight:500}
+.fl input:focus+label,.fl input:not(:placeholder-shown)+label{top:8px;font-size:.7rem;letter-spacing:.03em;color:var(--accent);font-weight:600}
+.fl .fi{position:absolute;left:14px;top:19px;color:var(--muted);pointer-events:none;display:flex}
+.fl input:focus~.fi{color:var(--accent)}
+.fl .eye{position:absolute;right:7px;top:8px;width:40px;height:40px}
+.caps{display:flex;gap:6px;align-items:center;font-size:.8rem;font-weight:600;color:var(--t);margin-top:-6px}
+.lrow{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.btn-login{height:54px;font-size:1rem;border-radius:12px;gap:10px;position:relative;overflow:hidden;transition:background .2s,border-color .2s,transform .12s}
+.btn-login:active:not(:disabled){transform:scale(.985)}
+.btn-login .spin{width:18px;height:18px;border:2.2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin .7s linear infinite}
+.btn-login.ok{background:var(--p);border-color:var(--p);color:#fff}
+@keyframes spin{to{transform:rotate(360deg)}}
+.demo-box{display:flex;flex-direction:column;gap:9px}
+.demo-chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.demo-chip{font:inherit;display:flex;flex-direction:column;align-items:flex-start;gap:1px;padding:9px 12px;border:1px solid var(--line-2);border-radius:11px;background:var(--surface);cursor:pointer;text-align:left;transition:border-color .15s,transform .15s,box-shadow .15s;color:var(--ink)}
+.demo-chip b{font-family:var(--f-mono);font-size:.82rem;color:var(--accent)}
+.demo-chip span{font-size:.72rem;color:var(--muted);line-height:1.3}
+.demo-chip:hover{border-color:var(--accent);box-shadow:var(--sh-1)}
+.login-foot{display:flex;gap:8px;align-items:flex-start;font-size:.78rem;color:var(--muted);line-height:1.4}
+.login-foot svg{margin-top:1px}
+@media (prefers-reduced-motion:no-preference){
+  .la-grid i{animation:cell 7s ease-in-out infinite;animation-delay:var(--d)}
+  .la-grid i.on{background:rgba(255,255,255,.045)}
+  @keyframes cell{0%,58%,100%{background:rgba(255,255,255,.045)}66%,86%{background:var(--c)}}
+  .la-margin{animation:draw 1.3s cubic-bezier(.6,0,.2,1) both .1s}
+  @keyframes draw{from{transform:scaleY(0)}}
+  .la-pill i{animation:pulse 2s infinite}
+  @keyframes pulse{70%{box-shadow:0 0 0 8px rgba(93,192,139,0)}100%{box-shadow:0 0 0 0 rgba(93,192,139,0)}}
+  .login-big .w{animation:rise .9s cubic-bezier(.2,.75,.2,1) both;animation-delay:calc(var(--i)*85ms + 250ms)}
+  @keyframes rise{from{opacity:0;transform:translateY(22px);filter:blur(8px)}}
+  .la-kicker{animation:fade .8s ease both .15s}
+  .la-scan{animation:rise .9s cubic-bezier(.2,.75,.2,1) both .95s}
+  .la-line{animation:qrscan 1.8s ease-in-out infinite}
+  @keyframes qrscan{0%,100%{top:8%}50%{top:88%}}
+  .login-feats li{animation:fade .7s ease both;animation-delay:calc(var(--i)*120ms + 1.15s)}
+  @keyframes fade{from{opacity:0;transform:translateX(-6px)}}
+  .login-card>*{animation:rise .75s cubic-bezier(.2,.75,.2,1) both;animation-delay:calc(var(--i,0)*80ms + 300ms)}
+  .shake{animation:shake .42s ease!important}
+  @keyframes shake{15%,55%{transform:translateX(-9px)}35%,75%{transform:translateX(9px)}}
+  .login.leaving{animation:leave .42s ease forwards}
+  @keyframes leave{to{opacity:0;transform:scale(.985);filter:blur(2px)}}
+}
+@media (max-width:900px){
+  .login{grid-template-columns:1fr;grid-template-rows:auto 1fr}
+  .login-art{gap:18px;padding-top:max(20px,env(safe-area-inset-top,0px));padding-bottom:28px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+  .la-grid{right:-110px;grid-template-columns:repeat(12,22px);gap:6px}.la-grid i{width:22px;height:22px;border-radius:6px}
+  .la-margin{top:72px;left:calc(max(20px,env(safe-area-inset-left,0px)) + 8px)}
+  .la-mid{padding-left:26px;gap:12px}
+  .login-big{font-size:clamp(2rem,1.4rem + 3vw,2.6rem)}
+  .la-scan,.login-feats{display:none}
+  .login-form{place-items:start center;padding-top:28px}
+  .login-tools{position:static;justify-content:flex-end;margin-bottom:8px;width:min(400px,100%)}
+  .login-form{display:flex;flex-direction:column;align-items:center}
+}
+
+/* ---------- Móvil, iOS y Android ---------- */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--side-bg);z-index:90;pointer-events:none}
+.app{min-height:100dvh}
+.side{height:100dvh;padding-top:max(22px,env(safe-area-inset-top,0px))}
+.main{padding-top:max(18px,env(safe-area-inset-top,0px))}
+.tabbar{display:none}
+@media (pointer:coarse){
+  input,select,textarea{font-size:16px}
+  .seg button{width:50px;height:42px}
+  .btn{min-height:42px}.btn-sm{min-height:36px}
+  .icon-btn{width:44px;height:44px}
+  .nav a{padding:12px 10px}
+}
+@media (hover:none){tbody tr:hover{background:transparent}.reg tbody tr:hover td.name{background:var(--surface)}.demo-chip:hover{box-shadow:none}}
+@media (max-width:760px){
+  .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:35;display:grid;grid-auto-flow:column;grid-auto-columns:1fr;
+    background:color-mix(in srgb,var(--surface) 90%,transparent);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);
+    border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+  .tabbar a,.tabbar button{font:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:58px;padding:6px 2px;font-size:.66rem;font-weight:600;color:var(--muted);text-decoration:none;background:none;border:0;cursor:pointer;position:relative}
+  .tabbar [aria-current="page"]{color:var(--accent)}
+  .tabbar [aria-current="page"]::before{content:"";position:absolute;top:0;left:30%;right:30%;height:3px;border-radius:0 0 3px 3px;background:var(--accent)}
+  .tabbar .badge{position:absolute;top:5px;left:calc(50% + 6px);min-width:18px;font-size:.62rem;padding:0 5px}
+  .main{padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))}
+  .savebar{bottom:calc(70px + env(safe-area-inset-bottom,0px))}
+  #toast{bottom:calc(80px + env(safe-area-inset-bottom,0px))}
+  .top .menu-btn{display:none}
+  .head .row{width:100%}.head .row .btn{flex:1}
+  .metric-v{font-size:1.6rem}
+  .metrics{grid-template-columns:1fr 1fr;gap:10px}
+  .metric{padding:13px 14px;gap:2px 8px}
+  .metric-i{width:32px;height:32px;border-radius:9px}.metric-i svg{width:17px;height:17px}
+  .ring{width:36px;height:36px}.ring::after{width:26px;height:26px}
+  .metric-l,.metric-s{font-size:.74rem}
+  .savebar{padding:10px;gap:8px}.savebar>span{display:none}.savebar .btn{flex:1;min-height:46px}
+  .d-long{display:none}.d-short{display:inline!important}
+  .panel{padding:16px}
+  .kiosk-full{padding-bottom:max(20px,env(safe-area-inset-bottom,0px))}
+}
+.inst-slot:empty{display:none}
+.d-short{display:none}
+
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(22px + env(safe-area-inset-bottom,0px));z-index:80;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none;width:calc(100% - 32px);max-width:480px}
+.toast{background:var(--ink);color:var(--bg);padding:11px 16px;border-radius:11px;font-size:.88rem;font-weight:500;box-shadow:var(--sh-2);display:flex;gap:9px;align-items:center}
+.toast.err{background:var(--a);color:#fff}
+@media (prefers-reduced-motion:no-preference){.toast{animation:up .2s ease-out}@keyframes up{from{transform:translateY(8px);opacity:0}}}
+
+/* ---------- Impresión (hoja carta) ---------- */
+.print-only{display:none}
+@media print{
+  :root:not(#_){--bg:#fff;--surface:#fff;--surface-2:#F1F3F8;--sunk:#E9ECF3;--ink:#000;--ink-2:#222;--muted:#4D5568;--line:#C9CED8;--line-2:#9AA2B3;
+    --accent:#1F3D99;--accent-soft:#E4E9FA;--margin:#C8423A;--p:#17663D;--p-soft:#DCF1E4;--a:#B0302A;--a-soft:#F7DCD9;--t:#8A5507;--t-soft:#F5E6C8;--j:#56429C;--j-soft:#E6E0F6;color-scheme:light}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact;box-shadow:none!important;animation:none!important;transition:none!important}
+  html,body{background:#fff!important;color:#000;font-size:9.5pt}
+  body::before{display:none}
+  .side,.top,.tabbar,.scrim,.no-print,.demo,.tabs,.pill-tabs,#toast,.toolbar,.head,.note,.btn,.icon-btn,.np{display:none!important}
+  .app{display:block;min-height:0}.main{padding:0!important;max-width:none;gap:0;display:block}
+  #main>*+*{margin-top:8pt}
+  .panel,.tbl-wrap{border:0;padding:0;border-radius:0;background:none;overflow:visible;gap:6pt}
+  .print-only{display:block!important}
+  .print-head{display:flex!important;justify-content:space-between;align-items:flex-end;gap:16pt;border-bottom:1.5pt solid #000;padding-bottom:6pt;margin-bottom:10pt;break-after:avoid}
+  .ph-l{display:flex;gap:10pt;align-items:center}
+  .ph-l svg{width:30pt;height:30pt}
+  .ph-inst{font-family:var(--f-display);font-weight:800;font-size:13pt;line-height:1.1}
+  .ph-t{font-weight:700;font-size:10.5pt;margin-top:1pt}
+  .ph-s{font-size:8.5pt;color:#333}
+  .ph-r{font-size:7.5pt;color:#444;text-align:right;line-height:1.45;white-space:nowrap}
+  table{font-size:8.5pt;width:100%}
+  th{position:static;background:#E9ECF3!important;color:#000;font-size:7pt;padding:4pt 5pt;border-bottom:1pt solid #000;letter-spacing:.04em}
+  td{padding:3.5pt 5pt;border-bottom:.5pt solid #C9CED8}
+  thead{display:table-header-group}tfoot{display:table-row-group}
+  tr{break-inside:avoid;page-break-inside:avoid}
+  tfoot td{border-top:1pt solid #000;background:#F1F3F8!important}
+  .linkbtn{color:#000;text-decoration:none}
+  .who .av,td .av{display:none}
+  .chip{padding:0 5pt;font-size:7pt;border:.5pt solid currentColor;background:none!important;line-height:1.5}
+  .chip::before{display:none}
+  .pctbar{min-width:0;gap:5pt}.pctbar-t{max-width:28mm;height:4pt}
+  .reg{font-size:7pt}.reg th,.reg td{padding:2pt 2.4pt}.reg th.d,.reg td.d{width:auto;min-width:0}
+  .reg td.name,.reg th.name{position:static;max-width:54mm;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .reg td.name .linkbtn{font-weight:500}
+  .reg .wd{font-size:5.5pt}
+  .legend{font-size:7pt;margin-top:4pt;gap:2pt 12pt}
+  .print-sign{display:grid!important;grid-auto-flow:column;grid-auto-columns:1fr;gap:14mm;margin-top:18mm;break-inside:avoid;page-break-inside:avoid}
+  .print-sign div{border-top:.75pt solid #000;padding-top:3pt;text-align:center;font-size:8pt}
+  .print-sign small{display:block;color:#555;font-size:7pt}
+  .print-note{font-size:7.5pt;color:#444;margin-top:6pt}
+  .counts{gap:4pt}.count{padding:2pt 6pt;font-size:8pt}
+  h2,h3{break-after:avoid}
+  dialog::backdrop{display:none}
+  body:not([data-print="ficha"]) dialog{display:none!important}
+  body[data-print="ficha"] #app{display:none!important}
+  body[data-print="ficha"] #dlg{position:static;display:block;width:auto;max-width:none;max-height:none;border:0;margin:0;padding:0;overflow:visible;background:#fff;color:#000;transform:none}
+  body[data-print="ficha"] .dlg{padding:0;gap:8pt}
+  body[data-print="carnets"] #main>*:not(#idc){display:none!important}
+  body[data-print="carnets"] #idc>*:not(.cards){display:none!important}
+  body[data-print="carnets"] .cards{display:grid;grid-template-columns:repeat(2,85.6mm);gap:6mm 8mm;justify-content:center;padding-top:2mm}
+  body[data-print="carnets"] .carnet{width:85.6mm;height:54mm;max-width:none;aspect-ratio:auto;border-radius:3mm;border:.3mm solid #B9C0CF;outline:.2mm dashed #8A92A6;outline-offset:1.8mm;break-inside:avoid;page-break-inside:avoid}
+  .carnet .av{display:grid!important}
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<dialog id="dlg"></dialog>
+<dialog id="dlg2"></dialog>
+<div id="toast" aria-live="polite"></div>
+
+<script>
+'use strict';
+/* =========================================================
+   Libro de Asistencia Escolar v2 — almacenamiento local (navegador)
+   ========================================================= */
+const KEY='libroAsistencia.v1',SKEY='libroAsistencia.sesion',TKEY='libroAsistencia.tema',UKEY='libroAsistencia.usuario',BKEY='libroAsistencia.bloqueo';
+let DB=null,YO=null,_fechas=null;
+const UI={lista:null,borrador:{},repTab:'mensual',rep:{},est:{sec:'',estado:'activo',q:''},jus:{estado:'pendiente'},idTab:'carnets',id:{sec:''},k:{modo:'qr'}};
+const LIBS={qr:'https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js',jsqr:'https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js',face:'https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.13/dist/face-api.js'};
+const MODELOS='https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.13/model/';
+
+const $=s=>document.querySelector(s);
+const app=$('#app');
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let _n=0;const uid=()=>Date.now().toString(36)+(_n++).toString(36)+Math.random().toString(36).slice(2,6);
+const pad=n=>String(n).padStart(2,'0');
+const iso=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const parse=s=>{const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
+const hoy=()=>iso(new Date());
+const horaAhora=()=>{const d=new Date();return `${pad(d.getHours())}:${pad(d.getMinutes())}`};
+const sumarMin=(hhmm,m)=>{const[h,mi]=hhmm.split(':').map(Number);const t=h*60+mi+m;return `${pad(Math.floor(t/60)%24)}:${pad(t%60)}`};
+const addDias=(s,n)=>{const d=parse(s);d.setDate(d.getDate()+n);return iso(d)};
+const DIAS=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+const MESES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+const fLarga=s=>{const d=parse(s);return `${DIAS[d.getDay()]} ${d.getDate()} de ${MESES[d.getMonth()]} de ${d.getFullYear()}`};
+const fCorta=s=>s?s.split('-').reverse().join('/'):'';
+const pct=v=>v==null?'—':v.toFixed(1).replace('.',',')+' %';
+const nivelPct=v=>v==null?'':v<DB.config.umbral-10?'crit':v<DB.config.umbral?'warn':'';
+const ESTADOS={P:'Presente',A:'Ausente',T:'Tardanza',J:'Justificada'};
+const VIAS={qr:'QR',rostro:'Rostro',reloj:'Huella',manual:'NIE',lista:'Lista',cierre:'Cierre'};
+const ROLES={direccion:'Dirección',coordinacion:'Coordinación académica',docente:'Docente',porteria:'Control de entrada'};
+const GRADOS=[['Parvularia 4','Parvularia'],['Parvularia 5','Parvularia'],['Parvularia 6','Parvularia'],
+ ['1.er grado','Básica'],['2.° grado','Básica'],['3.er grado','Básica'],['4.° grado','Básica'],['5.° grado','Básica'],['6.° grado','Básica'],['7.° grado','Básica'],['8.° grado','Básica'],['9.° grado','Básica'],
+ ['1.er año de bachillerato','Media'],['2.° año de bachillerato','Media'],['3.er año de bachillerato','Media']];
+const gIdx=g=>{const i=GRADOS.findIndex(x=>x[0]===g);return i<0?99:i};
+const nivelDe=g=>(GRADOS.find(x=>x[0]===g)||[,''])[1];
+
+/* ---------- Iconos ---------- */
+const IC={home:'M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z',lista:'M9 4h6a1 1 0 0 1 1 1v1H8V5a1 1 0 0 1 1-1zM8 6H6a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-2M9 14l2 2 4-4',
+ users:'M16 20v-1a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v1M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM22 20v-1a4 4 0 0 0-3-3.87M16 4.13a3.5 3.5 0 0 1 0 6.75',
+ layers:'M12 3 2 8l10 5 10-5zM2 16l10 5 10-5M2 12l10 5 10-5',doc:'M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8zM14 3v5h5M9 15l2 2 4-4',
+ chart:'M4 20V11M10 20V5M16 20v-7M21 20H3',ucog:'M10 14H7a4 4 0 0 0-4 4v2h8M9.5 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM18 18.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM18 12.5V14M18 19v1.5M21.5 16.5H20M16 16.5h-1.5',
+ cfg:'M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1M15 4v4M9 10v4M17 16v4',scan:'M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3M7 12h10',
+ qr:'M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2v2h-2zM18 14h2M20 14v2M14 18h2v2M18 18h2v2h-2z',face:'M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3M9 9v1.5M15 9v1.5M9.5 15.5a3.5 3.5 0 0 0 5 0M12 9v3.5h-1',
+ finger:'M12 11v4a7 7 0 0 1-1.2 4M8 8.6a5 5 0 0 1 9 3V14M6.2 12v-.5a6 6 0 0 1 1-3.4M15.5 17.5a13 13 0 0 1-1 3.5M8.7 20.5a9 9 0 0 0 1.3-4.7V11a2 2 0 0 1 4 0v1.5M4.5 7.2A9 9 0 0 1 21 11v1.5',
+ out:'M15 4h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4M10 17l5-5-5-5M15 12H3',sun:'M12 16.5a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9zM12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4',
+ moon:'M20.5 13.2A8.5 8.5 0 1 1 10.8 3.5a6.6 6.6 0 0 0 9.7 9.7z',auto:'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 3v18',plus:'M12 5v14M5 12h14',dl:'M12 3v12M7 10l5 5 5-5M5 21h14',
+ print:'M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z',search:'M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM20.5 20.5 16 16',
+ alert:'M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z',clock:'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2',
+ up:'M12 21V9M7 14l5-5 5 5M5 3h14',card:'M3 5h18v14H3zM6.5 15.5a2.5 2.5 0 0 1 5 0M9 11.5a1.5 1.5 0 1 0 0-.01M14 10h4M14 14h3',info:'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 11v5M12 8h.01',
+ menu:'M4 6h16M4 12h16M4 18h16',x:'M6 6l12 12M18 6 6 18',check:'M5 12.5l4.5 4.5L19 7.5',cam:'M3 8a2 2 0 0 1 2-2h2l2-2h6l2 2h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM12 16.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z',
+ full:'M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5',key:'M14.5 9.5a4.5 4.5 0 1 1-1.3-3.2L21 14v3h-3v2h-2v-2l-2.3-2.3',stop:'M6 6h12v12H6z',door:'M4 21h16M6 21V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v17M14 12h.01',eye:'M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z',eyeoff:'M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.2M6.6 6.6A17 17 0 0 0 2 12s3.5 7 10 7a9.6 9.6 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2',arrow:'M5 12h14M13 6l6 6-6 6',install:'M12 3v12M7 10l5 5 5-5M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2',share:'M12 3v13M8 7l4-4 4 4M5 11v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8',user:'M20 21v-1.5a5 5 0 0 0-5-5H9a5 5 0 0 0-5 5V21M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z',lock:'M6 11h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1zM8 11V7a4 4 0 0 1 8 0v4',school:'M3 9l9-5 9 5-9 5zM7 11.2V16c0 1.5 2.2 3 5 3s5-1.5 5-3v-4.8M21 9v6',plusbox:'M4 4h16v16H4zM12 8v8M8 12h8'};
+const ic=(n,s=18,w=1.8)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${IC[n]}"/></svg>`;
+
+/* ---------- Persistencia ---------- */
+function load(){try{const r=localStorage.getItem(KEY);if(r)return JSON.parse(r)}catch(e){}return null}
+function save(){_fechas=null;try{localStorage.setItem(KEY,JSON.stringify(DB));return true}catch(e){toast('No se pudo guardar: el almacenamiento del navegador está lleno o bloqueado. Descargue un respaldo desde Configuración.','err');return false}}
+function log(acc){DB.bitacora.unshift({at:new Date().toISOString(),u:YO?YO.nombre:'Sistema',acc});DB.bitacora.length=Math.min(DB.bitacora.length,300)}
+async function hash(txt){
+  const data=new TextEncoder().encode('libro-asistencia::'+txt);
+  if(window.crypto&&crypto.subtle){try{const b=await crypto.subtle.digest('SHA-256',data);return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){}}
+  let h=2166136261;for(const c of data){h^=c;h=Math.imul(h,16777619)}return 'f'+(h>>>0).toString(16);
+}
+function token(){const A='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',r=new Uint8Array(10);(window.crypto||{getRandomValues:a=>a.map(()=>Math.random()*256)}).getRandomValues(r);return [...r].map(x=>A[x%A.length]).join('')}
+function configBase(){
+  const y=new Date().getFullYear();
+  return {institucion:'Liceo San Miguel',anio:y,inicio:`${y}-01-19`,fin:`${y}-11-13`,umbral:85,consecutivas:3,tardanzas:3,docenteEditaAnteriores:false,
+    entrada:{Matutino:'07:00',Vespertino:'13:00'},tolerancia:10,umbralRostro:.5,sonido:true,
+    feriados:[{fecha:`${y}-01-01`,nombre:'Año Nuevo'},{fecha:`${y}-04-02`,nombre:'Jueves Santo'},{fecha:`${y}-04-03`,nombre:'Viernes Santo'},
+      {fecha:`${y}-05-01`,nombre:'Día del Trabajo'},{fecha:`${y}-05-10`,nombre:'Día de la Madre'},{fecha:`${y}-06-17`,nombre:'Día del Padre'},
+      {fecha:`${y}-06-22`,nombre:'Día del Maestro'},{fecha:`${y}-08-06`,nombre:'Fiestas Agostinas'},{fecha:`${y}-09-15`,nombre:'Día de la Independencia'},
+      {fecha:`${y}-11-02`,nombre:'Día de los Difuntos'},{fecha:`${y}-11-21`,nombre:'Fiestas patronales de San Miguel'},{fecha:`${y}-12-25`,nombre:'Navidad'}]};
+}
+function dbVacia(cfg){return {version:2,demo:false,config:cfg||configBase(),usuarios:[],secciones:[],estudiantes:[],asistencia:{},listas:{},justificaciones:[],bitacora:[]}}
+
+/* ---------- Tema ---------- */
+function temaActual(){try{return localStorage.getItem(TKEY)||'auto'}catch(e){return 'auto'}}
+function aplicarTema(t){const r=document.documentElement;if(t==='auto')r.removeAttribute('data-theme');else r.setAttribute('data-theme',t==='oscuro'?'dark':'light');try{localStorage.setItem(TKEY,t)}catch(e){}}
+
+function pintarTema(){const t=temaActual(),b=$('#temaBtn');if(!b)return;b.innerHTML=ic(t==='oscuro'?'moon':t==='claro'?'sun':'auto',19);b.title=`Tema: ${t==='auto'?'según el sistema':t}`;b.setAttribute('aria-label',b.title+'. Cambiar')}
+
+/* ---------- Plataforma: iOS / Android / instalación ---------- */
+const esIOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+const esStandalone=()=>{try{return matchMedia('(display-mode: standalone)').matches||navigator.standalone===true}catch(e){return false}};
+let _instalar=null;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();_instalar=e;pintarInstalar()});
+window.addEventListener('appinstalled',()=>{_instalar=null;pintarInstalar();toast('Aplicación instalada en este dispositivo.')});
+function pintarInstalar(){const ok=!esStandalone()&&(_instalar||esIOS);document.querySelectorAll('.inst-slot').forEach(el=>{el.innerHTML=ok?`<button class="btn btn-sm" data-act="instalar">${ic('install',16)}Instalar app</button>`:''})}
+if('serviceWorker' in navigator&&location.protocol==='https:')window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+
+/* ---------- Impresión ---------- */
+function prepararPagina(o){let st=document.getElementById('pageCss');if(!st){st=document.createElement('style');st.id='pageCss';document.head.appendChild(st)}
+  st.textContent=`@page{size:letter ${o};margin:${o==='landscape'?'10mm 10mm 12mm':'12mm 12mm 14mm'}}`}
+function imprimir(o,modo){prepararPagina(o);document.body.dataset.print=modo;setTimeout(()=>window.print(),60)}
+window.addEventListener('beforeprint',()=>{if(!document.body.dataset.print){prepararPagina(_vista==='reportes'&&UI.repTab==='mensual'?'landscape':'portrait');document.body.dataset.print=dlg.open?'ficha':'vista'}});
+window.addEventListener('afterprint',()=>{delete document.body.dataset.print});
+const printHead=(titulo,sub)=>`<div class="print-only print-head"><div class="ph-l">${LOGO}<div><div class="ph-inst">${esc(DB.config.institucion)}</div><div class="ph-t">${esc(titulo)}</div><div class="ph-s">${sub}</div></div></div>
+  <div class="ph-r">Año lectivo ${DB.config.anio}<br>Impreso el ${fCorta(hoy())} a las ${horaAhora()}<br>Por: ${esc(YO?YO.nombre:'')}</div></div>`;
+const printSign=(...f)=>`<div class="print-only print-sign">${f.map(x=>`<div>${x[0]}${x[1]?`<small>${esc(x[1])}</small>`:''}</div>`).join('')}</div>`;
+
+/* ---------- Calendario ---------- */
+const feriado=s=>DB.config.feriados.find(f=>f.fecha===s);
+function esLectivo(s){const d=parse(s).getDay();return d>0&&d<6&&!feriado(s)&&s>=DB.config.inicio&&s<=DB.config.fin}
+function motivoNoLectivo(s){const d=parse(s).getDay();if(d===0||d===6)return 'fin de semana';const f=feriado(s);if(f)return 'feriado: '+f.nombre;if(s<DB.config.inicio||s>DB.config.fin)return 'fuera del año lectivo';return ''}
+function lectivosEntre(a,b){const o=[];let s=a;while(s<=b){if(esLectivo(s))o.push(s);s=addDias(s,1)}return o}
+function fechasReg(){return _fechas||(_fechas=Object.keys(DB.asistencia).sort())}
+
+/* ---------- Reglas de asistencia ---------- */
+const justificada=(id,f)=>DB.justificaciones.some(j=>j.estudianteId===id&&j.estado==='aprobada'&&f>=j.desde&&f<=j.hasta);
+function estado(id,f){const r=DB.asistencia[f]&&DB.asistencia[f][id];if(!r)return null;if(r.e==='A'&&justificada(id,f))return 'J';return r.e}
+function stats(id,desde,hasta){
+  const s={P:0,A:0,T:0,J:0,total:0,racha:0};
+  for(const f of fechasReg()){if(f<desde||f>hasta)continue;const e=estado(id,f);if(!e)continue;s[e]++;s.total++;s.racha=e==='A'?s.racha+1:(e==='J'?s.racha:0)}
+  s.pct=s.total?(s.P+s.T)/s.total*100:null;return s;
+}
+function alertas(){
+  const c=DB.config,h=hoy(),mesIni=h.slice(0,8)+'01',o=[];
+  for(const e of estudiantesVisibles().filter(x=>x.estado==='activo')){
+    const s=stats(e.id,c.inicio,h);
+    if(s.racha>=c.consecutivas)o.push({nivel:'crit',tipo:'Inasistencias consecutivas',est:e,txt:`${s.racha} días seguidos sin justificar`,orden:0});
+    if(s.total>=5&&s.pct<c.umbral)o.push({nivel:s.pct<c.umbral-10?'crit':'warn',tipo:'Asistencia baja',est:e,txt:`${pct(s.pct)} en el año (mínimo ${c.umbral} %)`,orden:s.pct<c.umbral-10?1:2});
+    const m=stats(e.id,mesIni,h);
+    if(m.T>=c.tardanzas)o.push({nivel:'warn',tipo:'Tardanzas reiteradas',est:e,txt:`${m.T} tardanzas en ${MESES[parse(h).getMonth()]}`,orden:3});
+  }
+  return o.sort((a,b)=>a.orden-b.orden);
+}
+const esAuto=r=>r&&['qr','rostro','reloj','manual'].includes(r.via);
+const seccionConMarcas=(secId,f)=>{const a=DB.asistencia[f];if(!a)return 0;return estudiantesDe(secId).filter(e=>esAuto(a[e.id])).length};
+
+/* ---------- Permisos ---------- */
+const PERM={direccion:['*'],coordinacion:['lista','est_ver','est_edit','sec_edit','jus','jus_aprobar','rep','todas','entrada'],docente:['lista','est_ver','jus','rep'],porteria:['entrada','todas']};
+const can=p=>PERM[YO.rol].includes('*')||PERM[YO.rol].includes(p);
+const ordenSecs=a=>[...a].sort((x,y)=>gIdx(x.grado)-gIdx(y.grado)||x.seccion.localeCompare(y.seccion));
+const seccionesVisibles=()=>ordenSecs(can('todas')?DB.secciones:DB.secciones.filter(s=>s.docenteId===YO.id));
+function estudiantesVisibles(){const ids=new Set(seccionesVisibles().map(s=>s.id));return DB.estudiantes.filter(e=>ids.has(e.seccionId))}
+const porNombre=(a,b)=>a.apellidos.localeCompare(b.apellidos,'es')||a.nombres.localeCompare(b.nombres,'es');
+const estudiantesDe=(s,activos=true)=>DB.estudiantes.filter(e=>e.seccionId===s&&(!activos||e.estado==='activo')).sort(porNombre);
+const sec=id=>DB.secciones.find(s=>s.id===id);
+const secNombre=s=>s?`${s.grado} ${s.seccion}`:'Sin sección';
+const usuario=id=>DB.usuarios.find(u=>u.id===id);
+const nombreEst=e=>`${e.apellidos}, ${e.nombres}`;
+const iniciales=n=>n.replace(/^(Lic|Licda|Prof|Profa|Ing|Dr|Dra)\.\s*/,'').split(/\s+/).filter(Boolean).slice(0,2).map(x=>x[0]).join('').toUpperCase();
+const avatar=(e,cls='')=>e.rostro&&e.rostro.foto?`<img class="av ${cls}" src="${e.rostro.foto}" alt="">`:`<span class="av ${cls}" aria-hidden="true">${esc((e.nombres[0]||'')+(e.apellidos[0]||''))}</span>`;
+function puedeEditarLista(f){
+  if(f>hoy())return {ok:false,por:'No se registra asistencia de fechas futuras.'};
+  if(YO.rol!=='docente')return {ok:true};
+  if(f===hoy()||DB.config.docenteEditaAnteriores)return {ok:true};
+  return {ok:false,por:'Solo Dirección o Coordinación pueden modificar listas de días anteriores.'};
+}
+
+/* ---------- Utilidades ---------- */
+function toast(msg,tipo){const t=document.createElement('div');t.className='toast'+(tipo==='err'?' err':'');t.innerHTML=(tipo==='err'?ic('alert',16):ic('check',16))+`<span>${esc(msg)}</span>`;$('#toast').appendChild(t);setTimeout(()=>t.remove(),tipo==='err'?6000:3200)}
+const dlg=$('#dlg'),dlg2=$('#dlg2');
+function openDlg(html){dlg.innerHTML=`<div class="dlg">${html}</div>`;if(!dlg.open)dlg.showModal();const f=dlg.querySelector('input:not([type=checkbox]),select,textarea');if(f)f.focus()}
+function closeDlg(){if(dlg.open)dlg.close()}
+dlg.addEventListener('close',()=>{if(CAM.enDlg){cerrarCamara();CAM.enDlg=false}});
+function confirmar(t,d,ok='Confirmar',peligro=false){
+  return new Promise(res=>{
+    dlg2.innerHTML=`<div class="dlg"><h2>${esc(t)}</h2><p class="muted">${esc(d)}</p><div class="dlg-actions"><button class="btn" data-x="no">Cancelar</button><button class="btn ${peligro?'btn-danger':'btn-primary'}" data-x="si">${esc(ok)}</button></div></div>`;
+    let done=false;const fin=v=>{if(done)return;done=true;if(dlg2.open)dlg2.close();res(v)};
+    dlg2.querySelectorAll('[data-x]').forEach(b=>b.onclick=()=>fin(b.dataset.x==='si'));
+    dlg2.addEventListener('close',()=>fin(false),{once:true});dlg2.showModal();
+  });
+}
+function descargar(nombre,contenido,tipo){const b=new Blob([contenido],{type:tipo});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=nombre;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000)}
+const csvCell=v=>{const s=String(v??'');return /[;"\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s};
+const aCSV=rows=>'﻿'+rows.map(r=>r.map(csvCell).join(';')).join('\r\n');
+const pctNum=v=>v==null?'':v.toFixed(1).replace('.',',');
+const pctBar=v=>`<div class="pctbar"><div class="pctbar-t"><div class="pctbar-f ${nivelPct(v)}" style="width:${v==null?0:Math.max(0,Math.min(100,v))}%"></div></div><span class="num small">${pct(v)}</span></div>`;
+const chipEstado=e=>`<span class="chip ${e==='P'?'chip-ok':e==='A'?'chip-crit':e==='T'?'chip-warn':'chip-j'}">${ESTADOS[e]}</span>`;
+const optSecs=(secs,sel,vacio)=>(vacio?`<option value="">${vacio}</option>`:'')+secs.map(s=>`<option value="${s.id}" ${s.id===sel?'selected':''}>${esc(secNombre(s))} · ${esc(s.turno)}</option>`).join('');
+const viaTxt=r=>r&&r.via&&r.via!=='lista'?`<span class="via">${ic(r.via==='qr'?'qr':r.via==='rostro'?'face':r.via==='reloj'?'finger':r.via==='cierre'?'door':'key',13)}${VIAS[r.via]}${r.in?' '+esc(r.in):''}</span>`:'';
+const _libs={};
+function cargarLib(k){return _libs[k]||(_libs[k]=new Promise((res,rej)=>{const s=document.createElement('script');s.src=LIBS[k];s.onload=res;s.onerror=()=>{delete _libs[k];s.remove();rej(new Error('No se pudo descargar un componente. Revise la conexión a internet e intente de nuevo.'))};document.head.appendChild(s)}))}
+let _beep=null;
+function audioOn(){try{_beep=_beep||new (window.AudioContext||window.webkitAudioContext)();if(_beep.state==='suspended')_beep.resume()}catch(e){}}
+document.addEventListener('click',audioOn,{once:true});
+function beep(tipo){if(!DB.config.sonido)return;try{audioOn();const tonos={P:[880],T:[660,520],err:[240,200],ya:[740]}[tipo]||[600];
+  tonos.forEach((f,i)=>{const o=_beep.createOscillator(),g=_beep.createGain();o.frequency.value=f;o.type='sine';g.gain.setValueAtTime(.0001,_beep.currentTime+i*.16);g.gain.exponentialRampToValueAtTime(.25,_beep.currentTime+i*.16+.02);g.gain.exponentialRampToValueAtTime(.0001,_beep.currentTime+i*.16+.14);o.connect(g).connect(_beep.destination);o.start(_beep.currentTime+i*.16);o.stop(_beep.currentTime+i*.16+.15)})}catch(e){}}
+
+/* ---------- Cámara ---------- */
+const CAM={stream:null,loop:null,enDlg:false,gen:0};
+async function abrirCamara(video,facing){
+  cerrarCamara();
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw new Error('La cámara solo funciona si el sistema se abre desde una dirección https:// (por ejemplo GitHub Pages) o desde localhost.');
+  let s;try{s=await navigator.mediaDevices.getUserMedia({video:{facingMode:facing,width:{ideal:1280},height:{ideal:720}},audio:false})}
+  catch(e){throw new Error(e.name==='NotAllowedError'?'El navegador bloqueó la cámara. Permita el acceso desde el candado de la barra de direcciones.':e.name==='NotFoundError'?'No se encontró ninguna cámara conectada.':'No se pudo abrir la cámara ('+e.name+').')}
+  CAM.stream=s;CAM.gen++;video.srcObject=s;video.muted=true;video.setAttribute('playsinline','');await video.play();return CAM.gen;
+}
+async function pedirWakeLock(){try{if('wakeLock' in navigator&&!CAM.lock){CAM.lock=await navigator.wakeLock.request('screen');CAM.lock.addEventListener('release',()=>{CAM.lock=null})}}catch(e){}}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&CAM.stream)pedirWakeLock()});
+function cerrarCamara(){if(CAM.lock){CAM.lock.release().catch(()=>{});CAM.lock=null}if(CAM.loop){clearTimeout(CAM.loop);CAM.loop=null}if(CAM.stream){CAM.stream.getTracks().forEach(t=>t.stop());CAM.stream=null}CAM.gen++}
+let _face=null;
+function cargarRostro(){return _face||(_face=(async()=>{await cargarLib('face');try{await faceapi.tf.setBackend('webgl')}catch(e){}await faceapi.tf.ready();
+  await Promise.all([faceapi.nets.tinyFaceDetector.loadFromUri(MODELOS),faceapi.nets.faceLandmark68Net.loadFromUri(MODELOS),faceapi.nets.faceRecognitionNet.loadFromUri(MODELOS)])})().catch(e=>{_face=null;throw e}))}
+const faceOpts=()=>new faceapi.TinyFaceDetectorOptions({inputSize:320,scoreThreshold:.5});
+function dibujarCaja(cv,v,box,color,label){
+  if(!cv)return;cv.width=v.videoWidth||640;cv.height=v.videoHeight||480;const c=cv.getContext('2d');c.clearRect(0,0,cv.width,cv.height);if(!box)return;
+  c.lineWidth=Math.max(3,cv.width/220);c.strokeStyle=color;const r=14;c.beginPath();c.roundRect?c.roundRect(box.x,box.y,box.width,box.height,r):c.rect(box.x,box.y,box.width,box.height);c.stroke();
+  if(label){c.save();c.translate(cv.width,0);c.scale(-1,1);const x=cv.width-box.x-box.width;c.font=`600 ${Math.round(cv.width/40)}px Figtree, sans-serif`;const w=c.measureText(label).width+20,h=Math.round(cv.width/28);
+    c.fillStyle=color;c.fillRect(x,box.y-h-6,w,h);c.fillStyle='#fff';c.fillText(label,x+10,box.y-12);c.restore()}
+}
+
+/* ---------- Navegación ---------- */
+const NAV=[
+ {g:'Operación',items:[{id:'inicio',t:'Inicio',i:'home'},{id:'entrada',t:'Control de entrada',i:'scan',perm:'entrada'},{id:'lista',t:'Pasar lista',i:'lista',perm:'lista'}]},
+ {g:'Matrícula',items:[{id:'estudiantes',t:'Estudiantes',i:'users',perm:'est_ver'},{id:'identificacion',t:'Identificación',i:'card',perm:'est_edit'},{id:'secciones',t:'Grados y secciones',i:'layers',perm:'sec_edit'}]},
+ {g:'Seguimiento',items:[{id:'justificaciones',t:'Justificaciones',i:'doc',perm:'jus'},{id:'reportes',t:'Reportes',i:'chart',perm:'rep'}]},
+ {g:'Administración',items:[{id:'usuarios',t:'Usuarios',i:'ucog',perm:'usr'},{id:'config',t:'Configuración',i:'cfg',perm:'cfg'}]}];
+const NAVF=NAV.flatMap(g=>g.items);
+const VIEWS={};
+function go(v){if(location.hash==='#'+v)render();else location.hash=v}
+window.addEventListener('hashchange',render);
+let _vista='';
+function render(){
+  cerrarCamara();
+  if(!YO){renderLogin();return}
+  let v=location.hash.slice(1)||(YO.rol==='porteria'?'entrada':'inicio');const it=NAVF.find(n=>n.id===v);
+  if(!it||(it.perm&&!can(it.perm)))v=YO.rol==='porteria'?'entrada':'inicio';
+  const cambio=v!==_vista;_vista=v;shell(v);VIEWS[v]();if(cambio)window.scrollTo(0,0);
+}
+const LOGO=`<svg width="36" height="36" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" rx="9" fill="#2A4DB5"/><line x1="11" y1="5" x2="11" y2="29" stroke="#E8655C" stroke-width="1.6"/>
+<g fill="#fff"><rect x="14" y="7" width="5" height="5" rx="1.3"/><rect x="21" y="7" width="5" height="5" rx="1.3" opacity=".4"/><rect x="14" y="14.5" width="5" height="5" rx="1.3" opacity=".4"/><rect x="21" y="14.5" width="5" height="5" rx="1.3"/><rect x="14" y="22" width="5" height="5" rx="1.3"/><rect x="21" y="22" width="5" height="5" rx="1.3"/></g></svg>`;
+function shell(v){
+  if(!$('#main')){
+    app.innerHTML=`<div class="app" id="frame"><aside class="side no-print" id="side"><div class="brand">${LOGO}<div><div class="brand-t">Libro de Asistencia</div><div class="brand-s" id="brandS"></div></div></div>
+      <nav class="nav" id="nav" aria-label="Menú principal"></nav><div class="me" id="me"></div></aside><div class="scrim" data-act="menu"></div>
+      <main class="main"><div class="top no-print"><button class="icon-btn menu-btn" data-act="menu" aria-label="Abrir menú">${ic('menu',20)}</button>
+      <span class="top-date">${ic('clock',16)}<span id="topDate"></span></span><span class="top-sp"></span><span class="inst-slot"></span><button class="icon-btn" data-act="tema" id="temaBtn"></button></div><div id="main" style="display:contents"></div></main><nav class="tabbar no-print" id="tabbar" aria-label="Accesos rápidos"></nav></div>`;
+  }
+  $('#frame').classList.remove('nav-open');
+  $('#brandS').textContent=`${DB.config.institucion} · ${DB.config.anio}`;
+  const h=hoy(),dh=parse(h),nl=esLectivo(h)?'':` · ${motivoNoLectivo(h)}`;$('#topDate').innerHTML=`<span class="d-long">${esc(fLarga(h)[0].toUpperCase()+fLarga(h).slice(1)+nl)}</span><span class="d-short">${esc(DIAS[dh.getDay()][0].toUpperCase()+DIAS[dh.getDay()].slice(1,3))} ${dh.getDate()} ${MESES[dh.getMonth()].slice(0,3)}${nl?' · sin clases':''}</span>`;
+  pintarTema();pintarInstalar();
+  const pend=esLectivo(h)?seccionesVisibles().filter(s=>!(DB.listas[h]&&DB.listas[h][s.id])).length:0;
+  const jp=can('jus_aprobar')?DB.justificaciones.filter(j=>j.estado==='pendiente').length:0;
+  $('#nav').innerHTML=NAV.map(g=>{const its=g.items.filter(n=>!n.perm||can(n.perm));if(!its.length)return '';
+    return `<div class="nav-g"><div class="nav-l">${g.g}</div>${its.map(n=>{const b=n.id==='lista'&&pend?pend:n.id==='justificaciones'&&jp?jp:0;
+      return `<a href="#${n.id}" ${n.id===v?'aria-current="page"':''}>${ic(n.i,18)}<span>${n.t}</span>${b?`<span class="badge" title="Pendientes">${b}</span>`:''}</a>`}).join('')}</div>`}).join('');
+  const tb=['inicio','entrada','lista','estudiantes','reportes'].map(id=>NAVF.find(n=>n.id===id)).filter(n=>!n.perm||can(n.perm)).slice(0,4);
+  $('#tabbar').innerHTML=tb.map(n=>{const b=n.id==='lista'&&pend?pend:0;return `<a href="#${n.id}" ${n.id===v?'aria-current="page"':''}>${ic(n.i,22)}<span>${n.id==='entrada'?'Entrada':n.t}</span>${b?`<span class="badge">${b}</span>`:''}</a>`}).join('')+`<button data-act="menu">${ic('menu',22)}<span>Más</span></button>`;
+  $('#me').innerHTML=`<span class="av" style="background:#22306A;color:#C8D4F7">${esc(iniciales(YO.nombre))}</span><div style="min-width:0"><div class="me-n">${esc(YO.nombre)}</div><div class="me-r">${ROLES[YO.rol]}</div></div><button class="icon-btn" data-act="salir" title="Cerrar sesión" aria-label="Cerrar sesión">${ic('out',18)}</button>`;
+}
+function main(html){
+  const demo=DB.demo?`<div class="demo no-print"><span>${ic('info',16)} <b>Datos de ejemplo.</b> Estudiantes, docentes y asistencias son ficticios para que pruebe el sistema.</span>${YO.rol==='direccion'?'<button class="btn btn-sm btn-primary" data-act="empezarReal">Empezar con datos reales</button>':''}</div>`:'';
+  $('#main').innerHTML=demo+html;
+}
+const cabecera=(eyebrow,titulo,acciones='',desc='')=>`<div class="head"><div class="head-t"><span class="eyebrow">${eyebrow}</span><h1>${titulo}</h1>${desc?`<p>${desc}</p>`:''}</div>${acciones?`<div class="row">${acciones}</div>`:''}</div>`;
+
+/* ---------- Inicio ---------- */
+VIEWS.inicio=()=>{
+  const h=hoy(),lect=esLectivo(h),secs=seccionesVisibles(),ests=estudiantesVisibles().filter(e=>e.estado==='activo');
+  const H=ests.filter(e=>e.sexo==='M').length,M=ests.length-H;
+  const c={P:0,A:0,T:0,J:0,n:0},vias={};for(const e of ests){const s=estado(e.id,h);if(s){c[s]++;c.n++;const r=DB.asistencia[h][e.id];if(r.via&&r.in)vias[r.via]=(vias[r.via]||0)+1}}
+  const pHoy=c.n?(c.P+c.T)/c.n*100:null,reg=secs.filter(s=>DB.listas[h]&&DB.listas[h][s.id]);
+  const al=alertas();
+  const dias=lectivosEntre(addDias(h,-45),h).filter(f=>ests.some(e=>DB.asistencia[f]&&DB.asistencia[f][e.id])).slice(-10);
+  const serie=dias.map(f=>{let n=0,ok=0;for(const e of ests){const s=estado(e.id,f);if(s){n++;if(s==='P'||s==='T')ok++}}return {f,v:n?ok/n*100:0}});
+  const nom=YO.nombre.replace(/^(Lic|Licda|Prof|Profa|Ing|Dr|Dra)\.\s*/,'').split(' ')[0];
+  main(`${cabecera(lect?'Jornada en curso':'Día sin clases',`Buen día, ${esc(nom)}`,
+     (can('entrada')&&lect?`<a class="btn" href="#entrada">${ic('scan',17)}Control de entrada</a>`:'')+(can('lista')&&lect?`<button class="btn btn-primary" data-act="irLista">${ic('lista',17)}Pasar lista</button>`:''))}
+  ${lect?'':`<div class="note note-info">${ic('info',18)}<span><b>Hoy no es día lectivo</b> (${esc(motivoNoLectivo(h))}). Las listas y pendientes se calculan solo en días de clase.</span></div>`}
+  <section class="metrics" aria-label="Resumen de hoy">
+    <div class="metric"><span class="metric-l">Matrícula activa</span><span class="metric-v">${ests.length}</span><span class="metric-i">${ic('users',20)}</span><span class="metric-s">${H} niños · ${M} niñas</span></div>
+    <div class="metric"><span class="metric-l">Asistencia de hoy</span><span class="metric-v">${pct(pHoy)}</span><span class="ring" style="--v:${pHoy||0};--rc:${pHoy!=null&&pHoy<DB.config.umbral?'var(--t)':'var(--p)'}"></span><span class="metric-s">${c.n?`${c.P+c.T} de ${c.n} registrados`:'Aún sin registros'}</span></div>
+    <div class="metric"><span class="metric-l">Ausentes hoy</span><span class="metric-v">${c.A+c.J}</span><span class="metric-i a">${ic('alert',20)}</span><span class="metric-s">${c.J} justificados · ${c.T} tardanzas</span></div>
+    <div class="metric"><span class="metric-l">Listas registradas</span><span class="metric-v">${reg.length}<small> / ${secs.length}</small></span><span class="metric-i p">${ic('check',20)}</span><span class="metric-s">${lect?(secs.length-reg.length?`${secs.length-reg.length} pendientes`:'Todas al día'):'Día no lectivo'}</span></div>
+  </section>
+  <div class="grid2">
+    <section class="panel"><div class="panel-h"><div class="head-t"><h2>Listas de hoy</h2>${Object.keys(vias).length?`<span class="small muted">Ingresos automáticos: ${Object.entries(vias).map(([k,v])=>`${VIAS[k]} ${v}`).join(' · ')}</span>`:''}</div><span class="chip nodot">${secs.length} secciones</span></div>
+      ${secs.length?`<div class="list">${secs.map(s=>{const m=DB.listas[h]&&DB.listas[h][s.id];const u=m&&usuario(m.por);const mk=!m&&lect?seccionConMarcas(s.id,h):0;
+        return `<div class="list-r"><div><div style="font-weight:600">${esc(secNombre(s))}</div><div class="small muted">${esc(s.turno)} · ${esc((usuario(s.docenteId)||{}).nombre||'Sin docente guía')}</div></div>
+        <div class="row">${m?`<span class="chip chip-ok" title="${esc(u?u.nombre:'')}">${m.cierre?'Cerrada':'Registrada'} ${new Date(m.at).toLocaleTimeString('es-SV',{hour:'2-digit',minute:'2-digit'})}</span>`:mk?`<span class="chip chip-acc">En curso · ${mk}/${estudiantesDe(s.id).length}</span>`:lect?'<span class="chip chip-warn">Pendiente</span>':'<span class="chip">Sin clases</span>'}
+        ${can('lista')&&lect?`<button class="btn btn-sm" data-act="irLista" data-sec="${s.id}">${m?'Revisar':'Pasar lista'}</button>`:''}</div></div>`}).join('')}</div>`
+      :`<div class="empty">${ic('layers',36,1.5)}<b>No tiene secciones asignadas</b><span class="small">Pida a Dirección que lo asigne como docente guía de una sección.</span></div>`}
+    </section>
+    <section class="panel"><div class="panel-h"><h2>Alertas de seguimiento</h2>${al.length?`<span class="chip chip-crit">${al.length}</span>`:''}</div>
+      ${al.length?`<div class="list">${al.slice(0,6).map(a=>`<div class="list-r"><div class="who">${avatar(a.est)}<div><button class="linkbtn" data-act="ficha" data-id="${a.est.id}">${esc(nombreEst(a.est))}</button><div class="small muted">${esc(secNombre(sec(a.est.seccionId)))} · ${esc(a.txt)}</div></div></div><span class="chip ${a.nivel==='crit'?'chip-crit':'chip-warn'}">${esc(a.tipo)}</span></div>`).join('')}</div>
+      ${al.length>6&&can('rep')?`<button class="btn btn-sm" data-act="verAlertas" style="align-self:flex-start">Ver las ${al.length} alertas</button>`:''}`
+      :`<div class="empty">${ic('check',36,1.5)}<b>Sin alertas</b><span class="small">Ningún estudiante está bajo el ${DB.config.umbral} % ni acumula inasistencias seguidas.</span></div>`}
+    </section>
+  </div>
+  <section class="panel"><div class="panel-h"><div class="head-t"><h2>Asistencia de los últimos días de clase</h2><span class="small muted">Presentes y tardanzas sobre estudiantes registrados</span></div></div>
+   ${serie.length?`<div class="bars"><div class="bars-y"><span>100</span><span>50</span><span>0</span></div>
+    <div class="bars-plot">${serie.map(p=>`<div class="bar" title="${esc(fLarga(p.f))}: ${pct(p.v)}"><span class="bar-v">${Math.round(p.v)}</span><div class="bar-f ${p.v<DB.config.umbral?'warn':''}" style="height:${p.v}%"></div></div>`).join('')}</div>
+    <div class="bars-x">${serie.map(p=>{const d=parse(p.f);return `<span>${DIAS[d.getDay()][0].toUpperCase()} ${d.getDate()}</span>`}).join('')}</div></div>`
+    :'<div class="empty">Cuando se registren listas, aquí verá la tendencia diaria.</div>'}
+  </section>`);
+};
+
+/* ---------- Control de entrada ---------- */
+const K={ultimo:{},tVisto:{},tDesc:0};
+function buscarCodigo(code){
+  code=String(code||'').trim();if(!code)return null;
+  const m=code.match(/^LA1-([A-Z0-9]{10})$/i);
+  if(m)return {e:DB.estudiantes.find(e=>e.qr===m[1].toUpperCase()),via:'qr'};
+  const e=DB.estudiantes.find(x=>x.nie&&x.nie===code)||DB.estudiantes.find(x=>x.reloj&&x.reloj===code);
+  return e?{e,via:'manual'}:{e:null,via:'qr'};
+}
+function registrarEntrada(e,via,f=hoy(),hhmm=null){
+  if(!e)return {t:'err',msg:'Código no reconocido',sub:'El carnet no pertenece a ningún estudiante registrado.'};
+  if(e.estado!=='activo')return {t:'err',msg:'Estudiante retirado',e};
+  if(!esLectivo(f))return {t:'err',msg:'No es día lectivo',sub:motivoNoLectivo(f),e};
+  const s=sec(e.seccionId),ahora=hhmm||horaAhora();DB.asistencia[f]=DB.asistencia[f]||{};const r=DB.asistencia[f][e.id];
+  if(r&&r.in&&r.e!=='A')return {t:'ya',msg:`Ya ingresó a las ${r.in}`,e,r};
+  const lim=sumarMin(DB.config.entrada[s.turno]||'07:00',+DB.config.tolerancia||0);
+  if(r&&r.e!=='A'&&!r.in){r.in=ahora;r.via=via;return {t:'ya',msg:`Lista ya tomada como ${ESTADOS[r.e].toLowerCase()}`,e,r,guardar:true}}
+  const v=ahora<=lim?'P':'T';
+  DB.asistencia[f][e.id]={e:v,h:v==='T'?ahora:'',o:r&&r.o||'',in:ahora,via};
+  return {t:v,msg:v==='P'?'Ingreso a tiempo':'Tardanza',sub:v==='T'?`Límite ${lim} (${s.turno.toLowerCase()})`:`${s.turno} · entrada ${DB.config.entrada[s.turno]}`,e,h:ahora,guardar:true};
+}
+function procesar(e,via,codigo){
+  const id=e?e.id:'?'+codigo,now=Date.now();
+  if(K.tVisto[id]&&now-K.tVisto[id]<5000)return;K.tVisto[id]=now;
+  const r=registrarEntrada(e,via);
+  if(r.guardar){save();log(`Entrada ${VIAS[via]}: ${nombreEst(e)} (${ESTADOS[DB.asistencia[hoy()][e.id].e]})`)}
+  mostrarResultado(r,via);beep(r.t==='ya'?'ya':r.t);
+}
+function mostrarResultado(r,via){
+  const el=$('#kRes');if(!el)return;const s=r.e&&sec(r.e.seccionId);
+  el.className='result pop r-'+(r.t==='P'||r.t==='T'?r.t:r.t);void el.offsetWidth;
+  el.innerHTML=r.e?`${avatar(r.e)}<div style="min-width:0"><div class="result-s">${esc(r.msg)}${r.h?` · ${r.h}`:''}</div><div class="result-n">${esc(r.e.nombres)} ${esc(r.e.apellidos)}</div><div class="small muted">${esc(secNombre(s))}${r.sub?' · '+esc(r.sub):''} · ${VIAS[via]}</div></div>`
+    :`<span class="av" style="background:var(--a);color:#fff">${ic('x',26,2.4)}</span><div><div class="result-s">${esc(r.msg)}</div><div class="small muted">${esc(r.sub||'')}</div></div>`;
+  const fl=$('#kFlash');if(fl){fl.style.background=r.t==='P'?'#2FB36B':r.t==='T'?'#E3A33A':r.t==='err'?'#E2574E':'#6F8FEA';fl.classList.remove('on');void fl.offsetWidth;fl.classList.add('on')}
+  pintarRecientes();
+}
+function pintarRecientes(){
+  const h=hoy(),a=DB.asistencia[h]||{},ests=DB.estudiantes.filter(e=>e.estado==='activo');
+  const ing=ests.filter(e=>a[e.id]&&a[e.id].in).map(e=>({e,r:a[e.id]})).sort((x,y)=>y.r.in.localeCompare(x.r.in));
+  const t=ing.filter(x=>x.r.e==='T').length,el=$('#kCount');if(!el)return;
+  el.innerHTML=`<div class="panel-h"><div class="head-t"><span class="eyebrow">Ingresos de hoy</span><span class="metric-v" style="font-size:1.8rem">${ing.length}<small> / ${ests.length}</small></span></div><div class="counts"><span class="count k-P">A tiempo<b>${ing.length-t}</b></span><span class="count k-T">Tarde<b>${t}</b></span></div></div>
+   <div class="progress" role="img" aria-label="${ing.length} de ${ests.length} estudiantes han ingresado"><i style="width:${ests.length?(ing.length-t)/ests.length*100:0}%;background:var(--p)"></i><i style="width:${ests.length?t/ests.length*100:0}%;background:var(--t)"></i></div>`;
+  $('#kRec').innerHTML=ing.length?ing.slice(0,8).map(x=>`<div class="list-r"><div class="who">${avatar(x.e)}<div><div style="font-weight:600;font-size:.9rem">${esc(x.e.nombres)} ${esc(x.e.apellidos)}</div><div class="small muted">${esc(secNombre(sec(x.e.seccionId)))}</div></div></div><div style="text-align:right">${chipEstado(x.r.e)}<div class="via" style="justify-content:flex-end;margin-top:3px">${ic(x.r.via==='qr'?'qr':x.r.via==='rostro'?'face':x.r.via==='reloj'?'finger':'key',12)}${esc(x.r.in)}</div></div></div>`).join('')
+    :`<div class="empty small">${ic('door',32,1.5)}Aún no hay ingresos registrados hoy.</div>`;
+}
+VIEWS.entrada=()=>{
+  const h=hoy(),lect=esLectivo(h),m=UI.k.modo,c=DB.config,conRostro=DB.estudiantes.filter(e=>e.estado==='activo'&&e.rostro).length;
+  main(`<div id="kWrap" class="${UI.k.full?'kiosk-full':''}" style="display:flex;flex-direction:column;gap:20px">
+  ${cabecera('Ingreso automático','Control de entrada',
+    `<button class="btn" data-act="pantallaCompleta">${ic('full',17)}${UI.k.full?'Salir de pantalla completa':'Pantalla completa'}</button>${YO.rol!=='docente'?`<button class="btn" data-act="cerrarJornada" ${lect?'':'disabled'}>${ic('door',17)}Cerrar jornada</button>`:''}`,
+    `Marca como <b>presente</b> a quien ingresa hasta las ${sumarMin(c.entrada.Matutino,+c.tolerancia)} (matutino) o ${sumarMin(c.entrada.Vespertino,+c.tolerancia)} (vespertino), y como <b>tardanza</b> después.`)}
+  ${lect?'':`<div class="note">${ic('alert',18)}<span><b>Hoy no es día lectivo</b> (${esc(motivoNoLectivo(h))}). Los ingresos no se registrarán.</span></div>`}
+  <div class="kiosk">
+    <div class="stage-wrap">
+      <div class="pill-tabs" role="tablist" aria-label="Método de identificación">
+        ${[['qr','qr','Código QR'],['rostro','face','Reconocimiento facial'],['lector','key','Lector USB / NIE']].map(x=>`<button role="tab" aria-selected="${m===x[0]}" data-act="kModo" data-v="${x[0]}">${ic(x[1],16)}${x[2]}</button>`).join('')}
+      </div>
+      <div class="stage ${m==='rostro'?'face mirror':''}" id="kStage">
+        <video id="kVideo" playsinline muted hidden></video><canvas id="kOverlay"></canvas>
+        <div class="stage-idle" id="kIdle">${m==='lector'?`${ic('key',44,1.4)}<h2 style="color:#fff">Lector conectado por USB</h2><p>Los lectores de código QR o de barras USB escriben como un teclado. Escanee el carnet o digite el NIE en el campo de abajo y presione Enter.</p>`
+          :`${ic(m==='qr'?'qr':'face',48,1.3)}<h2 style="color:#fff">${m==='qr'?'Escanear carnets QR':'Reconocer rostros'}</h2><p>${m==='qr'?'Use la cámara trasera del teléfono o una cámara web apuntando hacia la fila de ingreso.':`${conRostro} estudiantes tienen rostro registrado. La primera vez se descargan unos 7 MB de modelos de reconocimiento.`}</p>
+          <button class="btn btn-primary btn-lg" data-act="kIniciar" ${lect?'':'disabled'}>${ic('cam',18)}Activar cámara</button>`}</div>
+        <div class="frame" hidden id="kFrame"><i></i><i></i><i></i><i></i>${m==='qr'?'<div class="scanline"></div>':''}</div>
+        <div class="flash" id="kFlash"></div>
+        <div class="stage-status" id="kStatus" hidden><span id="kMsg">Buscando…</span><button class="btn btn-sm" data-act="kDetener" style="pointer-events:auto">${ic('stop',14)}Detener</button></div>
+      </div>
+      <form class="wedge" id="kForm" autocomplete="off"><label class="search" style="flex:1"><span class="sr" hidden>Código</span>${ic('scan',17)}<input id="kInput" placeholder="Lector USB: escanee aquí o digite el NIE" ${lect?'':'disabled'} aria-label="Código del carnet o NIE"></label><button class="btn" ${lect?'':'disabled'}>Registrar</button></form>
+    </div>
+    <div class="k-side">
+      <div class="clock"><span class="clock-t" id="kClock">${horaAhora()}</span><span class="muted small">${esc(fLarga(h))}</span></div>
+      <div class="result" id="kRes"><span class="av" style="background:var(--sunk);color:var(--muted)">${ic('scan',26,1.6)}</span><div><div class="result-s" style="color:var(--muted)">Esperando ingreso</div><div class="small muted">El resultado de cada lectura aparece aquí con sonido.</div></div></div>
+      <section class="panel" id="kCount" style="gap:12px"></section>
+      <section class="panel" style="gap:4px"><h3>Últimos ingresos</h3><div class="list" id="kRec"></div></section>
+    </div>
+  </div></div>`);
+  pintarRecientes();
+  const tick=()=>{const el=$('#kClock');if(!el)return;el.textContent=horaAhora();setTimeout(tick,5000)};setTimeout(tick,5000);
+  $('#kForm').onsubmit=ev=>{ev.preventDefault();const v=$('#kInput').value;$('#kInput').value='';const r=buscarCodigo(v);if(r===null)return;procesar(r.e,r.via,v);$('#kInput').focus()};
+  if(m==='lector')$('#kInput').focus();
+};
+async function kIniciar(){
+  const m=UI.k.modo,v=$('#kVideo'),idle=$('#kIdle'),msg=t=>{const e=$('#kMsg');if(e)e.textContent=t};
+  idle.querySelector('button').disabled=true;idle.querySelector('p').textContent=m==='rostro'?'Preparando reconocimiento facial…':'Abriendo cámara…';
+  try{
+    if(m==='rostro')await cargarRostro();
+    const gen=await abrirCamara(v,m==='qr'?'environment':'user');
+    v.hidden=false;idle.hidden=true;$('#kFrame').hidden=false;$('#kStatus').hidden=false;audioOn();pedirWakeLock();
+    if(m==='qr')loopQR(v,gen,msg);else loopRostro(v,gen,msg);
+  }catch(e){idle.querySelector('p').textContent=e.message;idle.querySelector('button').disabled=false;toast(e.message,'err')}
+}
+async function loopQR(v,gen,msg){
+  let det=null;if('BarcodeDetector' in window){try{const f=await BarcodeDetector.getSupportedFormats();if(f.includes('qr_code'))det=new BarcodeDetector({formats:['qr_code']})}catch(e){}}
+  if(!det){msg('Cargando lector QR…');await cargarLib('jsqr')}
+  msg('Acerque el código QR del carnet');
+  const cv=document.createElement('canvas'),cx=cv.getContext('2d',{willReadFrequently:true});
+  const tick=async()=>{if(gen!==CAM.gen)return;try{if(v.readyState>=2){let code=null;
+      if(det){const r=await det.detect(v);if(r[0])code=r[0].rawValue}
+      else{const w=640,hh=Math.round(v.videoHeight/v.videoWidth*w)||480;cv.width=w;cv.height=hh;cx.drawImage(v,0,0,w,hh);const r=jsQR(cx.getImageData(0,0,w,hh).data,w,hh,{inversionAttempts:'dontInvert'});if(r)code=r.data}
+      if(code){const b=buscarCodigo(code);procesar(b&&b.e,'qr',code)}}}catch(e){}
+    if(gen===CAM.gen)CAM.loop=setTimeout(tick,160)};tick();
+}
+function loopRostro(v,gen,msg){
+  const cands=DB.estudiantes.filter(e=>e.estado==='activo'&&e.rostro&&e.rostro.d);
+  if(!cands.length){msg('Ningún estudiante tiene rostro registrado');toast('Registre rostros en Identificación antes de usar este modo.','err')}
+  const matcher=cands.length?new faceapi.FaceMatcher(cands.map(e=>new faceapi.LabeledFaceDescriptors(e.id,[new Float32Array(e.rostro.d)])),+DB.config.umbralRostro||.5):null;
+  const ov=$('#kOverlay'),opts=faceOpts();let prev=null,cnt=0;
+  msg('Mire a la cámara');
+  const tick=async()=>{if(gen!==CAM.gen)return;try{
+    const r=await faceapi.detectSingleFace(v,opts).withFaceLandmarks().withFaceDescriptor();
+    if(!r){dibujarCaja(ov,v,null);prev=null;cnt=0;msg('Mire a la cámara')}
+    else if(matcher){const best=matcher.findBestMatch(r.descriptor);
+      if(best.label!=='unknown'){const e=DB.estudiantes.find(x=>x.id===best.label);dibujarCaja(ov,v,r.detection.box,'#2FB36B',e.nombres.split(' ')[0]);
+        if(best.label===prev)cnt++;else{prev=best.label;cnt=1}msg(`Verificando… ${Math.round((1-best.distance)*100)} %`);
+        if(cnt>=2){procesar(e,'rostro');cnt=0;prev=null}}
+      else{dibujarCaja(ov,v,r.detection.box,'#E2574E','No registrado');prev=null;cnt=0;msg('Rostro no reconocido');
+        if(Date.now()-K.tDesc>6000){K.tDesc=Date.now();mostrarResultado({t:'err',msg:'Rostro no reconocido',sub:'Use el carnet QR o digite el NIE.'},'rostro');beep('err')}}}
+    else dibujarCaja(ov,v,r.detection.box,'#6F8FEA');
+  }catch(e){}if(gen===CAM.gen)CAM.loop=setTimeout(tick,300)};tick();
+}
+
+/* ---------- Pasar lista ---------- */
+VIEWS.lista=()=>{
+  const secs=seccionesVisibles();
+  if(!secs.length){main(`${cabecera('Registro diario','Pasar lista')}<div class="panel"><div class="empty">${ic('layers',36,1.5)}<b>No tiene secciones asignadas</b><span class="small">Dirección debe asignarlo como docente guía en Grados y secciones.</span></div></div>`);return}
+  if(!UI.lista)UI.lista={fecha:hoy(),sec:secs[0].id};
+  const st=UI.lista;if(!secs.find(s=>s.id===st.sec))st.sec=secs[0].id;
+  const s=sec(st.sec),ests=estudiantesDe(st.sec),meta=DB.listas[st.fecha]&&DB.listas[st.fecha][st.sec],ed=puedeEditarLista(st.fecha),auto=seccionConMarcas(st.sec,st.fecha);
+  UI.borrador={};
+  for(const e of ests){const r=DB.asistencia[st.fecha]&&DB.asistencia[st.fecha][e.id],jj=justificada(e.id,st.fecha);
+    UI.borrador[e.id]=r?{e:r.e==='A'&&jj?'J':r.e,h:r.h||'',o:r.o||''}:{e:jj?'J':auto?'A':'P',h:'',o:jj?'Justificación aprobada':auto?'Sin marcación de ingreso':''}}
+  const nl=motivoNoLectivo(st.fecha);
+  main(`${cabecera('Registro diario por jornada','Pasar lista')}
+  <div class="toolbar">
+    <div class="field"><label for="lFecha">Fecha</label><input type="date" id="lFecha" value="${st.fecha}" max="${hoy()}"></div>
+    <div class="field" style="flex:1;max-width:360px"><label for="lSec">Sección</label><select id="lSec">${optSecs(secs,st.sec)}</select></div>
+    <button class="btn" data-act="todosP" ${ed.ok?'':'disabled'}>${ic('check',16)}Marcar todos presentes</button>
+  </div>
+  ${nl?`<div class="note">${ic('alert',18)}<span><b>${esc(fLarga(st.fecha))}</b> no es día lectivo (${esc(nl)}). ${YO.rol==='docente'?'':'Puede registrar si hubo clase de reposición.'}</span></div>`:''}
+  ${ed.ok?'':`<div class="note note-info">${ic('info',18)}<span><b>Solo lectura.</b> ${esc(ed.por)}</span></div>`}
+  ${auto&&!meta?`<div class="note note-info">${ic('scan',18)}<span><b>${auto} estudiantes ya marcaron su ingreso.</b> Quienes no tienen marcación aparecen como ausentes; corrija si alguno está en el aula.</span></div>`:''}
+  <div class="panel-h"><div class="counts" id="counts"></div><span class="small muted">${meta?`${meta.cierre?'Cerrada automáticamente':'Registrada'} por ${esc((usuario(meta.por)||{}).nombre||'—')} el ${new Date(meta.at).toLocaleString('es-SV',{dateStyle:'short',timeStyle:'short'})}`:auto?'Lista sin guardar.':'Lista sin registrar: todos inician como presentes.'}</span></div>
+  ${ests.length?`<div class="roll" id="roll">${ests.map((e,i)=>filaLista(e,i,ed.ok)).join('')}</div>
+  <div class="savebar no-print"><span class="small"><b>${esc(secNombre(s))}</b> · ${esc(fLarga(st.fecha))}</span><button class="btn btn-primary" data-act="guardarLista" ${ed.ok&&!(nl&&YO.rol==='docente')?'':'disabled'}>${ic('check',16)}${meta?'Guardar cambios':'Guardar lista'}</button></div>`
+  :`<div class="panel"><div class="empty">${ic('users',36,1.5)}<b>Esta sección no tiene estudiantes activos</b>${can('est_edit')?'<a class="btn btn-sm" href="#estudiantes">Agregar estudiantes</a>':''}</div></div>`}`);
+  contarLista();
+  $('#lFecha').onchange=e=>{if(e.target.value){st.fecha=e.target.value>hoy()?hoy():e.target.value;VIEWS.lista()}};
+  $('#lSec').onchange=e=>{st.sec=e.target.value;VIEWS.lista()};
+  const roll=$('#roll');if(roll)roll.addEventListener('input',e=>{const t=e.target,id=t.dataset.id;if(!id)return;UI.borrador[id][t.dataset.f]=t.value});
+};
+function filaLista(e,i,ok){
+  const b=UI.borrador[e.id],r=DB.asistencia[UI.lista.fecha]&&DB.asistencia[UI.lista.fecha][e.id];
+  return `<div class="roll-r is-${b.e}" id="r-${e.id}"><span class="roll-n">${i+1}</span>
+   <div class="who">${avatar(e)}<div><div class="roll-name">${esc(e.apellidos)}, ${esc(e.nombres)}</div><div class="roll-sub"><span class="mono">NIE ${esc(e.nie||'—')}</span>${viaTxt(r)}${justificada(e.id,UI.lista.fecha)?'<span class="chip chip-j">Justificación aprobada</span>':''}</div></div></div>
+   <div class="seg" role="group" aria-label="Estado de ${esc(e.nombres)}">${['P','A','T','J'].map(v=>`<button type="button" data-act="marca" data-id="${e.id}" data-v="${v}" aria-pressed="${b.e===v}" aria-label="${ESTADOS[v]}" title="${ESTADOS[v]}" ${ok?'':'disabled'}>${v}</button>`).join('')}</div>
+   <div class="roll-x">${b.e==='T'?`<input type="time" data-id="${e.id}" data-f="h" value="${esc(b.h)}" aria-label="Hora de llegada" ${ok?'':'disabled'}>`:''}<input type="text" data-id="${e.id}" data-f="o" value="${esc(b.o)}" placeholder="Observación" aria-label="Observación" ${ok?'':'disabled'}></div></div>`;
+}
+function contarLista(){const c={P:0,A:0,T:0,J:0};Object.values(UI.borrador).forEach(b=>c[b.e]++);const el=$('#counts');if(el)el.innerHTML=['P','A','T','J'].map(k=>`<span class="count k-${k}">${ESTADOS[k]}<b>${c[k]}</b></span>`).join('')}
+
+/* ---------- Estudiantes ---------- */
+VIEWS.estudiantes=()=>{
+  const secs=seccionesVisibles(),f=UI.est,edit=can('est_edit'),h=hoy();
+  let ests=estudiantesVisibles();
+  if(f.sec)ests=ests.filter(e=>e.seccionId===f.sec);
+  if(f.estado)ests=ests.filter(e=>e.estado===f.estado);
+  if(f.q){const q=f.q.toLowerCase();ests=ests.filter(e=>(e.nombres+' '+e.apellidos+' '+e.nie).toLowerCase().includes(q))}
+  ests.sort((a,b)=>gIdx(sec(a.seccionId).grado)-gIdx(sec(b.seccionId).grado)||sec(a.seccionId).seccion.localeCompare(sec(b.seccionId).seccion)||porNombre(a,b));
+  main(`${cabecera('Matrícula','Estudiantes',`<button class="btn" data-act="imprimir">${ic('print',17)}Imprimir nómina</button>`+(edit?`<button class="btn" data-act="importar">${ic('up',17)}Importar lista</button><button class="btn btn-primary" data-act="nuevoEst">${ic('plus',17)}Nuevo estudiante</button>`:''))}
+  ${printHead('Nómina de estudiantes',`${f.sec?esc(secNombre(sec(f.sec))):'Todas las secciones'} · ${f.estado==='activo'?'Activos':f.estado==='retirado'?'Retirados':'Todos'} · ${ests.length} estudiantes (${ests.filter(e=>e.sexo==='M').length} M, ${ests.filter(e=>e.sexo==='F').length} F)`)}
+  <div class="toolbar">
+   <div class="field" style="flex:1;min-width:220px"><label for="eQ">Buscar</label><div class="search">${ic('search',16)}<input id="eQ" type="search" placeholder="Nombre, apellido o NIE" value="${esc(f.q)}"></div></div>
+   <div class="field"><label for="eSec">Sección</label><select id="eSec">${optSecs(secs,f.sec,'Todas las secciones')}</select></div>
+   <div class="field"><label for="eEst">Estado</label><select id="eEst"><option value="activo" ${f.estado==='activo'?'selected':''}>Activos</option><option value="retirado" ${f.estado==='retirado'?'selected':''}>Retirados</option><option value="" ${!f.estado?'selected':''}>Todos</option></select></div>
+  </div>
+  ${ests.length?`<div class="tbl-wrap"><table><thead><tr><th class="n">N.°</th><th>Estudiante</th><th>NIE</th><th class="c">Sexo</th><th>Sección</th><th>Responsable</th><th class="c np">Identificación</th><th>Asistencia del año</th><th class="np"></th></tr></thead><tbody>
+   ${ests.map((e,i)=>{const s=stats(e.id,DB.config.inicio,h);return `<tr><td class="n muted">${i+1}</td>
+    <td><div class="who">${avatar(e)}<div><button class="linkbtn" data-act="ficha" data-id="${e.id}">${esc(nombreEst(e))}</button>${e.estado==='retirado'?' <span class="chip">Retirado</span>':''}</div></div></td>
+    <td class="mono small">${esc(e.nie||'—')}</td><td class="c">${e.sexo}</td><td class="small">${esc(secNombre(sec(e.seccionId)))}</td><td class="small">${esc(e.encargado)}<div class="mono muted">${esc(e.telefono)}</div></td>
+    <td class="c np"><span class="row" style="justify-content:center;gap:6px;color:var(--muted)"><span title="${e.qr?'Carnet QR generado':'Sin carnet QR'}" style="opacity:${e.qr?1:.3}">${ic('qr',16)}</span><span title="${e.rostro?'Rostro registrado':'Sin rostro'}" style="opacity:${e.rostro?1:.3}">${ic('face',16)}</span></span></td>
+    <td>${pctBar(s.pct)}</td><td class="np">${edit?`<button class="btn btn-sm btn-ghost" data-act="editEst" data-id="${e.id}">Editar</button>`:''}</td></tr>`}).join('')}
+  </tbody></table></div><p class="small muted">${ests.length} estudiante${ests.length===1?'':'s'} · ${ests.filter(e=>e.sexo==='M').length} M · ${ests.filter(e=>e.sexo==='F').length} F</p>`
+  :`<div class="panel"><div class="empty">${ic('users',36,1.5)}<b>No hay estudiantes con esos filtros</b>${edit&&!DB.secciones.length?'<span class="small">Primero cree una sección en Grados y secciones.</span>':''}</div></div>`}`);
+  let tq;$('#eQ').oninput=e=>{clearTimeout(tq);tq=setTimeout(()=>{f.q=e.target.value;VIEWS.estudiantes();const q=$('#eQ');q.focus();q.setSelectionRange(q.value.length,q.value.length)},250)};
+  $('#eSec').onchange=e=>{f.sec=e.target.value;VIEWS.estudiantes()};
+  $('#eEst').onchange=e=>{f.estado=e.target.value;VIEWS.estudiantes()};
+};
+function formEst(e){
+  const nuevo=!e;e=e||{nie:'',apellidos:'',nombres:'',sexo:'F',seccionId:UI.est.sec||'',encargado:'',telefono:'',estado:'activo',reloj:''};
+  openDlg(`<h2>${nuevo?'Nuevo estudiante':'Editar estudiante'}</h2>
+  <form id="fEst" class="form">
+   <div class="field"><label for="fNie">NIE</label><input id="fNie" value="${esc(e.nie)}" inputmode="numeric" placeholder="Número de Identificación del Estudiante"></div>
+   <div class="field"><label for="fSec">Sección</label><select id="fSec" required>${optSecs(ordenSecs(DB.secciones),e.seccionId,'Seleccione…')}</select></div>
+   <div class="field"><label for="fApe">Apellidos</label><input id="fApe" value="${esc(e.apellidos)}" required></div>
+   <div class="field"><label for="fNom">Nombres</label><input id="fNom" value="${esc(e.nombres)}" required></div>
+   <div class="field"><label for="fSexo">Sexo</label><select id="fSexo"><option value="F" ${e.sexo==='F'?'selected':''}>Femenino</option><option value="M" ${e.sexo==='M'?'selected':''}>Masculino</option></select></div>
+   <div class="field"><label for="fEstado">Estado</label><select id="fEstado"><option value="activo" ${e.estado==='activo'?'selected':''}>Activo</option><option value="retirado" ${e.estado==='retirado'?'selected':''}>Retirado</option></select></div>
+   <div class="field"><label for="fEnc">Madre, padre o responsable</label><input id="fEnc" value="${esc(e.encargado)}"></div>
+   <div class="field"><label for="fTel">Teléfono del responsable</label><input id="fTel" value="${esc(e.telefono)}" inputmode="tel" placeholder="7000-0000"></div>
+   <div class="field"><label for="fRel">Código en reloj de huella</label><input id="fRel" value="${esc(e.reloj||'')}" inputmode="numeric" placeholder="Si se deja vacío se usa el NIE"></div>
+   ${!nuevo&&e.qr?`<div class="field"><span class="lbl">Carnet QR</span><button type="button" class="btn" data-act="regenQR" data-id="${e.id}">${ic('qr',16)}Reponer carnet (anula el anterior)</button></div>`:''}
+   <p class="err full" id="fErr"></p>
+   <div class="dlg-actions full">${!nuevo&&YO.rol==='direccion'?`<button type="button" class="btn btn-ghost" data-act="borrarEst" data-id="${e.id}" style="margin-right:auto;color:var(--a)">Eliminar</button>`:''}<button type="button" class="btn" data-act="cerrar">Cancelar</button><button class="btn btn-primary">${nuevo?'Agregar':'Guardar'}</button></div>
+  </form>`);
+  $('#fEst').onsubmit=ev=>{ev.preventDefault();
+    const d={nie:$('#fNie').value.trim(),seccionId:$('#fSec').value,apellidos:$('#fApe').value.trim(),nombres:$('#fNom').value.trim(),sexo:$('#fSexo').value,estado:$('#fEstado').value,encargado:$('#fEnc').value.trim(),telefono:$('#fTel').value.trim(),reloj:$('#fRel').value.trim()};
+    if(!d.seccionId){$('#fErr').textContent='Seleccione la sección del estudiante.';return}
+    if(d.nie&&DB.estudiantes.some(x=>x.nie===d.nie&&x.id!==(e.id||''))){$('#fErr').textContent='Ya existe un estudiante con ese NIE.';return}
+    if(nuevo){DB.estudiantes.push({id:uid(),...d,qr:token(),ingreso:hoy()});log(`Agregó a ${d.apellidos}, ${d.nombres}`)}
+    else{Object.assign(DB.estudiantes.find(x=>x.id===e.id),d);log(`Editó a ${d.apellidos}, ${d.nombres}`)}
+    save();closeDlg();toast(nuevo?'Estudiante agregado.':'Cambios guardados.');render();
+  };
+}
+function fichaEst(id){
+  const e=DB.estudiantes.find(x=>x.id===id);if(!e)return;const h=hoy(),c=DB.config,s=stats(id,c.inicio,h);
+  const hist=fechasReg().filter(f=>f>=c.inicio&&f<=h).map(f=>({f,e:estado(id,f),r:DB.asistencia[f][id]})).filter(x=>x.e&&x.e!=='P').reverse();
+  const jus=DB.justificaciones.filter(j=>j.estudianteId===id).sort((a,b)=>b.desde.localeCompare(a.desde));
+  const meses={};for(const f of fechasReg()){if(f<c.inicio||f>h)continue;const v=estado(id,f);if(!v)continue;const k=f.slice(0,7);(meses[k]||(meses[k]={P:0,A:0,T:0,J:0,n:0}))[v]++;meses[k].n++}
+  openDlg(`${printHead('Constancia de asistencia del estudiante',`${esc(nombreEst(e))} · NIE ${esc(e.nie||'—')} · ${esc(secNombre(sec(e.seccionId)))} · Del ${fCorta(c.inicio)} al ${fCorta(h)}`)}<div class="panel-h" style="align-items:flex-start"><div class="who">${avatar(e,'av-lg')}<div class="head-t"><span class="eyebrow">${esc(secNombre(sec(e.seccionId)))} · NIE ${esc(e.nie||'—')}</span><h2>${esc(nombreEst(e))}</h2><span class="small muted">Responsable: ${esc(e.encargado||'—')} · <span class="mono">${esc(e.telefono||'—')}</span></span></div></div><div class="row no-print" style="flex-wrap:nowrap"><button class="btn btn-sm" data-act="imprimirFicha">${ic('print',15)}Imprimir</button><button class="icon-btn" data-act="cerrar" aria-label="Cerrar">${ic('x',20)}</button></div></div>
+  <div class="counts">${['P','A','T','J'].map(k=>`<span class="count k-${k}">${ESTADOS[k]}<b>${s[k]}</b></span>`).join('')}</div>
+  ${pctBar(s.pct)}<p class="small muted">${s.total} días registrados desde ${fCorta(c.inicio)}.${s.racha?` <b style="color:var(--a)">${s.racha} inasistencia${s.racha>1?'s':''} seguida${s.racha>1?'s':''} sin justificar.</b>`:''}</p>
+  ${Object.keys(meses).length?`<div class="tbl-wrap"><table><thead><tr><th>Mes</th><th class="n">P</th><th class="n">A</th><th class="n">T</th><th class="n">J</th><th class="n">% asist.</th></tr></thead><tbody>${Object.keys(meses).sort().map(k=>{const m=meses[k];return `<tr><td>${MESES[+k.slice(5)-1]}</td><td class="n">${m.P}</td><td class="n">${m.A}</td><td class="n">${m.T}</td><td class="n">${m.J}</td><td class="n">${pct((m.P+m.T)/m.n*100)}</td></tr>`}).join('')}</tbody></table></div>`:''}
+  <h3>Inasistencias y tardanzas</h3>
+  ${hist.length?`<div class="list">${hist.slice(0,15).map(x=>`<div class="list-r"><div><div class="small" style="font-weight:600">${esc(fLarga(x.f))}</div>${x.r.o||x.r.h||x.r.in?`<div class="small muted">${x.r.in?'Ingresó '+esc(x.r.in)+' ('+VIAS[x.r.via]+'). ':x.r.h?'Llegó '+esc(x.r.h)+'. ':''}${esc(x.r.o)}</div>`:''}</div>${chipEstado(x.e)}</div>`).join('')}</div>`:'<p class="small muted">Sin inasistencias ni tardanzas este año.</p>'}
+  ${jus.length?`<h3>Justificaciones</h3><div class="list">${jus.map(j=>`<div class="list-r"><div class="small"><b>${esc(j.tipo)}</b> · ${fCorta(j.desde)}${j.hasta!==j.desde?' al '+fCorta(j.hasta):''}<div class="muted">${esc(j.detalle)}</div></div>${chipJus(j.estado)}</div>`).join('')}</div>`:''}
+  <p class="print-only print-note">Se extiende la presente constancia a solicitud de la parte interesada. Asistencia = (presentes + tardanzas) ÷ días registrados.</p>${printSign(['Dirección',DB.config.institucion])}`);
+}
+function importarDlg(){
+  openDlg(`<h2>Importar lista de estudiantes</h2>
+   <p class="small muted">Pegue una fila por estudiante, con columnas separadas por punto y coma o tabulación (puede copiarlas directo de Excel):<br><span class="mono">NIE ; Apellidos ; Nombres ; Sexo (M/F) ; Responsable ; Teléfono</span></p>
+   <div class="field"><label for="iSec">Sección destino</label><select id="iSec">${optSecs(ordenSecs(DB.secciones),UI.est.sec,'Seleccione…')}</select></div>
+   <div class="field"><label for="iTxt">Filas</label><textarea id="iTxt" placeholder="4387120;Hernández Flores;María José;F;Ana Flores;7123-4567"></textarea></div>
+   <p class="err" id="iErr"></p>
+   <div class="dlg-actions"><button class="btn" data-act="cerrar">Cancelar</button><button class="btn btn-primary" data-act="hacerImport">Importar</button></div>`);
+}
+
+/* ---------- Identificación: carnets, rostros y reloj de huella ---------- */
+VIEWS.identificacion=()=>{
+  const tabs=[['carnets','qr','Carnets QR'],['rostros','face','Rostros'],['reloj','finger','Reloj de huella']];
+  main(`${cabecera('Matrícula','Identificación de estudiantes','','Prepare los medios con que cada estudiante marca su ingreso en Control de entrada.')}
+  <div class="tabs" role="tablist">${tabs.map(t=>`<button role="tab" aria-selected="${UI.idTab===t[0]}" data-act="idTab" data-v="${t[0]}">${ic(t[1],16)}${t[2]}</button>`).join('')}</div><div id="idc" style="display:flex;flex-direction:column;gap:18px"></div>`);
+  ({carnets:idCarnets,rostros:idRostros,reloj:idReloj})[UI.idTab]();
+};
+async function idCarnets(){
+  const secs=ordenSecs(DB.secciones),f=UI.id;if(!f.sec&&secs[0])f.sec=secs[0].id;
+  const ests=f.sec==='*'?DB.estudiantes.filter(e=>e.estado==='activo').sort((a,b)=>gIdx(sec(a.seccionId).grado)-gIdx(sec(b.seccionId).grado)||porNombre(a,b)):estudiantesDe(f.sec);
+  let cambios=false;ests.forEach(e=>{if(!e.qr){e.qr=token();cambios=true}});if(cambios)save();
+  $('#idc').innerHTML=`<div class="toolbar no-print"><div class="field"><label for="cSec">Sección</label><select id="cSec"><option value="*" ${f.sec==='*'?'selected':''}>Todas las secciones</option>${optSecs(secs,f.sec)}</select></div>
+   <button class="btn btn-primary" data-act="imprimir" data-m="carnets">${ic('print',17)}Imprimir carnets</button><span class="small muted" style="flex:1;min-width:220px">Hoja carta: 8 carnets de 85,6 × 54 mm con guías de corte. Imprima en cartulina al 100 % (sin "ajustar a la página") y plastifique.</span></div>
+   <div class="cards" id="cards"><div class="empty">Generando códigos…</div></div>`;
+  $('#cSec').onchange=e=>{f.sec=e.target.value;idCarnets()};
+  try{await cargarLib('qr')}catch(e){$('#cards').innerHTML=`<div class="empty"><b>${esc(e.message)}</b></div>`;return}
+  const c=DB.config;
+  $('#cards').innerHTML=ests.length?ests.map(e=>{const q=qrcode(0,'M');q.addData('LA1-'+e.qr);q.make();const s=sec(e.seccionId);
+    return `<article class="carnet"><div class="carnet-h"><b>${esc(c.institucion)}</b><span>Carnet estudiantil ${c.anio}</span></div>
+    <div class="carnet-b"><div style="min-width:0">${avatar(e)}<div class="carnet-n">${esc(e.nombres)}<br>${esc(e.apellidos)}</div><div class="carnet-g">${esc(secNombre(s))} · ${esc(s.turno)}</div><div class="carnet-nie">NIE ${esc(e.nie||'—')}</div></div>
+    <div class="carnet-qr">${q.createSvgTag({cellSize:4,margin:0,scalable:true})}</div></div>
+    <div class="carnet-f"><span>Presente este código al ingresar</span><span class="mono">${e.qr.slice(0,4)}</span></div></article>`}).join('')
+    :`<div class="empty">No hay estudiantes activos en esta sección.</div>`;
+}
+function idRostros(){
+  const secs=ordenSecs(DB.secciones),f=UI.id;if(!f.sec||f.sec==='*')f.sec=secs[0]?secs[0].id:'';
+  const ests=estudiantesDe(f.sec),con=DB.estudiantes.filter(e=>e.rostro).length;
+  $('#idc').innerHTML=`<div class="note note-info">${ic('info',18)}<span><b>Consentimiento obligatorio.</b> Registre el rostro solo de estudiantes cuyo responsable firmó la autorización de uso de imagen y datos biométricos. El sistema guarda una huella numérica del rostro y una miniatura, únicamente en este navegador.</span></div>
+   <div class="toolbar"><div class="field"><label for="rSec2">Sección</label><select id="rSec2">${optSecs(secs,f.sec)}</select></div><span class="small muted" style="flex:1">${con} estudiantes con rostro registrado en total.</span>
+   ${con&&YO.rol==='direccion'?`<button class="btn btn-ghost" data-act="borrarRostros" style="color:var(--a)">Borrar todos los rostros</button>`:''}</div>
+   ${ests.length?`<div class="tbl-wrap"><table><thead><tr><th>Estudiante</th><th>NIE</th><th>Rostro</th><th>Autorización</th><th></th></tr></thead><tbody>
+   ${ests.map(e=>`<tr><td><div class="who">${avatar(e)}<span style="font-weight:600">${esc(nombreEst(e))}</span></div></td><td class="mono small">${esc(e.nie||'—')}</td>
+   <td>${e.rostro?`<span class="chip chip-ok">Registrado ${fCorta(e.rostro.at)}</span>`:'<span class="chip">Sin registrar</span>'}</td><td class="small muted">${e.rostro?esc(e.rostro.consent||'—'):'—'}</td>
+   <td><div class="row" style="flex-wrap:nowrap"><button class="btn btn-sm" data-act="regRostro" data-id="${e.id}">${ic('cam',15)}${e.rostro?'Actualizar':'Registrar'}</button>${e.rostro?`<button class="btn btn-sm btn-ghost" data-act="delRostro" data-id="${e.id}">Quitar</button>`:''}</div></td></tr>`).join('')}</tbody></table></div>`
+   :'<div class="panel"><div class="empty">No hay estudiantes activos en esta sección.</div></div>'}`;
+  $('#rSec2').onchange=e=>{f.sec=e.target.value;idRostros()};
+}
+function dlgRostro(e){
+  openDlg(`<div class="panel-h"><div class="head-t"><span class="eyebrow">Registro facial</span><h2>${esc(nombreEst(e))}</h2></div><button class="icon-btn" data-act="cerrar" aria-label="Cerrar">${ic('x',20)}</button></div>
+   <div class="stage face mirror" style="aspect-ratio:4/3"><video id="rVideo" playsinline muted hidden></video><canvas id="rOverlay"></canvas>
+    <div class="stage-idle" id="rIdle">${ic('face',44,1.3)}<p id="rMsg">Preparando reconocimiento facial…</p></div><div class="frame"></div><div class="flash" id="rFlash"></div></div>
+   <p class="small muted">Buena luz de frente, sin lentes oscuros ni gorra. Se toman 3 muestras; pida al estudiante que gire levemente la cabeza entre cada una.</p>
+   <label class="check"><input type="checkbox" id="rCons"> El responsable firmó la autorización de uso de imagen y datos biométricos.</label>
+   <div class="row" id="rDots" aria-live="polite"></div>
+   <div class="dlg-actions"><button class="btn" data-act="cerrar">Cancelar</button><button class="btn btn-primary" id="rCap" disabled>${ic('cam',16)}Capturar 3 muestras</button></div>`);
+  CAM.enDlg=true;
+  const v=$('#rVideo'),msg=t=>{const m=$('#rMsg');if(m)m.textContent=t};
+  (async()=>{try{await cargarRostro();if(!dlg.open)return;await abrirCamara(v,'user');CAM.enDlg=true;v.hidden=false;$('#rIdle').hidden=true;$('#rCap').disabled=false;
+    const gen=CAM.gen,ov=$('#rOverlay'),opts=faceOpts();
+    const prev=async()=>{if(gen!==CAM.gen||CAM.capturando)return;try{const r=await faceapi.detectSingleFace(v,opts);dibujarCaja(ov,v,r&&r.box,r?'#6F8FEA':'')}catch(x){}if(gen===CAM.gen)CAM.loop=setTimeout(prev,250)};prev();
+    $('#rCap').onclick=async()=>{
+      if(!$('#rCons').checked){toast('Confirme que existe la autorización firmada del responsable.','err');return}
+      $('#rCap').disabled=true;CAM.capturando=true;const muestras=[];let foto='',intentos=0;
+      const dots=()=>{$('#rDots').innerHTML=[0,1,2].map(i=>`<span class="chip ${i<muestras.length?'chip-ok':''}">Muestra ${i+1}</span>`).join('')};dots();
+      while(muestras.length<3&&intentos<40&&gen===CAM.gen){intentos++;
+        const r=await faceapi.detectSingleFace(v,new faceapi.TinyFaceDetectorOptions({inputSize:416,scoreThreshold:.6})).withFaceLandmarks().withFaceDescriptor();
+        if(r){dibujarCaja(ov,v,r.detection.box,'#2FB36B');muestras.push(r.descriptor);dots();const fl=$('#rFlash');fl.style.background='#fff';fl.classList.remove('on');void fl.offsetWidth;fl.classList.add('on');
+          if(!foto)foto=recorte(v,r.detection.box);await new Promise(z=>setTimeout(z,700))}
+        else await new Promise(z=>setTimeout(z,200))}
+      CAM.capturando=false;
+      if(muestras.length<3){toast('No se detectó bien el rostro. Mejore la luz y vuelva a intentar.','err');$('#rCap').disabled=false;prev();return}
+      const d=new Array(128).fill(0);muestras.forEach(m=>m.forEach((x,i)=>d[i]+=x/3));
+      e.rostro={d:d.map(x=>Math.round(x*1e5)/1e5),foto,at:hoy(),consent:`Autorizado, registró ${YO.nombre}`};
+      log(`Registró el rostro de ${nombreEst(e)}`);if(save()){closeDlg();toast('Rostro registrado.');render()}
+    };
+  }catch(x){msg(x.message);toast(x.message,'err')}})();
+}
+function recorte(v,b){const c=document.createElement('canvas'),S=96;c.width=c.height=S;const m=Math.max(b.width,b.height)*1.35,cx=b.x+b.width/2,cy=b.y+b.height/2;
+  c.getContext('2d').drawImage(v,cx-m/2,cy-m/2,m,m,0,0,S,S);return c.toDataURL('image/jpeg',.72)}
+function idReloj(){
+  $('#idc').innerHTML=`<div class="grid2">
+   <section class="panel"><div class="head-t"><h2>Importar marcaciones de huella</h2><p class="small muted">Un navegador no puede leer un lector de huella directamente. La forma confiable es usar un reloj biométrico de asistencia (por ejemplo ZKTeco) y traer aquí el archivo que exporta por USB o desde su programa.</p></div>
+    <div class="field"><label for="rlFile">Archivo de marcaciones (.dat, .txt o .csv)</label><input type="file" id="rlFile" accept=".dat,.txt,.csv,text/plain,text/csv"></div>
+    <div class="field"><label for="rlTxt">O pegue el contenido</label><textarea id="rlTxt" placeholder="4387120	2026-10-15 06:52:10	1	0	1	0"></textarea></div>
+    <p class="err" id="rlErr"></p><div class="row"><button class="btn btn-primary" data-act="importarReloj">${ic('up',16)}Procesar marcaciones</button></div><div id="rlRes"></div></section>
+   <section class="panel"><h2>Cómo configurarlo</h2><div class="list small">
+    <div class="list-r"><div><b>1. Enrolar a cada estudiante en el reloj</b><div class="muted">Use como número de usuario su NIE, o anote el número del reloj en el campo "Código en reloj de huella" de la ficha del estudiante.</div></div></div>
+    <div class="list-r"><div><b>2. Exportar las marcaciones</b><div class="muted">Desde el menú del reloj (memoria USB → descargar registros) o desde su software. Se aceptan formatos con fecha 2026-10-15 07:01 o 15/10/2026 07:01.</div></div></div>
+    <div class="list-r"><div><b>3. Procesar aquí cada día o semana</b><div class="muted">Se toma la primera marcación de cada día como hora de ingreso y se aplica la misma regla de tardanza. No se sobrescriben ingresos ya registrados.</div></div></div>
+   </div></section></div>`;
+  $('#rlFile').onchange=ev=>{const f=ev.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{$('#rlTxt').value=rd.result};rd.readAsText(f)};
+}
+function procesarReloj(txt){
+  const marcas={};let lineas=0;
+  for(const ln of txt.split(/\r?\n/)){if(!ln.trim())continue;lineas++;
+    let m=ln.match(/^\s*"?([A-Za-z0-9-]+)"?[\s,;]+(?:.*?[\s,;])?(\d{4})[-/](\d{2})[-/](\d{2})[ T,;]+(\d{1,2}):(\d{2})/);
+    let id,f,hh;if(m){id=m[1];f=`${m[2]}-${m[3]}-${m[4]}`;hh=`${pad(m[5])}:${m[6]}`}
+    else{m=ln.match(/^\s*"?([A-Za-z0-9-]+)"?[\s,;]+(?:.*?[\s,;])?(\d{1,2})\/(\d{1,2})\/(\d{4})[ ,;]+(\d{1,2}):(\d{2})/);if(!m)continue;id=m[1];f=`${m[4]}-${pad(m[3])}-${pad(m[2])}`;hh=`${pad(m[5])}:${m[6]}`}
+    const k=id+'|'+f;if(!marcas[k]||hh<marcas[k].hh)marcas[k]={id,f,hh}}
+  const norm=x=>String(x||'').replace(/^0+/,'');const res={ok:0,ya:0,noLect:0,sinEst:new Set(),lineas};
+  for(const k in marcas){const {id,f,hh}=marcas[k];const e=DB.estudiantes.find(x=>norm(x.reloj||x.nie)===norm(id)&&norm(id));
+    if(!e){res.sinEst.add(id);continue}if(f>hoy())continue;const r=registrarEntrada(e,'reloj',f,hh);
+    if(r.t==='P'||r.t==='T')res.ok++;else if(r.t==='ya')res.ya++;else res.noLect++}
+  return res;
+}
+
+/* ---------- Secciones ---------- */
+VIEWS.secciones=()=>{
+  const secs=ordenSecs(DB.secciones);
+  main(`${cabecera('Organización escolar','Grados y secciones',`<button class="btn btn-primary" data-act="nuevaSec">${ic('plus',17)}Nueva sección</button>`,'El docente guía es quien pasa lista en esa sección. Un docente puede ser guía de varias secciones.')}
+  ${secs.length?`<div class="tbl-wrap"><table><thead><tr><th>Nivel</th><th>Grado y sección</th><th>Turno</th><th>Docente guía</th><th class="n">M</th><th class="n">F</th><th class="n">Matrícula</th><th></th></tr></thead><tbody>
+   ${secs.map(s=>{const e=estudiantesDe(s.id);return `<tr><td class="muted small">${esc(nivelDe(s.grado))}</td><td style="font-weight:600">${esc(secNombre(s))}</td><td>${esc(s.turno)} <span class="mono small muted">${esc(DB.config.entrada[s.turno]||'')}</span></td><td>${esc((usuario(s.docenteId)||{}).nombre||'Sin asignar')}</td>
+   <td class="n">${e.filter(x=>x.sexo==='M').length}</td><td class="n">${e.filter(x=>x.sexo==='F').length}</td><td class="n" style="font-weight:700">${e.length}</td><td><button class="btn btn-sm btn-ghost" data-act="editSec" data-id="${s.id}">Editar</button></td></tr>`}).join('')}
+   </tbody><tfoot><tr><td colspan="4">Total institución</td><td class="n">${DB.estudiantes.filter(e=>e.estado==='activo'&&e.sexo==='M').length}</td><td class="n">${DB.estudiantes.filter(e=>e.estado==='activo'&&e.sexo==='F').length}</td><td class="n">${DB.estudiantes.filter(e=>e.estado==='activo').length}</td><td></td></tr></tfoot></table></div>`
+  :`<div class="panel"><div class="empty">${ic('layers',36,1.5)}<b>Aún no hay secciones</b><span class="small">Cree la primera sección para empezar a matricular estudiantes.</span></div></div>`}`);
+};
+function formSec(s){
+  const nuevo=!s;s=s||{grado:'1.er grado',seccion:'A',turno:'Matutino',docenteId:''};
+  const docs=DB.usuarios.filter(u=>u.activo&&u.rol!=='porteria');
+  openDlg(`<h2>${nuevo?'Nueva sección':'Editar sección'}</h2><form id="fSecF" class="form">
+   <div class="field"><label for="sGr">Grado</label><select id="sGr">${GRADOS.map(g=>`<option ${g[0]===s.grado?'selected':''}>${g[0]}</option>`).join('')}</select></div>
+   <div class="field"><label for="sLe">Sección</label><input id="sLe" value="${esc(s.seccion)}" maxlength="3" required></div>
+   <div class="field"><label for="sTu">Turno</label><select id="sTu">${['Matutino','Vespertino'].map(t=>`<option ${t===s.turno?'selected':''}>${t}</option>`).join('')}</select></div>
+   <div class="field"><label for="sDo">Docente guía</label><select id="sDo"><option value="">Sin asignar</option>${docs.map(u=>`<option value="${u.id}" ${u.id===s.docenteId?'selected':''}>${esc(u.nombre)} (${ROLES[u.rol]})</option>`).join('')}</select></div>
+   <p class="err full" id="sErr"></p>
+   <div class="dlg-actions full">${!nuevo?`<button type="button" class="btn btn-ghost" data-act="borrarSec" data-id="${s.id}" style="margin-right:auto;color:var(--a)">Eliminar</button>`:''}<button type="button" class="btn" data-act="cerrar">Cancelar</button><button class="btn btn-primary">${nuevo?'Crear sección':'Guardar'}</button></div></form>`);
+  $('#fSecF').onsubmit=ev=>{ev.preventDefault();
+    const d={grado:$('#sGr').value,seccion:$('#sLe').value.trim().toUpperCase(),turno:$('#sTu').value,docenteId:$('#sDo').value};
+    if(DB.secciones.some(x=>x.grado===d.grado&&x.seccion===d.seccion&&x.turno===d.turno&&x.id!==(s.id||''))){$('#sErr').textContent='Esa sección ya existe en ese turno.';return}
+    if(nuevo)DB.secciones.push({id:uid(),...d});else Object.assign(sec(s.id),d);
+    log(`${nuevo?'Creó':'Editó'} la sección ${d.grado} ${d.seccion}`);save();closeDlg();toast('Sección guardada.');render();
+  };
+}
+
+/* ---------- Justificaciones ---------- */
+const chipJus=e=>`<span class="chip ${e==='aprobada'?'chip-ok':e==='pendiente'?'chip-warn':'chip-crit'}">${e==='aprobada'?'Aprobada':e==='pendiente'?'Pendiente':'Rechazada'}</span>`;
+VIEWS.justificaciones=()=>{
+  const ids=new Set(estudiantesVisibles().map(e=>e.id)),f=UI.jus;
+  let js=DB.justificaciones.filter(j=>ids.has(j.estudianteId));if(f.estado)js=js.filter(j=>j.estado===f.estado);
+  js.sort((a,b)=>b.creada.localeCompare(a.creada));
+  const ap=can('jus_aprobar');
+  main(`${cabecera('Permisos y constancias','Justificaciones',`<button class="btn btn-primary" data-act="nuevaJus">${ic('plus',17)}Registrar justificación</button>`,
+    `Una justificación aprobada convierte en <b>justificada</b> toda ausencia del estudiante dentro del período, aunque la lista ya esté guardada.${ap?'':' Las que usted registra quedan pendientes hasta que Coordinación o Dirección las revise.'}`)}
+  <div class="pill-tabs" role="tablist">${[['pendiente','Pendientes'],['aprobada','Aprobadas'],['rechazada','Rechazadas'],['','Todas']].map(o=>`<button role="tab" aria-selected="${f.estado===o[0]}" data-act="jusFiltro" data-v="${o[0]}">${o[1]}${o[0]==='pendiente'?` <span class="mono">${DB.justificaciones.filter(j=>ids.has(j.estudianteId)&&j.estado==='pendiente').length}</span>`:''}</button>`).join('')}</div>
+  ${js.length?`<div class="tbl-wrap"><table><thead><tr><th>Estudiante</th><th>Período</th><th>Motivo</th><th class="c">Constancia</th><th>Estado</th><th>Registró</th><th></th></tr></thead><tbody>
+   ${js.map(j=>{const e=DB.estudiantes.find(x=>x.id===j.estudianteId);return `<tr><td><div class="who">${avatar(e)}<div><button class="linkbtn" data-act="ficha" data-id="${e.id}">${esc(nombreEst(e))}</button><div class="small muted">${esc(secNombre(sec(e.seccionId)))}</div></div></div></td>
+   <td class="mono small" style="white-space:nowrap">${fCorta(j.desde)}${j.hasta!==j.desde?' – '+fCorta(j.hasta):''}</td><td><b>${esc(j.tipo)}</b><div class="small muted">${esc(j.detalle)}</div></td>
+   <td class="c">${j.documento?'Sí':'No'}</td><td>${chipJus(j.estado)}</td><td class="small muted">${esc((usuario(j.por)||{}).nombre||'—')}</td>
+   <td><div class="row" style="flex-wrap:nowrap">${ap&&j.estado==='pendiente'?`<button class="btn btn-sm btn-primary" data-act="jusEstado" data-id="${j.id}" data-v="aprobada">Aprobar</button><button class="btn btn-sm" data-act="jusEstado" data-id="${j.id}" data-v="rechazada">Rechazar</button>`:''}
+   ${ap&&j.estado!=='pendiente'?`<button class="btn btn-sm btn-ghost" data-act="jusEstado" data-id="${j.id}" data-v="pendiente">Reabrir</button>`:''}</div></td></tr>`}).join('')}</tbody></table></div>`
+  :`<div class="panel"><div class="empty">${ic('doc',36,1.5)}<b>No hay justificaciones ${f.estado?f.estado+'s':''}</b><span class="small">Registre permisos, constancias médicas o ausencias por motivos familiares.</span></div></div>`}`);
+};
+function formJus(preEst){
+  const secs=seccionesVisibles(),ap=can('jus_aprobar');
+  openDlg(`<h2>Registrar justificación</h2><form id="fJus" class="form">
+   <div class="field full"><label for="jE">Estudiante</label><select id="jE" required><option value="">Seleccione…</option>${secs.map(s=>`<optgroup label="${esc(secNombre(s))}">${estudiantesDe(s.id).map(e=>`<option value="${e.id}" ${e.id===preEst?'selected':''}>${esc(nombreEst(e))}</option>`).join('')}</optgroup>`).join('')}</select></div>
+   <div class="field"><label for="jD">Desde</label><input type="date" id="jD" value="${hoy()}" required></div>
+   <div class="field"><label for="jH">Hasta</label><input type="date" id="jH" value="${hoy()}" required></div>
+   <div class="field"><label for="jT">Motivo</label><select id="jT">${['Médico','Familiar','Permiso de Dirección','Actividad institucional','Otro'].map(t=>`<option>${t}</option>`).join('')}</select></div>
+   <label class="check" style="align-self:end;padding-bottom:9px"><input type="checkbox" id="jDoc"> Presentó constancia</label>
+   <div class="field full"><label for="jDet">Detalle</label><input id="jDet" placeholder="Ej.: Incapacidad por consulta en Unidad de Salud"></div>
+   ${ap?`<label class="check full"><input type="checkbox" id="jAp" checked> Aprobar de inmediato</label>`:''}
+   <p class="err full" id="jErr"></p>
+   <div class="dlg-actions full"><button type="button" class="btn" data-act="cerrar">Cancelar</button><button class="btn btn-primary">Registrar</button></div></form>`);
+  $('#fJus').onsubmit=ev=>{ev.preventDefault();
+    const d={estudianteId:$('#jE').value,desde:$('#jD').value,hasta:$('#jH').value,tipo:$('#jT').value,documento:$('#jDoc').checked,detalle:$('#jDet').value.trim()};
+    if(!d.estudianteId){$('#jErr').textContent='Seleccione al estudiante.';return}
+    if(d.hasta<d.desde){$('#jErr').textContent='La fecha final no puede ser anterior a la inicial.';return}
+    const e=DB.estudiantes.find(x=>x.id===d.estudianteId);
+    DB.justificaciones.push({id:uid(),...d,estado:ap&&$('#jAp').checked?'aprobada':'pendiente',por:YO.id,creada:new Date().toISOString()});
+    log(`Registró justificación de ${nombreEst(e)} (${fCorta(d.desde)}–${fCorta(d.hasta)})`);save();closeDlg();toast('Justificación registrada.');render();
+  };
+}
+
+/* ---------- Reportes ---------- */
+VIEWS.reportes=()=>{
+  const tabs=[['mensual','Registro mensual'],['resumen','Resumen por sección'],['alertas','Alertas']];
+  main(`${cabecera('Análisis y control','Reportes')}
+  <div class="tabs" role="tablist">${tabs.map(t=>`<button role="tab" aria-selected="${UI.repTab===t[0]}" data-act="tab" data-v="${t[0]}">${t[1]}</button>`).join('')}</div><div id="rep" style="display:flex;flex-direction:column;gap:16px"></div>`);
+  ({mensual:repMensual,resumen:repResumen,alertas:repAlertas})[UI.repTab]();
+};
+function datosMensual(secId,mes){
+  const [y,m]=mes.split('-').map(Number),ini=`${mes}-01`,fin=iso(new Date(y,m,0)),h=hoy();
+  const dias=lectivosEntre(ini,fin).concat(Object.keys(DB.listas).filter(f=>f>=ini&&f<=fin&&DB.listas[f][secId]&&!esLectivo(f))).sort();
+  const ests=DB.estudiantes.filter(e=>e.seccionId===secId&&(e.estado==='activo'||fechasReg().some(f=>f>=ini&&f<=fin&&DB.asistencia[f][e.id]))).sort(porNombre);
+  const filas=ests.map(e=>{const c={P:0,A:0,T:0,J:0,n:0};const cel=dias.map(f=>{const v=estado(e.id,f);if(v){c[v]++;c.n++}return v||(f<=h?'·':'')});return {e,cel,c,p:c.n?(c.P+c.T)/c.n*100:null}});
+  const diaPct=dias.map((f,i)=>{let n=0,ok=0;filas.forEach(r=>{const v=r.cel[i];if(ESTADOS[v]){n++;if(v==='P'||v==='T')ok++}});return n?ok/n*100:null});
+  return {dias,filas,diaPct};
+}
+function repMensual(){
+  const secs=seccionesVisibles(),r=UI.rep;if(!r.sec||!secs.find(s=>s.id===r.sec))r.sec=secs[0]&&secs[0].id;if(!r.mes)r.mes=hoy().slice(0,7);
+  if(!r.sec){$('#rep').innerHTML='<div class="empty">No hay secciones disponibles.</div>';return}
+  const s=sec(r.sec),{dias,filas,diaPct}=datosMensual(r.sec,r.mes),[y,m]=r.mes.split('-').map(Number);
+  const tot={P:0,A:0,T:0,J:0,n:0};filas.forEach(f=>{['P','A','T','J','n'].forEach(k=>tot[k]+=f.c[k])});
+  $('#rep').innerHTML=`<div class="toolbar no-print">
+   <div class="field"><label for="rSec">Sección</label><select id="rSec">${optSecs(secs,r.sec)}</select></div>
+   <div class="field"><label for="rMes">Mes</label><input type="month" id="rMes" value="${r.mes}"></div>
+   <div class="row"><button class="btn" data-act="csvMensual">${ic('dl',16)}Exportar a Excel</button><button class="btn" data-act="imprimir" data-o="landscape">${ic('print',16)}Imprimir</button></div></div>
+  <div class="panel">${printHead('Registro mensual de asistencia',`<b>${esc(secNombre(s))}</b> · ${esc(s.turno)} · ${MESES[m-1]} de ${y} · Docente guía: ${esc((usuario(s.docenteId)||{}).nombre||'Sin asignar')} · Matrícula ${filas.length} (${filas.filter(f=>f.e.sexo==='M').length} M, ${filas.filter(f=>f.e.sexo==='F').length} F)`)}<div class="panel-h no-print"><div class="head-t"><span class="eyebrow">${esc(DB.config.institucion)} · Libro de asistencia</span><h2>${esc(secNombre(s))} · ${MESES[m-1]} ${y}</h2></div>
+   <div class="small muted">Docente guía: ${esc((usuario(s.docenteId)||{}).nombre||'Sin asignar')} · ${esc(s.turno)} · Matrícula ${filas.length} (${filas.filter(f=>f.e.sexo==='M').length} M, ${filas.filter(f=>f.e.sexo==='F').length} F)</div></div>
+   ${filas.length&&dias.length?`<div class="tbl-wrap"><table class="reg"><thead><tr><th class="n">N.°</th><th class="name">Estudiante</th>${dias.map(f=>{const d=parse(f);return `<th class="d">${d.getDate()}<span class="wd">${'DLMMJVS'[d.getDay()]}</span></th>`}).join('')}<th class="n">P</th><th class="n">A</th><th class="n">T</th><th class="n">J</th><th class="n">%</th></tr></thead>
+   <tbody>${filas.map((f,i)=>`<tr><td class="n muted">${i+1}</td><td class="name"><button class="linkbtn" data-act="ficha" data-id="${f.e.id}">${esc(nombreEst(f.e))}</button></td>${f.cel.map(v=>`<td class="d ${ESTADOS[v]?'c-'+v:'c-0'}">${v}</td>`).join('')}
+    <td class="n">${f.c.P}</td><td class="n">${f.c.A}</td><td class="n">${f.c.T}</td><td class="n">${f.c.J}</td><td class="n" style="font-weight:700;color:${f.p!=null&&f.p<DB.config.umbral?'var(--a)':'inherit'}">${f.p==null?'—':Math.round(f.p)}</td></tr>`).join('')}</tbody>
+   <tfoot><tr><td></td><td class="name">% asistencia del día</td>${diaPct.map(v=>`<td class="d">${v==null?'':Math.round(v)}</td>`).join('')}<td class="n">${tot.P}</td><td class="n">${tot.A}</td><td class="n">${tot.T}</td><td class="n">${tot.J}</td><td class="n">${tot.n?Math.round((tot.P+tot.T)/tot.n*100):'—'}</td></tr></tfoot></table></div>
+   <div class="legend"><span><b class="c-P">P</b> Presente</span><span><b class="c-A">A</b> Ausente sin justificar</span><span><b class="c-T">T</b> Tardanza</span><span><b class="c-J">J</b> Ausencia justificada</span><span>· Día sin registro</span><span>% = (presentes + tardanzas) ÷ días registrados</span></div>${printSign(['Docente guía',(usuario(s.docenteId)||{}).nombre],['Coordinación académica'],['Dirección'])}`
+   :`<div class="empty">No hay días lectivos ni estudiantes para este mes y sección.</div>`}</div>`;
+  $('#rSec').onchange=e=>{r.sec=e.target.value;repMensual()};$('#rMes').onchange=e=>{if(e.target.value){r.mes=e.target.value;repMensual()}};
+}
+function datosResumen(desde,hasta){
+  return seccionesVisibles().map(s=>{const ests=estudiantesDe(s.id);const t={P:0,A:0,T:0,J:0,n:0};const dias=new Set();
+    for(const f of fechasReg()){if(f<desde||f>hasta)continue;if(DB.listas[f]&&DB.listas[f][s.id])dias.add(f);for(const e of ests){const v=estado(e.id,f);if(v){t[v]++;t.n++}}}
+    return {s,ests,t,dias:dias.size,p:t.n?(t.P+t.T)/t.n*100:null}});
+}
+function repResumen(){
+  const r=UI.rep,h=hoy();if(!r.desde)r.desde=h.slice(0,8)+'01';if(!r.hasta)r.hasta=h;
+  const rows=datosResumen(r.desde,r.hasta),T={P:0,A:0,T:0,J:0,n:0};rows.forEach(x=>['P','A','T','J','n'].forEach(k=>T[k]+=x.t[k]));
+  $('#rep').innerHTML=`<div class="toolbar no-print">
+   <div class="field"><label for="rD">Desde</label><input type="date" id="rD" value="${r.desde}"></div><div class="field"><label for="rH">Hasta</label><input type="date" id="rH" value="${r.hasta}"></div>
+   <div class="row"><button class="btn" data-act="csvResumen">${ic('dl',16)}Exportar a Excel</button><button class="btn" data-act="imprimir">${ic('print',16)}Imprimir</button></div></div>
+  <div class="panel">${printHead('Resumen de asistencia por sección',`Período del ${fCorta(r.desde)} al ${fCorta(r.hasta)} · ${rows.length} secciones`)}<div class="head-t no-print"><span class="eyebrow">${esc(DB.config.institucion)}</span><h2>Resumen de asistencia del ${fCorta(r.desde)} al ${fCorta(r.hasta)}</h2></div>
+  <div class="tbl-wrap"><table><thead><tr><th>Sección</th><th>Docente guía</th><th class="n">Matrícula</th><th class="n">Días con lista</th><th>Asistencia</th><th class="n">Ausencias</th><th class="n">Justificadas</th><th class="n">Tardanzas</th></tr></thead><tbody>
+   ${rows.map(x=>`<tr><td style="font-weight:600">${esc(secNombre(x.s))}</td><td class="small">${esc((usuario(x.s.docenteId)||{}).nombre||'—')}</td><td class="n">${x.ests.length}</td><td class="n">${x.dias}</td><td>${pctBar(x.p)}</td><td class="n">${x.t.A}</td><td class="n">${x.t.J}</td><td class="n">${x.t.T}</td></tr>`).join('')}
+  </tbody><tfoot><tr><td colspan="2">Total</td><td class="n">${rows.reduce((a,x)=>a+x.ests.length,0)}</td><td></td><td class="num">${pct(T.n?(T.P+T.T)/T.n*100:null)}</td><td class="n">${T.A}</td><td class="n">${T.J}</td><td class="n">${T.T}</td></tr></tfoot></table></div>
+  <p class="small muted">Asistencia = (presentes + tardanzas) ÷ registros del período. Las ausencias justificadas no cuentan como asistencia, pero tampoco generan alerta de inasistencia consecutiva.</p>${printSign(['Coordinación académica'],['Dirección'])}</div>`;
+  $('#rD').onchange=e=>{if(e.target.value){r.desde=e.target.value;repResumen()}};$('#rH').onchange=e=>{if(e.target.value){r.hasta=e.target.value;repResumen()}};
+}
+function repAlertas(){
+  const al=alertas(),c=DB.config;
+  $('#rep').innerHTML=`<div class="toolbar no-print"><p class="small muted" style="flex:1;max-width:70ch">Criterios: asistencia anual menor a ${c.umbral} %, ${c.consecutivas} o más inasistencias seguidas sin justificar, o ${c.tardanzas} o más tardanzas en el mes. Se ajustan en Configuración.</p>
+   <div class="row"><button class="btn" data-act="csvAlertas" ${al.length?'':'disabled'}>${ic('dl',16)}Exportar a Excel</button><button class="btn" data-act="imprimir">${ic('print',16)}Imprimir</button></div></div>
+  ${printHead('Estudiantes con alertas de asistencia',`Criterios: asistencia anual menor a ${c.umbral} %, ${c.consecutivas} o más inasistencias seguidas sin justificar o ${c.tardanzas} o más tardanzas en el mes · ${al.length} alertas`)}
+  ${al.length?`<div class="tbl-wrap"><table><thead><tr><th>Prioridad</th><th>Estudiante</th><th>Alerta</th><th>Detalle</th><th>Responsable</th></tr></thead><tbody>
+   ${al.map(a=>`<tr><td><span class="chip ${a.nivel==='crit'?'chip-crit':'chip-warn'}">${a.nivel==='crit'?'Alta':'Media'}</span></td><td><div class="who">${avatar(a.est)}<div><button class="linkbtn" data-act="ficha" data-id="${a.est.id}">${esc(nombreEst(a.est))}</button><div class="small muted">${esc(secNombre(sec(a.est.seccionId)))}</div></div></div></td><td>${esc(a.tipo)}</td><td class="small">${esc(a.txt)}</td><td class="small">${esc(a.est.encargado)}<div class="mono muted">${esc(a.est.telefono)}</div></td></tr>`).join('')}
+  </tbody></table></div>${printSign(['Orientación / Coordinación'],['Dirección'])}`:`<div class="panel"><div class="empty">${ic('check',36,1.5)}<b>Sin alertas activas</b></div></div>`}`;
+}
+
+/* ---------- Usuarios ---------- */
+VIEWS.usuarios=()=>{
+  main(`${cabecera('Acceso al sistema','Usuarios',`<button class="btn btn-primary" data-act="nuevoUsr">${ic('plus',17)}Nuevo usuario</button>`)}
+  <div class="tbl-wrap"><table><thead><tr><th>Nombre</th><th>Usuario</th><th>Rol</th><th>Secciones a cargo</th><th>Estado</th><th></th></tr></thead><tbody>
+  ${DB.usuarios.map(u=>{const ss=ordenSecs(DB.secciones.filter(s=>s.docenteId===u.id));return `<tr><td><div class="who"><span class="av">${esc(iniciales(u.nombre))}</span><span style="font-weight:600">${esc(u.nombre)}${u.id===YO.id?' <span class="chip chip-acc nodot">Usted</span>':''}</span></div></td><td class="mono small">${esc(u.usuario)}</td><td>${ROLES[u.rol]}</td>
+  <td class="small">${ss.length?ss.map(s=>esc(secNombre(s))).join(', '):'<span class="muted">—</span>'}</td><td>${u.activo?'<span class="chip chip-ok">Activo</span>':'<span class="chip">Inactivo</span>'}</td><td><button class="btn btn-sm btn-ghost" data-act="editUsr" data-id="${u.id}">Editar</button></td></tr>`}).join('')}
+  </tbody></table></div>
+  <section class="panel"><h2>Permisos por rol</h2><div class="tbl-wrap"><table><thead><tr><th>Permiso</th><th class="c">Dirección</th><th class="c">Coordinación</th><th class="c">Docente</th><th class="c">Control de entrada</th></tr></thead><tbody>
+  ${[['Control de entrada (QR, rostro, lector)','Sí','Sí','No','Sí'],['Pasar lista','Todas','Todas','Sus secciones','No'],['Corregir listas de días anteriores','Sí','Sí',DB.config.docenteEditaAnteriores?'Sí':'No','No'],['Matrícula, carnets y rostros','Sí','Sí','Solo consulta','No'],['Aprobar justificaciones','Sí','Sí','Registra pendientes','No'],['Reportes','Institución','Institución','Sus secciones','No'],['Usuarios, configuración y respaldos','Sí','No','No','No']].map(r=>`<tr><td>${r[0]}</td>${r.slice(1).map(x=>`<td class="c small">${x}</td>`).join('')}</tr>`).join('')}
+  </tbody></table></div></section>`);
+};
+function formUsr(u){
+  const nuevo=!u;u=u||{nombre:'',usuario:'',rol:'docente',activo:true};const yo=u.id===YO.id;
+  openDlg(`<h2>${nuevo?'Nuevo usuario':'Editar usuario'}</h2><form id="fUsr" class="form">
+   <div class="field full"><label for="uN">Nombre completo</label><input id="uN" value="${esc(u.nombre)}" placeholder="Profa. Ana Romero" required></div>
+   <div class="field"><label for="uU">Usuario</label><input id="uU" value="${esc(u.usuario)}" autocomplete="off" required></div>
+   <div class="field"><label for="uR">Rol</label><select id="uR" ${yo?'disabled':''}>${Object.keys(ROLES).map(r=>`<option value="${r}" ${r===u.rol?'selected':''}>${ROLES[r]}</option>`).join('')}</select></div>
+   <div class="field"><label for="uP">${nuevo?'Contraseña':'Nueva contraseña'}</label><input id="uP" type="password" autocomplete="new-password" ${nuevo?'required':''} placeholder="${nuevo?'Mínimo 4 caracteres':'Dejar vacío para no cambiarla'}"></div>
+   <label class="check" style="align-self:end;padding-bottom:9px"><input type="checkbox" id="uA" ${u.activo?'checked':''} ${yo?'disabled':''}> Usuario activo</label>
+   <p class="err full" id="uErr"></p>
+   <div class="dlg-actions full"><button type="button" class="btn" data-act="cerrar">Cancelar</button><button class="btn btn-primary">${nuevo?'Crear usuario':'Guardar'}</button></div></form>`);
+  $('#fUsr').onsubmit=async ev=>{ev.preventDefault();
+    const d={nombre:$('#uN').value.trim(),usuario:$('#uU').value.trim().toLowerCase(),rol:yo?u.rol:$('#uR').value,activo:yo?true:$('#uA').checked},p=$('#uP').value;
+    if(DB.usuarios.some(x=>x.usuario===d.usuario&&x.id!==(u.id||''))){$('#uErr').textContent='Ese nombre de usuario ya está en uso.';return}
+    if(p&&p.length<4){$('#uErr').textContent='La contraseña debe tener al menos 4 caracteres.';return}
+    if(nuevo)DB.usuarios.push({id:uid(),...d,hash:await hash(p)});
+    else{const t=usuario(u.id);Object.assign(t,d);if(p)t.hash=await hash(p);if(yo)YO=t}
+    log(`${nuevo?'Creó':'Editó'} el usuario ${d.usuario}`);save();closeDlg();toast('Usuario guardado.');render();
+  };
+}
+
+/* ---------- Configuración ---------- */
+VIEWS.config=()=>{
+  const c=DB.config;let kb=0;try{kb=Math.round((localStorage.getItem(KEY)||'').length*2/1024)}catch(e){}
+  main(`${cabecera('Parámetros del año lectivo','Configuración')}
+  <div class="grid2">
+  <section class="panel"><h2>Institución y reglas</h2><form id="fCfg" class="form">
+   <div class="field full"><label for="cI">Nombre de la institución</label><input id="cI" value="${esc(c.institucion)}" required></div>
+   <div class="field"><label for="cA">Año lectivo</label><input id="cA" type="number" value="${c.anio}" min="2020" max="2100"></div>
+   <div class="field"><label for="cIni">Inicio de clases</label><input id="cIni" type="date" value="${c.inicio}"></div>
+   <div class="field"><label for="cFin">Fin de clases</label><input id="cFin" type="date" value="${c.fin}"></div>
+   <div class="field"><label for="cU">Asistencia mínima (%)</label><input id="cU" type="number" value="${c.umbral}" min="50" max="100"></div>
+   <div class="field"><label for="cC">Alerta por inasistencias seguidas</label><input id="cC" type="number" value="${c.consecutivas}" min="2" max="20"></div>
+   <div class="field"><label for="cT">Alerta por tardanzas en el mes</label><input id="cT" type="number" value="${c.tardanzas}" min="2" max="30"></div>
+   <label class="check full"><input type="checkbox" id="cE" ${c.docenteEditaAnteriores?'checked':''}> Docentes pueden corregir listas de días anteriores</label>
+   <div class="full" style="border-top:1px solid var(--line);padding-top:14px"><h3>Control de entrada</h3></div>
+   <div class="field"><label for="cEM">Entrada turno matutino</label><input id="cEM" type="time" value="${c.entrada.Matutino}"></div>
+   <div class="field"><label for="cEV">Entrada turno vespertino</label><input id="cEV" type="time" value="${c.entrada.Vespertino}"></div>
+   <div class="field"><label for="cTol">Tolerancia (minutos)</label><input id="cTol" type="number" value="${c.tolerancia}" min="0" max="60"><span class="hint">Después de la entrada más la tolerancia se marca tardanza.</span></div>
+   <div class="field"><label for="cR">Exigencia del reconocimiento facial</label><select id="cR">${[[.45,'Estricta (menos errores, más rechazos)'],[.5,'Normal'],[.55,'Flexible (acepta más variación)']].map(o=>`<option value="${o[0]}" ${+c.umbralRostro===o[0]?'selected':''}>${o[1]}</option>`).join('')}</select></div>
+   <label class="check full"><input type="checkbox" id="cS" ${c.sonido?'checked':''}> Sonido de confirmación en cada ingreso</label>
+   <div class="dlg-actions full"><button class="btn btn-primary">Guardar configuración</button></div></form></section>
+  <section class="panel"><div class="panel-h"><h2>Feriados y días sin clases</h2><span class="chip nodot">${c.feriados.length}</span></div>
+   <form id="fFer" class="row"><input type="date" id="feF" required aria-label="Fecha"><input id="feN" placeholder="Motivo (ej.: Jornada pedagógica)" required aria-label="Motivo" style="flex:1;min-width:160px"><button class="btn">${ic('plus',16)}Agregar</button></form>
+   <div class="list">${[...c.feriados].sort((a,b)=>a.fecha.localeCompare(b.fecha)).map(f=>`<div class="list-r"><div><span class="mono small">${fCorta(f.fecha)}</span> · ${esc(f.nombre)}</div><button class="btn btn-sm btn-ghost" data-act="quitarFer" data-f="${f.fecha}" aria-label="Quitar ${esc(f.nombre)}">Quitar</button></div>`).join('')}</div>
+  </section></div>
+  <section class="panel"><div class="panel-h"><h2>Respaldo de datos</h2><span class="chip nodot mono">${kb} KB de ~5 000 KB</span></div>
+   <p class="small muted" style="max-width:72ch">Toda la información se guarda en este navegador y en este equipo. Si se borran los datos de navegación o cambia de computadora, se pierde. Descargue un respaldo al final de cada semana y guárdelo en un lugar seguro.</p>
+   <div class="row"><button class="btn btn-primary" data-act="exportar">${ic('dl',16)}Descargar respaldo (.json)</button><label class="btn" for="impFile">${ic('up',16)}Restaurar respaldo</label><input type="file" id="impFile" accept=".json,application/json" hidden>
+   <button class="btn btn-ghost" data-act="empezarReal" style="color:var(--a)">Borrar todo y empezar de cero</button></div></section>
+  <section class="panel"><h2>Bitácora de cambios</h2>${DB.bitacora.length?`<div class="tbl-wrap" style="max-height:420px;overflow:auto"><table><thead><tr><th>Fecha y hora</th><th>Usuario</th><th>Acción</th></tr></thead><tbody>${DB.bitacora.slice(0,60).map(b=>`<tr><td class="mono small" style="white-space:nowrap">${new Date(b.at).toLocaleString('es-SV',{dateStyle:'short',timeStyle:'short'})}</td><td class="small">${esc(b.u)}</td><td class="small">${esc(b.acc)}</td></tr>`).join('')}</tbody></table></div>`:'<p class="small muted">Sin movimientos todavía.</p>'}</section>`);
+  $('#fCfg').onsubmit=ev=>{ev.preventDefault();
+    Object.assign(c,{institucion:$('#cI').value.trim(),anio:+$('#cA').value,inicio:$('#cIni').value,fin:$('#cFin').value,umbral:+$('#cU').value,consecutivas:+$('#cC').value,tardanzas:+$('#cT').value,docenteEditaAnteriores:$('#cE').checked,
+      entrada:{Matutino:$('#cEM').value||'07:00',Vespertino:$('#cEV').value||'13:00'},tolerancia:+$('#cTol').value||0,umbralRostro:+$('#cR').value,sonido:$('#cS').checked});
+    log('Actualizó la configuración');save();toast('Configuración guardada.');render();};
+  $('#fFer').onsubmit=ev=>{ev.preventDefault();const f=$('#feF').value,n=$('#feN').value.trim();if(c.feriados.some(x=>x.fecha===f)){toast('Esa fecha ya está registrada.','err');return}
+    c.feriados.push({fecha:f,nombre:n});log(`Agregó día sin clases ${fCorta(f)}: ${n}`);save();render()};
+  $('#impFile').onchange=e=>{const file=e.target.files[0];if(!file)return;const rd=new FileReader();rd.onload=async()=>{
+    let d;try{d=JSON.parse(rd.result)}catch(x){toast('El archivo no es un respaldo válido.','err');return}
+    if(!d||!d.config||!Array.isArray(d.usuarios)||!Array.isArray(d.estudiantes)){toast('El archivo no tiene la estructura de un respaldo del Libro de Asistencia.','err');return}
+    if(!await confirmar('¿Restaurar este respaldo?',`Reemplazará todos los datos actuales por los del archivo (${d.estudiantes.length} estudiantes, ${Object.keys(d.asistencia||{}).length} días con asistencia).`,'Restaurar',true))return;
+    DB=Object.assign(dbVacia(),d);DB.config=Object.assign(configBase(),d.config);save();const yo=DB.usuarios.find(u=>u.id===YO.id&&u.activo);toast('Respaldo restaurado.');if(yo){YO=yo;render()}else salir()};rd.readAsText(file)};
+};
+
+/* ---------- Acciones ---------- */
+const ACT={
+  salir:()=>salir(),
+  cerrar:()=>closeDlg(),
+  menu:()=>$('#frame').classList.toggle('nav-open'),
+  tema:()=>{const t=temaActual();aplicarTema(t==='auto'?'oscuro':t==='oscuro'?'claro':'auto');pintarTema();toast(`Tema ${temaActual()==='auto'?'según el sistema':temaActual()}.`)},
+  instalar:()=>{if(_instalar){_instalar.prompt();_instalar.userChoice.finally(()=>{_instalar=null;pintarInstalar()})}else if(esIOS)openDlg(`<div class="panel-h"><div class="head-t"><span class="eyebrow">iPhone y iPad</span><h2>Instalar en la pantalla de inicio</h2></div><button class="icon-btn" data-act="cerrar" aria-label="Cerrar">${ic('x',20)}</button></div>
+    <div class="list">${[[ic('share',20),'Abra el sistema en <b>Safari</b> y toque el botón <b>Compartir</b> de la barra inferior.'],[ic('plusbox',20),'Deslice y elija <b>Agregar a pantalla de inicio</b>.'],[ic('check',20),'Confirme con <b>Agregar</b>. Abra siempre el sistema desde el ícono <b>Asistencia</b>: se verá a pantalla completa, sin barras del navegador.']].map(x=>`<div class="list-r" style="justify-content:flex-start;gap:14px"><span class="metric-i" style="grid-row:auto">${x[0]}</span><p class="small">${x[1]}</p></div>`).join('')}</div>
+    <p class="small muted">Los datos quedan en la app instalada. Si antes usó el sistema en Safari, descargue un respaldo allí y restáurelo en la app.</p>`)},
+  verPass:b=>{const i=$('#lP');const ver=i.type==='password';i.type=ver?'text':'password';b.innerHTML=ic(ver?'eyeoff':'eye',18);b.setAttribute('aria-label',ver?'Ocultar contraseña':'Mostrar contraseña');i.focus()},
+  irLista:b=>{UI.lista={fecha:hoy(),sec:b.dataset.sec||(UI.lista&&UI.lista.sec)||''};go('lista')},
+  verAlertas:()=>{UI.repTab='alertas';go('reportes')},
+  ficha:b=>fichaEst(b.dataset.id),
+  kModo:b=>{UI.k.modo=b.dataset.v;cerrarCamara();VIEWS.entrada()},
+  kIniciar:()=>kIniciar(),
+  kDetener:()=>{cerrarCamara();VIEWS.entrada()},
+  pantallaCompleta:()=>{UI.k.full=!UI.k.full;const w=$('#kWrap');w.classList.toggle('kiosk-full',UI.k.full);
+    try{if(UI.k.full&&document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(()=>{});else if(!UI.k.full&&document.fullscreenElement)document.exitFullscreen()}catch(e){}
+    const btn=w.querySelector('[data-act="pantallaCompleta"]');btn.innerHTML=ic('full',17)+(UI.k.full?'Salir de pantalla completa':'Pantalla completa')},
+  cerrarJornada:async()=>{const h=hoy(),a=DB.asistencia[h]||{};const pend=DB.secciones.filter(s=>!(DB.listas[h]&&DB.listas[h][s.id])).map(s=>({s,falt:estudiantesDe(s.id).filter(e=>!a[e.id])}));
+    const n=pend.reduce((x,p)=>x+p.falt.length,0);
+    if(!pend.length){toast('Todas las secciones ya tienen su lista registrada hoy.');return}
+    if(!await confirmar('¿Cerrar la jornada de hoy?',`${n} estudiantes sin marcación de ingreso quedarán como ausentes en ${pend.length} secciones sin lista. Los docentes aún pueden corregir hoy en Pasar lista.`,'Cerrar jornada'))return;
+    DB.asistencia[h]=a;DB.listas[h]=DB.listas[h]||{};const at=new Date().toISOString();
+    pend.forEach(p=>{p.falt.forEach(e=>{a[e.id]={e:'A',h:'',o:'Sin marcación de ingreso',via:'cierre'}});DB.listas[h][p.s.id]={por:YO.id,at,cierre:true}});
+    log(`Cerró la jornada: ${n} ausencias registradas`);save();toast(`Jornada cerrada: ${n} ausencias registradas.`);VIEWS.entrada()},
+  marca:b=>{const id=b.dataset.id,v=b.dataset.v,br=UI.borrador[id];br.e=v;
+    if(v==='T'&&!br.h&&UI.lista.fecha===hoy())br.h=horaAhora();
+    if(v!=='T')br.h='';const e=DB.estudiantes.find(x=>x.id===id),i=[...$('#roll').children].findIndex(r=>r.id==='r-'+id);
+    const tmp=document.createElement('div');tmp.innerHTML=filaLista(e,i,true);$('#r-'+id).replaceWith(tmp.firstElementChild);contarLista();$(`#r-${id} [data-v="${v}"]`).focus()},
+  todosP:()=>{for(const id in UI.borrador){const b=UI.borrador[id];if(b.e!=='J'){b.e='P';b.h='';if(b.o==='Sin marcación de ingreso')b.o=''}}const st=UI.lista;
+    $('#roll').innerHTML=estudiantesDe(st.sec).map((e,i)=>filaLista(e,i,true)).join('');contarLista()},
+  guardarLista:()=>{const st=UI.lista,f=st.fecha;DB.asistencia[f]=DB.asistencia[f]||{};
+    for(const id in UI.borrador){const b=UI.borrador[id],p=DB.asistencia[f][id]||{};DB.asistencia[f][id]={e:b.e,h:b.e==='T'?b.h:'',o:b.o.trim(),in:p.in||'',via:p.via&&p.via!=='cierre'?p.via:'lista'}}
+    DB.listas[f]=DB.listas[f]||{};const prev=DB.listas[f][st.sec];DB.listas[f][st.sec]={por:YO.id,at:new Date().toISOString()};
+    log(`${prev?'Corrigió':'Registró'} la lista de ${secNombre(sec(st.sec))} del ${fCorta(f)}`);
+    if(save()){toast(`Lista guardada: ${secNombre(sec(st.sec))}.`);render()}},
+  nuevoEst:()=>formEst(),
+  editEst:b=>formEst(DB.estudiantes.find(e=>e.id===b.dataset.id)),
+  regenQR:async b=>{const e=DB.estudiantes.find(x=>x.id===b.dataset.id);if(!await confirmar('¿Reponer el carnet QR?','El código actual dejará de funcionar. Deberá imprimir un carnet nuevo para este estudiante.','Generar nuevo código'))return;
+    e.qr=token();log(`Repuso el carnet QR de ${nombreEst(e)}`);save();toast('Nuevo código generado. Imprímalo en Identificación.')},
+  borrarEst:async b=>{const e=DB.estudiantes.find(x=>x.id===b.dataset.id);
+    if(!await confirmar('¿Eliminar estudiante?',`Se borrará a ${nombreEst(e)} con todo su historial de asistencia. Si solo dejó de asistir, cámbielo a "Retirado".`,'Eliminar',true))return;
+    DB.estudiantes=DB.estudiantes.filter(x=>x.id!==e.id);for(const f in DB.asistencia)delete DB.asistencia[f][e.id];DB.justificaciones=DB.justificaciones.filter(j=>j.estudianteId!==e.id);
+    log(`Eliminó a ${nombreEst(e)}`);save();closeDlg();toast('Estudiante eliminado.');render()},
+  importar:()=>importarDlg(),
+  hacerImport:()=>{const s=$('#iSec').value,txt=$('#iTxt').value.trim();if(!s){$('#iErr').textContent='Seleccione la sección destino.';return}
+    let ok=0,mal=0;for(const ln of txt.split(/\r?\n/)){if(!ln.trim())continue;const c=ln.split(/[;\t]/).map(x=>x.trim());if(/apellido/i.test(ln))continue;
+      if(c.length<3||!c[1]||!c[2]){mal++;continue}if(c[0]&&DB.estudiantes.some(e=>e.nie===c[0])){mal++;continue}
+      DB.estudiantes.push({id:uid(),nie:c[0]||'',apellidos:c[1],nombres:c[2],sexo:/^m/i.test(c[3]||'')?'M':'F',seccionId:s,encargado:c[4]||'',telefono:c[5]||'',estado:'activo',qr:token(),ingreso:hoy()});ok++}
+    if(!ok){$('#iErr').textContent=mal?`Ninguna fila válida (${mal} con datos incompletos o NIE repetido).`:'Pegue al menos una fila.';return}
+    log(`Importó ${ok} estudiantes a ${secNombre(sec(s))}`);save();closeDlg();toast(`${ok} estudiantes importados${mal?`, ${mal} filas omitidas`:''}.`);render()},
+  idTab:b=>{UI.idTab=b.dataset.v;VIEWS.identificacion()},
+  regRostro:b=>dlgRostro(DB.estudiantes.find(e=>e.id===b.dataset.id)),
+  delRostro:async b=>{const e=DB.estudiantes.find(x=>x.id===b.dataset.id);if(!await confirmar('¿Quitar el rostro registrado?',`${nombreEst(e)} ya no podrá ingresar por reconocimiento facial.`,'Quitar',true))return;
+    delete e.rostro;log(`Quitó el rostro de ${nombreEst(e)}`);save();idRostros()},
+  borrarRostros:async()=>{if(!await confirmar('¿Borrar todos los rostros?','Se eliminarán los datos faciales y miniaturas de todos los estudiantes.','Borrar todos',true))return;
+    DB.estudiantes.forEach(e=>delete e.rostro);log('Borró todos los rostros registrados');save();idRostros()},
+  importarReloj:()=>{const txt=$('#rlTxt').value;if(!txt.trim()){$('#rlErr').textContent='Seleccione el archivo o pegue las marcaciones.';return}$('#rlErr').textContent='';
+    const r=procesarReloj(txt);save();log(`Importó marcaciones de huella: ${r.ok} ingresos`);
+    $('#rlRes').innerHTML=`<div class="note ${r.ok?'note-info':''}">${ic(r.ok?'check':'alert',18)}<span><b>${r.ok} ingresos registrados</b> de ${r.lineas} líneas leídas. ${r.ya?`${r.ya} ya tenían ingreso. `:''}${r.noLect?`${r.noLect} en días no lectivos. `:''}${r.sinEst.size?`Sin estudiante para los códigos: <span class="mono">${[...r.sinEst].slice(0,12).map(esc).join(', ')}${r.sinEst.size>12?'…':''}</span>`:''}</span></div>`},
+  nuevaSec:()=>formSec(),
+  editSec:b=>formSec(sec(b.dataset.id)),
+  borrarSec:async b=>{const s=sec(b.dataset.id);if(DB.estudiantes.some(e=>e.seccionId===s.id)){toast('No se puede eliminar: la sección tiene estudiantes. Muévalos primero.','err');return}
+    if(!await confirmar('¿Eliminar sección?',`Se eliminará ${secNombre(s)}.`,'Eliminar',true))return;DB.secciones=DB.secciones.filter(x=>x.id!==s.id);log(`Eliminó la sección ${secNombre(s)}`);save();closeDlg();render()},
+  nuevaJus:()=>formJus(),
+  jusFiltro:b=>{UI.jus.estado=b.dataset.v;VIEWS.justificaciones()},
+  jusEstado:b=>{const j=DB.justificaciones.find(x=>x.id===b.dataset.id);j.estado=b.dataset.v;j.revisa=YO.id;const e=DB.estudiantes.find(x=>x.id===j.estudianteId);
+    log(`Marcó como ${j.estado} la justificación de ${nombreEst(e)}`);save();toast(`Justificación ${j.estado==='pendiente'?'reabierta':j.estado}.`);render()},
+  tab:b=>{UI.repTab=b.dataset.v;VIEWS.reportes()},
+  imprimir:b=>imprimir(b.dataset.o||'portrait',b.dataset.m||'vista'),
+  imprimirFicha:()=>imprimir('portrait','ficha'),
+  csvMensual:()=>{const r=UI.rep,s=sec(r.sec),{dias,filas,diaPct}=datosMensual(r.sec,r.mes);
+    const rows=[[DB.config.institucion],[`Registro de asistencia ${secNombre(s)} - ${r.mes}`],[],['N.°','NIE','Estudiante','Sexo',...dias.map(f=>+f.slice(8)),'P','A','T','J','% asistencia']];
+    filas.forEach((f,i)=>rows.push([i+1,f.e.nie,nombreEst(f.e),f.e.sexo,...f.cel.map(v=>v==='·'?'':v),f.c.P,f.c.A,f.c.T,f.c.J,pctNum(f.p)]));
+    rows.push(['','','% asistencia del día','',...diaPct.map(pctNum)]);
+    descargar(`asistencia-${secNombre(s).replace(/[^\wáéíóúñ]+/gi,'-')}-${r.mes}.csv`,aCSV(rows),'text/csv;charset=utf-8')},
+  csvResumen:()=>{const r=UI.rep,rows=[[`Resumen de asistencia ${r.desde} a ${r.hasta}`],[],['Sección','Turno','Docente guía','Matrícula','Días con lista','% asistencia','Presentes','Ausencias','Justificadas','Tardanzas']];
+    datosResumen(r.desde,r.hasta).forEach(x=>rows.push([secNombre(x.s),x.s.turno,(usuario(x.s.docenteId)||{}).nombre||'',x.ests.length,x.dias,pctNum(x.p),x.t.P,x.t.A,x.t.J,x.t.T]));
+    descargar(`resumen-asistencia-${r.desde}-a-${r.hasta}.csv`,aCSV(rows),'text/csv;charset=utf-8')},
+  csvAlertas:()=>{const rows=[['Prioridad','Estudiante','NIE','Sección','Alerta','Detalle','Responsable','Teléfono']];
+    alertas().forEach(a=>rows.push([a.nivel==='crit'?'Alta':'Media',nombreEst(a.est),a.est.nie,secNombre(sec(a.est.seccionId)),a.tipo,a.txt,a.est.encargado,a.est.telefono]));
+    descargar(`alertas-asistencia-${hoy()}.csv`,aCSV(rows),'text/csv;charset=utf-8')},
+  nuevoUsr:()=>formUsr(),
+  editUsr:b=>formUsr(usuario(b.dataset.id)),
+  quitarFer:b=>{DB.config.feriados=DB.config.feriados.filter(f=>f.fecha!==b.dataset.f);save();render()},
+  exportar:()=>{descargar(`respaldo-asistencia-${hoy()}.json`,JSON.stringify(DB),'application/json');log('Descargó un respaldo');save();toast('Respaldo descargado.')},
+  empezarReal:async()=>{if(!await confirmar('¿Borrar todos los datos?','Se eliminarán estudiantes, secciones, asistencias, justificaciones, rostros y usuarios. Se conserva la configuración. Luego creará la cuenta de Dirección. Si tiene datos reales, descargue un respaldo antes.','Borrar todo',true))return;
+    const cfg=DB.config;DB=dbVacia(cfg);save();salir()},
+  demoUser:async b=>{if(_tecleando||$('#lBtn').disabled)return;_tecleando=true;try{await teclear($('#lU'),b.dataset.u,45);await teclear($('#lP'),'1234',70);await espera(sinAnim()?0:150);$('#fLog').requestSubmit()}finally{_tecleando=false}},
+};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b||b.disabled)return;const f=ACT[b.dataset.act];if(f){e.preventDefault();f(b,e)}});
+dlg.addEventListener('click',e=>{if(e.target===dlg)closeDlg()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&UI.k.full&&_vista==='entrada'&&!dlg.open&&!dlg2.open)ACT.pantallaCompleta()});
+
+/* ---------- Sesión ---------- */
+function salir(){cerrarCamara();YO=null;$('#app').innerHTML='';_vista='';try{sessionStorage.removeItem(SKEY)}catch(e){}closeDlg();renderLogin()}
+let _loginTimer=null,_intentos=0,_tecleando=false;
+const LA_MSG=[['Leyendo carnet QR…','Control de entrada',''],['Ingreso a tiempo · 06:52','Marcado como presente','p'],['Rostro verificado · 06:55','Reconocimiento facial','p'],['Tardanza · 07:14','Límite 07:10 · turno matutino','t'],['Lista guardada · 7.° grado B','28 de 30 presentes','']];
+const espera=ms=>new Promise(r=>setTimeout(r,ms));
+const sinAnim=()=>{try{return matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){return false}};
+function renderLogin(){
+  clearInterval(_loginTimer);
+  const setup=!DB.usuarios.length,c=DB.config;let rec='';try{rec=localStorage.getItem(UKEY)||''}catch(e){}
+  const COL=['rgba(93,192,139,.8)','rgba(93,192,139,.8)','rgba(93,192,139,.8)','rgba(228,176,90,.85)','rgba(238,128,119,.85)','rgba(140,166,242,.6)'];
+  const celdas=Array.from({length:144},(_,i)=>{const col=i%12,row=Math.floor(i/12);return `<i class="${Math.random()<.2?'on':''}" style="--c:${COL[Math.floor(Math.random()*COL.length)]};--d:${(col*.22+row*.11+Math.random()*1.4).toFixed(2)}s"></i>`}).join('');
+  const W=(t,i)=>`<span class="w" style="--i:${i}">${t}</span>`;
+  const campo=(id,lbl,icono,extra='',tipo='text',val='')=>`<div class="fl"><input id="${id}" type="${tipo}" placeholder=" " value="${esc(val)}" ${extra}><label for="${id}">${lbl}</label><span class="fi">${ic(icono,18)}</span>${tipo==='password'?`<button type="button" class="icon-btn eye" data-act="verPass" aria-label="Mostrar contraseña">${ic('eye',18)}</button>`:''}</div>`;
+  app.innerHTML=`<div class="login" id="login">
+   <section class="login-art">
+    <div class="la-glow" aria-hidden="true"></div><div class="la-grid" aria-hidden="true">${celdas}</div><div class="la-margin" aria-hidden="true"></div>
+    <div class="la-top"><div class="brand" style="padding:0">${LOGO}<div><div class="brand-t">Libro de Asistencia</div><div class="brand-s">${esc(c.institucion)}</div></div></div><span class="la-pill" aria-hidden="true"><i></i><span id="laClock">${horaAhora()}</span></span></div>
+    <div class="la-mid"><p class="la-kicker">Año lectivo ${c.anio}</p>
+     <h1 class="login-big">${W('Cada',0)} ${W('estudiante,',1)} <em>${W('cada',2)} ${W('día,',3)}</em> ${W('en',4)} ${W('su',5)} ${W('lugar.',6)}</h1>
+     <div class="la-scan" aria-hidden="true"><div class="la-qr">${ic('qr',30,1.7)}<span class="la-line"></span></div><div style="min-width:0"><div class="la-st" id="laSt"><span class="la-dot"></span><b>${LA_MSG[0][0]}</b></div><div class="la-sub" id="laSub">${LA_MSG[0][1]}</div></div></div></div>
+    <ul class="login-feats">${[['qr','Ingreso con carnet QR, rostro o reloj de huella'],['lista','Pase de lista por jornada con justificaciones'],['chart','Registro mensual, resúmenes y alertas de ausentismo']].map((f,i)=>`<li style="--i:${i}">${ic(f[0],18)}${f[1]}</li>`).join('')}</ul>
+   </section>
+   <section class="login-form">
+    <div class="login-tools"><span class="inst-slot"></span><button class="icon-btn" data-act="tema" id="temaBtn"></button></div>
+    <div class="login-card" id="lCard">
+    ${setup?`<div class="head-t" style="--i:0"><span class="eyebrow">Primer uso</span><h1 class="lt">Cree la cuenta de Dirección</h1><p class="small muted">Será la cuenta con acceso total: usuarios, configuración y respaldos.</p></div>
+     <form id="fSet" class="lform" style="--i:1" novalidate>
+      ${campo('sN','Nombre completo','user','required autocomplete="name"')}
+      ${campo('sI','Institución','school','required','text',c.institucion)}
+      ${campo('sU','Usuario','user','required autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false"','text','direccion')}
+      ${campo('sP','Contraseña (mínimo 4 caracteres)','lock','required autocomplete="new-password"','password')}
+      <p class="err" id="lErr" role="alert"></p>
+      <button class="btn btn-primary btn-login" id="lBtn"><span>Crear cuenta y entrar</span>${ic('arrow',18)}</button></form>`
+    :`<div class="head-t" style="--i:0"><span class="eyebrow">${rec?'Bienvenido de nuevo':'Bienvenido'}</span><h1 class="lt">Iniciar sesión</h1><p class="small muted">Ingrese con el usuario que le asignó Dirección.</p></div>
+     <form id="fLog" class="lform" style="--i:1" novalidate>
+      ${campo('lU','Usuario','user','required autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false"','text',rec)}
+      ${campo('lP','Contraseña','lock','required autocomplete="current-password"','password')}
+      <p class="caps" id="lCaps" hidden>${ic('alert',14)}Bloq Mayús está activado</p>
+      <div class="lrow"><label class="check"><input type="checkbox" id="lRec" ${rec?'checked':''}> Recordar mi usuario en este equipo</label></div>
+      <p class="err" id="lErr" role="alert"></p>
+      <button class="btn btn-primary btn-login" id="lBtn"><span>Entrar</span>${ic('arrow',18)}</button></form>
+     ${DB.demo?`<div class="demo-box" style="--i:2"><span class="eyebrow">Cuentas de ejemplo · contraseña 1234</span><div class="demo-chips">${[['direccion','Dirección'],['coordinacion','Coordinación académica'],['kmejia','Docente de Parvularia y 3.er grado'],['dportillo','Docente de 7.° y bachillerato'],['porteria','Control de entrada']].map(x=>`<button type="button" class="demo-chip" data-act="demoUser" data-u="${x[0]}"><b>${x[0]}</b><span>${x[1]}</span></button>`).join('')}</div></div>`:''}`}
+     <p class="login-foot" style="--i:3">${ic('lock',14)}<span>La información se guarda solo en este equipo. ${esIOS&&!esStandalone()?'En iPhone, instálelo desde Safari con Compartir → Agregar a pantalla de inicio.':''}</span></p>
+    </div></section></div>`;
+  pintarTema();pintarInstalar();
+  let k=0;_loginTimer=setInterval(()=>{const cl=$('#laClock');if(!cl){clearInterval(_loginTimer);return}cl.textContent=horaAhora();
+    const st=$('#laSt'),sb=$('#laSub');if(!st||sinAnim())return;k=(k+1)%LA_MSG.length;st.classList.add('x');sb.classList.add('x');
+    setTimeout(()=>{st.className='la-st '+LA_MSG[k][2];st.querySelector('b').textContent=LA_MSG[k][0];sb.textContent=LA_MSG[k][1];sb.classList.remove('x')},260)},2600);
+  const err=(m)=>{$('#lErr').innerHTML=m?`${m}`:'';if(m){const cd=$('#lCard');cd.classList.remove('shake');void cd.offsetWidth;cd.classList.add('shake')}};
+  const boton=(estado,txt)=>{const b=$('#lBtn');b.classList.toggle('ok',estado==='ok');b.disabled=estado==='load'||estado==='lock';
+    b.innerHTML=estado==='load'?`<span class="spin"></span><span>${txt||'Verificando…'}</span>`:estado==='ok'?`${ic('check',20,2.4)}<span>${txt||'Acceso correcto'}</span>`:`<span>${txt||(setup?'Crear cuenta y entrar':'Entrar')}</span>${estado==='lock'?ic('lock',18):ic('arrow',18)}`};
+  const salirAnimado=async u=>{boton('ok');await espera(sinAnim()?0:450);$('#login').classList.add('leaving');await espera(sinAnim()?0:380);entrar(u)};
+  if(setup){
+    $('#fSet').onsubmit=async ev=>{ev.preventDefault();const n=$('#sN').value.trim(),i=$('#sI').value.trim(),us=$('#sU').value.trim().toLowerCase(),pw=$('#sP').value;
+      if(!n||!i||!us){err('Complete nombre, institución y usuario.');return}if(pw.length<4){err('La contraseña debe tener al menos 4 caracteres.');return}
+      boton('load','Creando cuenta…');const u={id:uid(),nombre:n,usuario:us,rol:'direccion',activo:true,hash:await hash(pw)};
+      DB.config.institucion=i;DB.usuarios.push(u);YO=u;log('Creó la cuenta de Dirección');save();salirAnimado(u)};
+    $('#sN').focus();return;
+  }
+  const bloqueo=()=>{let t=0;try{t=+(localStorage.getItem(BKEY)||0)}catch(e){}return t-Date.now()};
+  const cuenta=()=>{const r=bloqueo();if(r<=0){boton('');err('');return}boton('lock',`Espere ${Math.ceil(r/1000)} s`);setTimeout(cuenta,1000)};
+  if(bloqueo()>0){err('Demasiados intentos fallidos. Espere un momento.');cuenta()}
+  const pw=$('#lP');['keydown','keyup'].forEach(t=>pw.addEventListener(t,e=>{if(e.getModifierState)$('#lCaps').hidden=!e.getModifierState('CapsLock')}));
+  $('#fLog').onsubmit=async ev=>{ev.preventDefault();if(bloqueo()>0)return;
+    const us=$('#lU').value.trim().toLowerCase(),p=pw.value;if(!us||!p){err('Escriba su usuario y contraseña.');(us?pw:$('#lU')).focus();return}
+    err('');boton('load');const [h]=await Promise.all([hash(p),espera(sinAnim()?0:420)]);
+    const u=DB.usuarios.find(x=>x.usuario===us);
+    if(!u||u.hash!==h){_intentos++;pw.value='';boton('');
+      if(_intentos>=5){_intentos=0;try{localStorage.setItem(BKEY,String(Date.now()+60000))}catch(e){}err('Demasiados intentos fallidos. Por seguridad, espere 1 minuto.');cuenta();return}
+      err(`Usuario o contraseña incorrectos.${_intentos>=3?` Le quedan ${5-_intentos} intentos.`:''}`);pw.focus();return}
+    if(!u.activo){boton('');err('Este usuario está desactivado. Consulte con Dirección.');return}
+    _intentos=0;try{if($('#lRec').checked)localStorage.setItem(UKEY,us);else localStorage.removeItem(UKEY)}catch(e){}
+    salirAnimado(u)};
+  (rec?pw:$('#lU')).focus();
+}
+async function teclear(el,txt,ms){el.value='';el.focus();if(sinAnim()){el.value=txt;return}for(const ch of txt){el.value+=ch;el.dispatchEvent(new Event('input'));await espera(ms)}}
+function entrar(u){YO=u;try{sessionStorage.setItem(SKEY,u.id)}catch(e){}const d=u.rol==='porteria'?'entrada':'inicio';if(location.hash==='#'+d)render();else location.hash=d}
+
+/* ---------- Datos de ejemplo ---------- */
+function mulberry32(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+async function semilla(){
+  const db=dbVacia();db.demo=true;DB=db;const rnd=mulberry32(20261016),pick=a=>a[Math.floor(rnd()*a.length)],pass=await hash('1234');
+  const U=(n,u,r)=>({id:uid(),nombre:n,usuario:u,rol:r,activo:true,hash:pass});
+  const dir=U('Licda. Marta Ventura','direccion','direccion'),coo=U('Lic. Roberto Amaya','coordinacion','coordinacion'),d1=U('Profa. Karla Mejía','kmejia','docente'),d2=U('Prof. Daniel Portillo','dportillo','docente'),por=U('Sr. Julio Canales','porteria','porteria');
+  db.usuarios=[dir,coo,d1,d2,por];
+  const S=(g,l,t,d)=>({id:uid(),grado:g,seccion:l,turno:t,docenteId:d.id});
+  db.secciones=[S('Parvularia 6','A','Matutino',d1),S('3.er grado','A','Matutino',d1),S('7.° grado','B','Matutino',d2),S('1.er año de bachillerato','A','Vespertino',d2)];
+  const AP=['Hernández','Martínez','López','García','Rodríguez','Flores','Romero','Ramírez','Cruz','Reyes','Mejía','Sorto','Guevara','Argueta','Chávez','Benítez','Granados','Lazo','Quintanilla','Villatoro','Canales','Fuentes'];
+  const NM={M:['José Antonio','Carlos Eduardo','Kevin Alexander','Diego','Mateo','Josué David','Fernando','Óscar Armando','Luis Mario','Gabriel','Samuel','Ángel'],F:['María José','Andrea Sofía','Fátima','Valeria','Gabriela','Daniela','Karla Patricia','Sofía','Alejandra','Camila','Ximena','Marisol']};
+  const NR=['Ana','Rosa','Carmen','Gloria','Silvia','Reina','Mirna','Patricia','Julio','Mauricio'];
+  const usados=new Set();
+  db.secciones.forEach((s,i)=>{for(let k=0;k<[9,10,11,10][i];k++){const sx=rnd()<.5?'M':'F';let ap,nm;do{ap=pick(AP)+' '+pick(AP);nm=pick(NM[sx])}while(usados.has(ap+nm)||ap.split(' ')[0]===ap.split(' ')[1]);usados.add(ap+nm);
+    db.estudiantes.push({id:uid(),nie:String(4100000+Math.floor(rnd()*890000)),apellidos:ap,nombres:nm,sexo:sx,seccionId:s.id,encargado:pick(NR)+' '+ap.split(' ')[0],telefono:`${pick(['7','6'])}${Math.floor(100+rnd()*899)}-${Math.floor(1000+rnd()*8999)}`,estado:'activo',qr:token(),reloj:'',ingreso:db.config.inicio})}});
+  const h=hoy(),dias=lectivosEntre(addDias(h,-45),addDias(h,-1)).slice(-18);
+  const ec=s=>db.estudiantes.filter(e=>e.seccionId===db.secciones[s].id).sort(porNombre);
+  const racha=ec(2)[3],baja=ec(3)[2],tarde=ec(1)[4],jus=ec(0)[1];
+  dias.forEach((f,di)=>{db.asistencia[f]={};db.listas[f]={};
+    db.secciones.forEach(s=>{db.listas[f][s.id]={por:s.docenteId,at:f+(s.turno==='Matutino'?'T07:40:00':'T13:25:00')}});
+    db.estudiantes.forEach(e=>{const s=db.secciones.find(x=>x.id===e.seccionId),r=rnd();let v=r<.89?'P':r<.95?'T':'A';
+      if(e===racha&&di>=dias.length-4)v='A';if(e===baja&&rnd()<.3)v='A';if(e===tarde&&rnd()<.35)v='T';if(e===jus&&(di===dias.length-6||di===dias.length-5))v='A';
+      const hh=s.turno==='Matutino'?'07':'13',via=di>=dias.length-5&&s.turno==='Matutino'?(rnd()<.8?'qr':'manual'):'lista';
+      const ing=v==='A'?'':v==='T'?`${hh}:${pad(11+Math.floor(rnd()*25))}`:`${s.turno==='Matutino'?'06':'12'}:${pad(35+Math.floor(rnd()*24))}`;
+      db.asistencia[f][e.id]={e:v,h:v==='T'?ing:'',o:'',in:via==='lista'?'':ing,via}})});
+  db.justificaciones.push({id:uid(),estudianteId:jus.id,desde:dias[dias.length-6],hasta:dias[dias.length-5],tipo:'Médico',documento:true,detalle:'Constancia de consulta por infección respiratoria',estado:'aprobada',por:d1.id,creada:dias[dias.length-4]+'T08:10:00.000Z'});
+  db.justificaciones.push({id:uid(),estudianteId:racha.id,desde:dias[dias.length-1],hasta:dias[dias.length-1],tipo:'Familiar',documento:false,detalle:'La madre avisó por teléfono: viaje familiar a La Unión',estado:'pendiente',por:d2.id,creada:h+'T07:55:00.000Z'});
+  if(esLectivo(h)){db.asistencia[h]={};db.listas[h]={};
+    [0,2].forEach(si=>{const s=db.secciones[si];db.listas[h][s.id]={por:s.docenteId,at:new Date().toISOString()};
+      ec(si).forEach(e=>{const r=rnd();let v=r<.9?'P':r<.96?'T':'A';if(e===racha)v='A';const ing=v==='A'?'':v==='T'?`07:${pad(11+Math.floor(rnd()*20))}`:`06:${pad(38+Math.floor(rnd()*21))}`;
+        db.asistencia[h][e.id]={e:v,h:v==='T'?ing:'',o:'',in:ing,via:v==='A'?'lista':'qr'}})});
+    ec(1).forEach((e,i)=>{if(i%4===3)return;const t=rnd()<.12;const ing=t?`07:${pad(11+Math.floor(rnd()*15))}`:`06:${pad(40+Math.floor(rnd()*19))}`;db.asistencia[h][e.id]={e:t?'T':'P',h:t?ing:'',o:'',in:ing,via:i%5===0?'manual':'qr'}})}
+  db.bitacora=[{at:new Date().toISOString(),u:'Sistema',acc:'Cargó los datos de ejemplo'}];
+  return db;
+}
+
+/* ---------- Arranque ---------- */
+(async()=>{
+  aplicarTema(temaActual());
+  DB=load();
+  if(!DB){DB=await semilla();save()}
+  else{const b=dbVacia();for(const k in b)if(DB[k]==null)DB[k]=b[k];DB.config=Object.assign(configBase(),DB.config);if(!DB.config.entrada)DB.config.entrada=configBase().entrada;
+    if(DB.demo&&!DB.usuarios.some(u=>u.rol==='porteria'))DB.usuarios.push({id:uid(),nombre:'Sr. Julio Canales',usuario:'porteria',rol:'porteria',activo:true,hash:await hash('1234')});
+    let c=false;DB.estudiantes.forEach(e=>{if(!e.qr){e.qr=token();c=true}});if(c)save()}
+  try{const id=sessionStorage.getItem(SKEY);YO=DB.usuarios.find(u=>u.id===id&&u.activo)||null}catch(e){}
+  render();
+})();
+</script>
+</body>
+</html>

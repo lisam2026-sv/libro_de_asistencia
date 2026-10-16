@@ -1,0 +1,22 @@
+{
+  "name": "Libro de Asistencia Escolar",
+  "short_name": "Asistencia",
+  "description": "Control de asistencia escolar: pase de lista, ingreso con QR o rostro, justificaciones y reportes.",
+  "lang": "es-SV",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0E1530",
+  "theme_color": "#0E1530",
+  "categories": ["education", "productivity"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Control de entrada", "url": "./index.html#entrada", "icons": [{ "src": "icon-192.png", "sizes": "192x192" }] },
+    { "name": "Pasar lista", "url": "./index.html#lista", "icons": [{ "src": "icon-192.png", "sizes": "192x192" }] }
+  ]
+}
