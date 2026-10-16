@@ -505,6 +505,33 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .ph-logo{width:56px;height:56px;object-fit:contain}
 @media print{.ph-logo{width:44pt;height:44pt}}
 
+/* ---------- Asistente de importación ---------- */
+dialog.wide{width:min(980px,calc(100vw - 24px))}
+.wz{display:flex;gap:8px;list-style:none;margin:0;padding:0;counter-reset:wz}
+.wz-step{flex:1;display:flex;align-items:center;gap:8px;font-size:.84rem;font-weight:600;color:var(--muted);padding-bottom:10px;border-bottom:3px solid var(--line)}
+.wz-step span{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--sunk);font-size:.78rem}
+.wz-step.on{color:var(--accent);border-color:var(--accent)}.wz-step.on span{background:var(--accent);color:var(--accent-ink)}
+.wz-step.done{color:var(--p);border-color:var(--p)}.wz-step.done span{background:var(--p);color:#fff}
+#wzBody{display:flex;flex-direction:column;gap:14px}
+.drop{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:38px 16px;border:2px dashed var(--line-2);border-radius:var(--r-lg);background:var(--surface-2);cursor:pointer;color:var(--muted);transition:border-color .15s,background .15s}
+.drop b{color:var(--ink);font-size:1.05rem}.drop span{font-size:.84rem}
+.drop:hover,.drop.over{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.drop.busy{opacity:.7;pointer-events:none}
+.map{border:1px solid var(--line);border-radius:var(--r);padding:10px 14px}
+.map summary{cursor:pointer;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.map-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-top:12px}
+.wz-stats{border:1px solid var(--line);border-radius:var(--r);padding:12px}
+.sec-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.wz-done{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:10px 0}
+.wz-ok{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;background:var(--p);color:#fff}
+@media (prefers-reduced-motion:no-preference){.wz-ok{animation:crestIn .7s cubic-bezier(.2,.8,.25,1.3) both}}
+
+/* ---------- Sincronización ---------- */
+.nube-chip{font:inherit;display:inline-flex;align-items:center;gap:7px;padding:6px 11px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--muted);font-size:.8rem;font-weight:600;cursor:pointer;white-space:nowrap}
+.nube-chip.ok{color:var(--p)}.nube-chip.sub{color:var(--accent)}.nube-chip.err{color:var(--a);border-color:color-mix(in srgb,var(--a) 40%,transparent)}.nube-chip.new{color:#fff;background:var(--accent);border-color:var(--accent)}
+.nube-chip.sub svg{animation:nubeP 1.2s ease-in-out infinite}@keyframes nubeP{50%{opacity:.35}}
+@media (max-width:760px){.nube-chip span{max-width:120px;overflow:hidden;text-overflow:ellipsis}}
+
 /* ---------- Control de entrada masivo ---------- */
 .stage-hit{position:absolute;left:50%;top:14px;transform:translateX(-50%);display:flex;align-items:center;gap:10px;padding:7px 16px 7px 7px;border-radius:99px;background:rgba(6,10,22,.84);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#fff;font-weight:700;font-size:1.02rem;max-width:calc(100% - 28px);white-space:nowrap;overflow:hidden;opacity:0;pointer-events:none;z-index:3}
 .stage-hit.on{animation:hit 1.8s ease forwards}
@@ -606,7 +633,7 @@ const SHIELD_DEF='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAACuCAMAAACo
 const KEY='libroAsistencia.v1',SKEY='libroAsistencia.sesion',TKEY='libroAsistencia.tema',UKEY='libroAsistencia.usuario',BKEY='libroAsistencia.bloqueo';
 let DB=null,YO=null,_fechas=null;
 const UI={lista:null,borrador:{},repTab:'mensual',rep:{},est:{sec:'',estado:'activo',q:''},jus:{estado:'pendiente'},idTab:'carnets',id:{sec:''},k:{modo:'qr'}};
-const LIBS={qr:'https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js',jsqr:'https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js',face:'https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.13/dist/face-api.js'};
+const LIBS={xlsx:'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js',qr:'https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js',jsqr:'https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js',face:'https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.13/dist/face-api.js'};
 const MODELOS='https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.13/model/';
 
 const $=s=>document.querySelector(s);
@@ -629,7 +656,7 @@ const nivelPct=v=>v==null?'':v<DB.config.umbral-10?'crit':v<DB.config.umbral?'wa
 const ESTADOS={P:'Presente',A:'Ausente',T:'Tardanza',J:'Justificada'};
 const VIAS={qr:'QR',rostro:'Rostro',reloj:'Huella',manual:'NIE',lista:'Lista',cierre:'Cierre'};
 const ROLES={admin:'Administrador del sistema',direccion:'Dirección',coordinacion:'Coordinación académica',docente:'Docente',porteria:'Control de entrada'};
-const GRADOS=[['Parvularia 4','Parvularia'],['Parvularia 5','Parvularia'],['Parvularia 6','Parvularia'],
+const GRADOS=[['Inicial','Parvularia'],['Parvularia 4','Parvularia'],['Parvularia 5','Parvularia'],['Parvularia 6','Parvularia'],
  ['1.er grado','Básica'],['2.° grado','Básica'],['3.er grado','Básica'],['4.° grado','Básica'],['5.° grado','Básica'],['6.° grado','Básica'],['7.° grado','Básica'],['8.° grado','Básica'],['9.° grado','Básica'],
  ['1.er año de bachillerato','Media'],['2.° año de bachillerato','Media'],['3.er año de bachillerato','Media']];
 const gIdx=g=>{const i=GRADOS.findIndex(x=>x[0]===g);return i<0?99:i};
@@ -649,12 +676,13 @@ const IC={home:'M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z',
  alert:'M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z',clock:'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2',
  up:'M12 21V9M7 14l5-5 5 5M5 3h14',card:'M3 5h18v14H3zM6.5 15.5a2.5 2.5 0 0 1 5 0M9 11.5a1.5 1.5 0 1 0 0-.01M14 10h4M14 14h3',info:'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 11v5M12 8h.01',
  menu:'M4 6h16M4 12h16M4 18h16',x:'M6 6l12 12M18 6 6 18',check:'M5 12.5l4.5 4.5L19 7.5',cam:'M3 8a2 2 0 0 1 2-2h2l2-2h6l2 2h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM12 16.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z',
- full:'M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5',key:'M14.5 9.5a4.5 4.5 0 1 1-1.3-3.2L21 14v3h-3v2h-2v-2l-2.3-2.3',stop:'M6 6h12v12H6z',door:'M4 21h16M6 21V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v17M14 12h.01',eye:'M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z',eyeoff:'M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.2M6.6 6.6A17 17 0 0 0 2 12s3.5 7 10 7a9.6 9.6 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2',arrow:'M5 12h14M13 6l6 6-6 6',install:'M12 3v12M7 10l5 5 5-5M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2',share:'M12 3v13M8 7l4-4 4 4M5 11v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8',user:'M20 21v-1.5a5 5 0 0 0-5-5H9a5 5 0 0 0-5 5V21M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z',lock:'M6 11h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1zM8 11V7a4 4 0 0 1 8 0v4',school:'M3 9l9-5 9 5-9 5zM7 11.2V16c0 1.5 2.2 3 5 3s5-1.5 5-3v-4.8M21 9v6',plusbox:'M4 4h16v16H4zM12 8v8M8 12h8',crown:'M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5zM5 15.5h14'};
+ full:'M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5',key:'M14.5 9.5a4.5 4.5 0 1 1-1.3-3.2L21 14v3h-3v2h-2v-2l-2.3-2.3',stop:'M6 6h12v12H6z',door:'M4 21h16M6 21V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v17M14 12h.01',eye:'M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z',eyeoff:'M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.2M6.6 6.6A17 17 0 0 0 2 12s3.5 7 10 7a9.6 9.6 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2',arrow:'M5 12h14M13 6l6 6-6 6',install:'M12 3v12M7 10l5 5 5-5M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2',share:'M12 3v13M8 7l4-4 4 4M5 11v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8',user:'M20 21v-1.5a5 5 0 0 0-5-5H9a5 5 0 0 0-5 5V21M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z',lock:'M6 11h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1zM8 11V7a4 4 0 0 1 8 0v4',school:'M3 9l9-5 9 5-9 5zM7 11.2V16c0 1.5 2.2 3 5 3s5-1.5 5-3v-4.8M21 9v6',plusbox:'M4 4h16v16H4zM12 8v8M8 12h8',crown:'M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5zM5 15.5h14',cloud:'M7 18.5h10.5a4 4 0 0 0 .6-7.96A6 6 0 0 0 6.6 9.2 4.7 4.7 0 0 0 7 18.5z'};
 const ic=(n,s=18,w=1.8)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${IC[n]}"/></svg>`;
 
 /* ---------- Persistencia ---------- */
 function load(){try{const r=localStorage.getItem(KEY);if(r)return JSON.parse(r)}catch(e){}return null}
-function save(){_fechas=null;try{localStorage.setItem(KEY,JSON.stringify(DB));return true}catch(e){toast('No se pudo guardar: el almacenamiento del navegador está lleno o bloqueado. Descargue un respaldo desde Configuración.','err');return false}}
+function save(){const ok=saveLocal();if(ok&&typeof nubeOn==='function'&&nubeOn())nubeDiffPronto();return ok}
+function saveLocal(){_fechas=null;try{localStorage.setItem(KEY,JSON.stringify(DB));return true}catch(e){toast('No se pudo guardar: el almacenamiento del navegador está lleno o bloqueado. Descargue un respaldo desde Configuración.','err');return false}}
 function log(acc){DB.bitacora.unshift({at:new Date().toISOString(),u:YO?YO.nombre:'Sistema',acc});DB.bitacora.length=Math.min(DB.bitacora.length,300)}
 async function hash(txt){
   const data=new TextEncoder().encode('libro-asistencia::'+txt);
@@ -665,7 +693,7 @@ function token(){const A='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',r=new Uint8Array(10)
 function configBase(){
   const y=new Date().getFullYear();
   return {institucion:'Liceo San Miguel',lema:'Libertad, Ciencia y Fe',anio:y,inicio:`${y}-01-19`,fin:`${y}-11-13`,umbral:85,consecutivas:3,tardanzas:3,docenteEditaAnteriores:false,
-    entrada:{Matutino:'07:00',Vespertino:'13:00'},tolerancia:10,umbralRostro:.5,sonido:true,voz:'ingresado',qrSoloNie:true,qrPausa:4,
+    entrada:{Matutino:'07:00',Vespertino:'13:00'},tolerancia:10,umbralRostro:.5,sonido:true,voz:'ingresado',qrSoloNie:true,qrPausa:4,qrValidar:'nie',
     feriados:[{fecha:`${y}-01-01`,nombre:'Año Nuevo'},{fecha:`${y}-04-02`,nombre:'Jueves Santo'},{fecha:`${y}-04-03`,nombre:'Viernes Santo'},
       {fecha:`${y}-05-01`,nombre:'Día del Trabajo'},{fecha:`${y}-05-10`,nombre:'Día de la Madre'},{fecha:`${y}-06-17`,nombre:'Día del Padre'},
       {fecha:`${y}-06-22`,nombre:'Día del Maestro'},{fecha:`${y}-08-06`,nombre:'Fiestas Agostinas'},{fecha:`${y}-09-15`,nombre:'Día de la Independencia'},
@@ -686,7 +714,12 @@ let _instalar=null;
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();_instalar=e;pintarInstalar()});
 window.addEventListener('appinstalled',()=>{_instalar=null;pintarInstalar();toast('Aplicación instalada en este dispositivo.')});
 function pintarInstalar(){const ok=!esStandalone()&&(_instalar||esIOS);document.querySelectorAll('.inst-slot').forEach(el=>{el.innerHTML=ok?`<button class="btn btn-sm" data-act="instalar">${ic('install',16)}Instalar app</button>`:''})}
-if('serviceWorker' in navigator&&location.protocol==='https:')window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+const VERSION_APP='2026.10.16';
+function avisoVersion(){if($('#updBar'))return;const d=document.createElement('div');d.id='updBar';d.className='toast';d.style.cssText='position:fixed;left:50%;transform:translateX(-50%);top:calc(14px + env(safe-area-inset-top,0px));z-index:95;pointer-events:auto';
+  d.innerHTML=`${ic('install',16)}<span>Hay una versión nueva del sistema.</span><button class="btn btn-sm btn-primary" onclick="location.reload()">Actualizar</button>`;document.body.appendChild(d)}
+if('serviceWorker' in navigator&&location.protocol==='https:')window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').then(reg=>{
+  reg.addEventListener('updatefound',()=>{const w=reg.installing;if(w)w.addEventListener('statechange',()=>{if(w.state==='installed'&&navigator.serviceWorker.controller)avisoVersion()})});
+  setInterval(()=>reg.update().catch(()=>{}),30*60000)}).catch(()=>{}));
 
 /* ---------- Impresión ---------- */
 function prepararPagina(o){let st=document.getElementById('pageCss');if(!st){st=document.createElement('style');st.id='pageCss';document.head.appendChild(st)}
@@ -754,6 +787,7 @@ function toast(msg,tipo){const t=document.createElement('div');t.className='toas
 const dlg=$('#dlg'),dlg2=$('#dlg2');
 function openDlg(html){dlg.innerHTML=`<div class="dlg">${html}</div>`;if(!dlg.open)dlg.showModal();const f=dlg.querySelector('input:not([type=checkbox]),select,textarea');if(f)f.focus()}
 function closeDlg(){if(dlg.dataset.lock==='1')return;if(dlg.open)dlg.close()}
+dlg.addEventListener('close',()=>dlg.classList.remove('wide'));
 dlg.addEventListener('close',()=>{if(CAM.enDlg){cerrarCamara();CAM.enDlg=false}});
 function confirmar(t,d,ok='Confirmar',peligro=false){
   return new Promise(res=>{
@@ -828,12 +862,12 @@ function shell(v){
     app.innerHTML=`<div class="app" id="frame"><aside class="side no-print" id="side"><div class="brand"><img class="brand-logo" id="brandLogo" alt="" width="42" height="42"><div><div class="brand-t">Libro de Asistencia</div><div class="brand-s" id="brandS"></div></div></div>
       <nav class="nav" id="nav" aria-label="Menú principal"></nav><div class="me" id="me"></div></aside><div class="scrim" data-act="menu"></div>
       <main class="main"><div class="top no-print"><button class="icon-btn menu-btn" data-act="menu" aria-label="Abrir menú">${ic('menu',20)}</button>
-      <span class="top-date">${ic('clock',16)}<span id="topDate"></span></span><span class="top-sp"></span><span class="inst-slot"></span><button class="icon-btn" data-act="tema" id="temaBtn"></button></div><div id="main" style="display:contents"></div></main><nav class="tabbar no-print" id="tabbar" aria-label="Accesos rápidos"></nav></div>`;
+      <span class="top-date">${ic('clock',16)}<span id="topDate"></span></span><span class="top-sp"></span><span id="nubeSlot"></span><span class="inst-slot"></span><button class="icon-btn" data-act="tema" id="temaBtn"></button></div><div id="main" style="display:contents"></div></main><nav class="tabbar no-print" id="tabbar" aria-label="Accesos rápidos"></nav></div>`;
   }
   $('#frame').classList.remove('nav-open');
   $('#brandS').textContent=`${DB.config.institucion} · ${DB.config.anio}`;if($('#brandLogo').getAttribute('src')!==logoMini())$('#brandLogo').src=logoMini();
   const h=hoy(),dh=parse(h),nl=esLectivo(h)?'':` · ${motivoNoLectivo(h)}`;$('#topDate').innerHTML=`<span class="d-long">${esc(fLarga(h)[0].toUpperCase()+fLarga(h).slice(1)+nl)}</span><span class="d-short">${esc(DIAS[dh.getDay()][0].toUpperCase()+DIAS[dh.getDay()].slice(1,3))} ${dh.getDate()} ${MESES[dh.getMonth()].slice(0,3)}${nl?' · sin clases':''}</span>`;
-  pintarTema();pintarInstalar();
+  pintarTema();pintarInstalar();pintarNube();
   const pend=esLectivo(h)?seccionesVisibles().filter(s=>!(DB.listas[h]&&DB.listas[h][s.id])).length:0;
   const jp=can('jus_aprobar')?DB.justificaciones.filter(j=>j.estado==='pendiente').length:0;
   $('#nav').innerHTML=NAV.map(g=>{const its=g.items.filter(n=>!n.perm||can(n.perm));if(!its.length)return '';
@@ -852,7 +886,7 @@ const cabecera=(eyebrow,titulo,acciones='',desc='')=>`<div class="head"><div cla
 /* ---------- Inicio ---------- */
 VIEWS.inicio=()=>{
   const h=hoy(),lect=esLectivo(h),secs=seccionesVisibles(),ests=estudiantesVisibles().filter(e=>e.estado==='activo');
-  const H=ests.filter(e=>e.sexo==='M').length,M=ests.length-H;
+  const H=ests.filter(e=>e.sexo==='M').length,M=ests.filter(e=>e.sexo==='F').length;
   const c={P:0,A:0,T:0,J:0,n:0},vias={};for(const e of ests){const s=estado(e.id,h);if(s){c[s]++;c.n++;const r=DB.asistencia[h][e.id];if(r.via&&r.in)vias[r.via]=(vias[r.via]||0)+1}}
   const pHoy=c.n?(c.P+c.T)/c.n*100:null,reg=secs.filter(s=>DB.listas[h]&&DB.listas[h][s.id]);
   const al=alertas();
@@ -890,22 +924,188 @@ VIEWS.inicio=()=>{
   </section>`);
 };
 
+/* ---------- Sincronización con Google Drive (Apps Script + Google Sheets) ---------- */
+const NKEY='libroAsistencia.nube',SNKEY='libroAsistencia.nubeEstado';
+const NUBE={cfg:null,st:{since:0,snap:{},bitAt:'',out:{}},estado:'off',ultimo:0,err:'',timer:0,busy:false,sucias:new Set(['*']),dT:0,nuevo:false};
+function nubeCargar(){try{NUBE.cfg=JSON.parse(localStorage.getItem(NKEY)||'null')}catch(e){}try{const s=JSON.parse(localStorage.getItem(SNKEY)||'null');if(s)NUBE.st=Object.assign({since:0,snap:{},bitAt:'',out:{}},s)}catch(e){}}
+function nubeGuardarEstado(){try{localStorage.setItem(SNKEY,JSON.stringify(NUBE.st))}catch(e){}}
+const nubeOn=()=>!!(NUBE.cfg&&NUBE.cfg.url&&NUBE.cfg.activo);
+const nubePend=()=>Object.keys(NUBE.st.out).length;
+function h32(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0).toString(36)+s.length.toString(36)}
+function tocar(f){NUBE.sucias.add(f||'*')}
+function mapaSec(){const m={};for(const e of DB.estudiantes)m[e.id]=e.seccionId;return m}
+function valorDe(k,SM){const p=k.split('|'),J=JSON.stringify,busca=(arr,id)=>{const x=arr.find(o=>o.id===id);return x?J(x):null};
+  switch(p[0]){
+    case 'cfg':return J(DB.config);
+    case 'meta':return J({demo:!!DB.demo});
+    case 'usr':return busca(DB.usuarios,p[1]);
+    case 'sec':return busca(DB.secciones,p[1]);
+    case 'est':return busca(DB.estudiantes,p[1]);
+    case 'jus':return busca(DB.justificaciones,p[1]);
+    case 'asis':{const a=DB.asistencia[p[1]];if(!a)return null;SM=SM||mapaSec();const g={};let n=0;for(const id in a){if((SM[id]||'x')===p[2]){g[id]=a[id];n++}}return n?J(g):null}
+    case 'lista':{const l=DB.listas[p[1]];return l&&Object.keys(l).length?J(l):null}
+    case 'bit':{const b=DB.bitacora.find(b=>b.at===p[1]&&h32(b.u+'|'+b.acc)===p[2]);return b?J(b):undefined}
+  }return undefined}
+function nubeClaves(){
+  const m=new Map(),J=JSON.stringify;m.set('cfg',J(DB.config));m.set('meta',J({demo:!!DB.demo}));
+  DB.usuarios.forEach(u=>m.set('usr|'+u.id,J(u)));DB.secciones.forEach(s=>m.set('sec|'+s.id,J(s)));DB.estudiantes.forEach(e=>m.set('est|'+e.id,J(e)));DB.justificaciones.forEach(j=>m.set('jus|'+j.id,J(j)));
+  const todas=NUBE.sucias.has('*'),SM=mapaSec();
+  const fA=todas?Object.keys(DB.asistencia):[...NUBE.sucias].filter(f=>DB.asistencia[f]);
+  for(const f of fA){const g={};for(const id in DB.asistencia[f]){const s=SM[id]||'x';(g[s]||(g[s]={}))[id]=DB.asistencia[f][id]}for(const s in g)m.set(`asis|${f}|${s}`,J(g[s]))}
+  const fL=todas?Object.keys(DB.listas):[...NUBE.sucias].filter(f=>DB.listas[f]);
+  for(const f of fL)if(Object.keys(DB.listas[f]).length)m.set('lista|'+f,J(DB.listas[f]));
+  return {m,todas,fechas:new Set([...NUBE.sucias])};
+}
+function nubeDiff(){
+  if(!nubeOn()||!DB)return;const {m,todas,fechas}=nubeClaves(),snap=NUBE.st.snap,out=NUBE.st.out;
+  for(const [k,v] of m)if(snap[k]!==h32(v))out[k]=1;
+  for(const k in snap){if(m.has(k))continue;const p=k.split('|');if((p[0]==='asis'||p[0]==='lista')&&!todas&&!fechas.has(p[1]))continue;out[k]=1}
+  for(const b of DB.bitacora){if(b.at<=NUBE.st.bitAt)break;out[`bit|${b.at}|${h32(b.u+'|'+b.acc)}`]=1}
+  if(DB.bitacora[0]&&DB.bitacora[0].at>NUBE.st.bitAt)NUBE.st.bitAt=DB.bitacora[0].at;
+  NUBE.sucias.clear();nubeGuardarEstado();pintarNube();nubeProgramar(nubePend()?700:4000);
+}
+function nubeDiffPronto(){clearTimeout(NUBE.dT);NUBE.dT=setTimeout(nubeDiff,500)}
+async function nubeLlamar(p,cfg){cfg=cfg||NUBE.cfg;const ctrl=new AbortController(),to=setTimeout(()=>ctrl.abort(),45000);
+  try{const res=await fetch(cfg.url,{method:'POST',body:JSON.stringify(Object.assign({clave:cfg.clave},p)),headers:{'Content-Type':'text/plain;charset=utf-8'},redirect:'follow',signal:ctrl.signal});
+    let j;try{j=await res.json()}catch(e){throw new Error('Google Drive no devolvió una respuesta válida. Revise que la URL sea la de la aplicación web (/exec) y que el acceso sea "Cualquier usuario".')}
+    if(!j.ok)throw new Error(j.error==='clave'?'La clave de sincronización no coincide con la de Codigo.gs.':(j.error||'Error del servidor'));return j}
+  catch(e){if(e.name==='AbortError')throw new Error('Google Drive tardó demasiado en responder.');if(e instanceof TypeError)throw new Error('Sin conexión con Google Drive.');throw e}
+  finally{clearTimeout(to)}}
+async function nubeFlush(){
+  for(let vuelta=0;vuelta<60;vuelta++){
+    const ks=Object.keys(NUBE.st.out);if(!ks.length)return;
+    const SM=mapaSec(),lote=[];let tam=0;
+    for(const k of ks){const v=valorDe(k,SM);if(v===undefined){delete NUBE.st.out[k];continue}lote.push({k,v});tam+=v?v.length:8;if(lote.length>=120||tam>700000)break}
+    if(!lote.length)return;
+    await nubeLlamar({op:'push',items:lote});
+    const SM2=mapaSec();
+    lote.forEach(it=>{if(it.k.startsWith('bit|')){delete NUBE.st.out[it.k];return}if(it.v==null)delete NUBE.st.snap[it.k];else NUBE.st.snap[it.k]=h32(it.v);if(valorDe(it.k,SM2)===it.v)delete NUBE.st.out[it.k]});
+    nubeGuardarEstado();pintarNube();
+  }
+}
+function nubeAplicar(rows){
+  if(!rows.length)return 0;const yoId=YO&&YO.id;let n=0,SMx=null;
+  const up=(arr,id,v)=>{const i=arr.findIndex(o=>o.id===id);if(v){if(i<0)arr.push(v);else arr[i]=v}else if(i>=0)arr.splice(i,1)};
+  for(const row of rows){const k=row.k,p=k.split('|');let v=null;if(row.v){try{v=JSON.parse(row.v)}catch(e){continue}}
+    const pendiente=!!NUBE.st.out[k];
+    if(pendiente&&p[0]!=='asis'&&p[0]!=='lista')continue;
+    switch(p[0]){
+      case 'cfg':if(v)DB.config=Object.assign(configBase(),v);break;
+      case 'meta':if(v)DB.demo=!!v.demo;break;
+      case 'usr':up(DB.usuarios,p[1],v);break;
+      case 'sec':up(DB.secciones,p[1],v);break;
+      case 'est':up(DB.estudiantes,p[1],v);SMx=null;break;
+      case 'jus':up(DB.justificaciones,p[1],v);break;
+      case 'asis':{if(!v)break;const a=DB.asistencia[p[1]]||(DB.asistencia[p[1]]={});let mas=false;
+        for(const id in v){const L=a[id],R=v[id];if(!L||(+R.u||0)>(+L.u||0))a[id]=R}
+        const SMa=SMx||(SMx=mapaSec());for(const id in a){if((SMa[id]||'x')!==p[2])continue;const L=a[id];if(!v[id]||(+L.u||0)>(+v[id].u||0)){mas=true;break}}
+        const loc=valorDe(k);if(loc)NUBE.st.snap[k]=h32(loc);if(mas)NUBE.st.out[k]=1;n++;continue}
+      case 'lista':{if(!v)break;const L=DB.listas[p[1]]||(DB.listas[p[1]]={});let mas=false;
+        for(const s in v)if(!L[s]||(v[s].at||'')>(L[s].at||''))L[s]=v[s];
+        for(const s in L)if(!v[s]||(L[s].at||'')>(v[s].at||'')){mas=true;break}
+        const loc=valorDe(k);if(loc)NUBE.st.snap[k]=h32(loc);if(mas)NUBE.st.out[k]=1;n++;continue}
+      case 'bit':if(v&&!DB.bitacora.some(b=>b.at===v.at&&b.acc===v.acc))DB.bitacora.push(v);n++;continue;
+      default:continue}
+    if(row.v)NUBE.st.snap[k]=h32(row.v);else delete NUBE.st.snap[k];n++}
+  DB.bitacora.sort((a,b)=>b.at.localeCompare(a.at));DB.bitacora.length=Math.min(DB.bitacora.length,300);
+  if(DB.bitacora[0]&&DB.bitacora[0].at>NUBE.st.bitAt)NUBE.st.bitAt=DB.bitacora[0].at;
+  K.idx=null;_fechas=null;saveLocal();
+  if(YO){const u=DB.usuarios.find(x=>x.id===yoId);if(!u||!u.activo){salir();toast('Su usuario fue modificado o desactivado desde otro equipo.','err');return n}YO=u}
+  return n;
+}
+async function nubePull(){const r=await nubeLlamar({op:'pull',since:NUBE.st.since});const n=nubeAplicar(r.rows||[]);NUBE.st.since=r.now||NUBE.st.since;nubeGuardarEstado();return n}
+function nubeProgramar(ms){if(!nubeOn())return;clearTimeout(NUBE.timer);NUBE.timer=setTimeout(nubeCiclo,ms)}
+async function nubeCiclo(){
+  if(!nubeOn())return;if(NUBE.busy){nubeProgramar(1500);return}NUBE.busy=true;let n=0;
+  try{if(navigator.onLine===false)throw new Error('Sin conexión a internet.');await nubeFlush();n=await nubePull();NUBE.estado='ok';NUBE.err='';NUBE.ultimo=Date.now()}
+  catch(e){NUBE.estado='err';NUBE.err=e.message||'Error de sincronización'}
+  finally{NUBE.busy=false;pintarNube();if(n)nubeRefrescar();
+    nubeProgramar(NUBE.estado==='err'?20000:nubePend()?2000:document.hidden?60000:_vista==='entrada'?8000:12000)}}
+function nubeRefrescar(){
+  if(!YO)return;if(dlg.open||dlg2.open){NUBE.nuevo=true;pintarNube();return}
+  if(_vista==='entrada'){pintarPanel();return}
+  if(['inicio','reportes','justificaciones','secciones','identificacion'].includes(_vista)){render();return}
+  NUBE.nuevo=true;pintarNube();
+}
+function pintarNube(){const el=$('#nubeSlot');if(!el)return;if(!nubeOn()){el.innerHTML='';return}
+  const p=nubePend(),hace=NUBE.ultimo?Math.round((Date.now()-NUBE.ultimo)/1000):null;
+  const [cls,txt]=NUBE.estado==='err'?['err',`Sin sincronizar${p?' · '+p+' pendientes':''}`]:p?['sub',`Subiendo ${p} cambio${p===1?'':'s'}`]:NUBE.nuevo?['new','Hay datos nuevos · Actualizar']:['ok',hace==null?'Conectando…':`Sincronizado${hace<60?'':' hace '+Math.round(hace/60)+' min'}`];
+  el.innerHTML=`<button class="nube-chip ${cls}" data-act="nubeAhora" title="${esc(NUBE.err||'Google Drive: toque para sincronizar ahora')}">${ic('cloud',15)}<span>${txt}</span></button>`}
+async function nubeConectar(url,clave){
+  url=(url||'').trim();clave=(clave||'').trim();
+  if(!/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/.test(url))throw new Error('La URL debe ser la de la aplicación web de Apps Script (empieza con https://script.google.com/macros/s/ y termina en /exec).');
+  if(!clave)throw new Error('Escriba la clave de sincronización.');
+  const cfg={url,clave,activo:false};await nubeLlamar({op:'ping'},cfg);const r=await nubeLlamar({op:'pull',since:0},cfg);
+  if(r.rows.length){
+    if(!await confirmar('¿Descargar los datos de Google Drive?',`La nube del Liceo ya tiene ${r.rows.length} registros. Este equipo usará esa información y reemplazará los datos que tiene ahora.`,'Descargar y conectar'))return false;
+    NUBE.cfg=Object.assign(cfg,{activo:true});NUBE.st={since:0,snap:{},bitAt:'',out:{}};NUBE.sucias.clear();
+    const yo=YO;DB=dbVacia();YO=null;nubeAplicar(r.rows);NUBE.st.since=r.now;if(yo){YO=DB.usuarios.find(x=>x.id===yo.id&&x.activo)||null;if(!YO){try{sessionStorage.removeItem(SKEY)}catch(e){}}}
+  }else{
+    if(!await confirmar('La nube está vacía',`¿Subir los datos de este equipo a Google Drive para que los demás equipos los reciban?${DB.demo?' Son los datos de ejemplo.':''}`,'Subir datos'))return false;
+    NUBE.cfg=Object.assign(cfg,{activo:true});NUBE.st={since:r.now,snap:{},bitAt:'',out:{}};NUBE.sucias.add('*');
+  }
+  try{localStorage.setItem(NKEY,JSON.stringify(NUBE.cfg))}catch(e){}
+  nubeGuardarEstado();saveLocal();log('Conectó este equipo a Google Drive');if(!r.rows.length)nubeDiff();else save();
+  nubeProgramar(300);return true;
+}
+function nubeDesconectar(){clearTimeout(NUBE.timer);NUBE.cfg=null;NUBE.st={since:0,snap:{},bitAt:'',out:{}};NUBE.estado='off';try{localStorage.removeItem(NKEY);localStorage.removeItem(SNKEY)}catch(e){}pintarNube()}
+const codigoConexion=()=>btoa(unescape(encodeURIComponent(JSON.stringify({u:NUBE.cfg.url,c:NUBE.cfg.clave}))));
+function leerCodigo(txt){try{const o=JSON.parse(decodeURIComponent(escape(atob(txt.trim()))));return {url:o.u,clave:o.c}}catch(e){return null}}
+function dlgConectar(){
+  openDlg(`<div class="panel-h"><div class="head-t"><span class="eyebrow">Google Drive</span><h2>Conectar este equipo</h2></div><button class="icon-btn" data-act="cerrar" aria-label="Cerrar">${ic('x',20)}</button></div>
+   <p class="small muted">Pegue el <b>código de conexión</b> que aparece en el Panel de administrador del equipo principal. También puede escribir la URL y la clave por separado.</p>
+   <form id="fNube" class="form" style="grid-template-columns:1fr">
+    <div class="field"><label for="nCod">Código de conexión</label><textarea id="nCod" style="min-height:76px" placeholder="eyJ1Ijoi…"></textarea></div>
+    <details><summary class="small" style="cursor:pointer">Escribir URL y clave</summary><div class="form" style="grid-template-columns:1fr;margin-top:10px">
+     <div class="field"><label for="nUrl">URL de la aplicación web</label><input id="nUrl" placeholder="https://script.google.com/macros/s/…/exec" value="${esc(NUBE.cfg&&NUBE.cfg.url||'')}"></div>
+     <div class="field"><label for="nCla">Clave de sincronización</label><input id="nCla" type="password" autocomplete="off"></div></div></details>
+    <p class="err" id="nErr"></p>
+    <div class="dlg-actions"><button type="button" class="btn" data-act="cerrar">Cancelar</button><button class="btn btn-primary" id="nBtn">${ic('cloud',16)}Conectar</button></div></form>`);
+  $('#fNube').onsubmit=async ev=>{ev.preventDefault();const c=$('#nCod').value.trim(),d=c?leerCodigo(c):{url:$('#nUrl').value,clave:$('#nCla').value};
+    if(!d){$('#nErr').textContent='El código de conexión no es válido. Cópielo completo.';return}
+    const b=$('#nBtn');b.disabled=true;b.innerHTML='<span class="spin" style="width:16px;height:16px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin .7s linear infinite"></span>Conectando…';
+    try{const ok=await nubeConectar(d.url,d.clave);dlg.dataset.lock='';closeDlg();if(ok){if(YO){toast('Equipo conectado a Google Drive.');render()}else{cerrarCamara();_vista='';renderLogin();toast('Datos descargados de Google Drive. Inicie sesión con su usuario.')}}}
+    catch(e){$('#nErr').textContent=e.message;b.disabled=false;b.innerHTML=ic('cloud',16)+'Conectar'}};
+}
+function panelNube(){
+  if(!nubeOn())return `<section class="panel"><div class="panel-h"><div class="head-t"><h2>Sincronización con Google Drive</h2><span class="small muted">Todos los equipos (Dirección, docentes, portón) comparten la misma información y se actualizan solos.</span></div><span class="chip">Desconectado</span></div>
+   <div class="list small">${[['1','Cree una hoja de cálculo nueva en el Google Drive del Liceo y llámela <b>Libro de Asistencia – Datos</b>.'],['2','En la hoja: <b>Extensiones → Apps Script</b>. Borre lo que aparece y pegue el archivo <b>Codigo.gs</b> (viene en la carpeta google-drive). Cambie <b>CLAVE</b> por una frase secreta.'],['3','<b>Implementar → Nueva implementación → Aplicación web</b>. Ejecutar como: <b>Yo</b>. Acceso: <b>Cualquier usuario</b>. Autorice con la cuenta del Liceo y copie la URL que termina en <b>/exec</b>.'],['4','Toque <b>Conectar este equipo</b>, pegue la URL y la clave. Luego conecte los demás equipos con el código de conexión.']].map(x=>`<div class="list-r" style="justify-content:flex-start;gap:12px"><span class="chip chip-acc nodot mono">${x[0]}</span><div>${x[1]}</div></div>`).join('')}</div>
+   <div class="row"><button class="btn btn-primary" data-act="nubeConectar">${ic('cloud',16)}Conectar este equipo</button></div></section>`;
+  const p=nubePend();
+  return `<section class="panel"><div class="panel-h"><div class="head-t"><h2>Sincronización con Google Drive</h2><span class="small muted">${NUBE.estado==='err'?esc(NUBE.err):NUBE.ultimo?`Última sincronización: ${new Date(NUBE.ultimo).toLocaleTimeString('es-SV')}`:'Conectando…'}${p?` · ${p} cambios por subir`:''}</span></div><span class="chip ${NUBE.estado==='err'?'chip-crit':'chip-ok'}">${NUBE.estado==='err'?'Con problemas':'Conectado'}</span></div>
+   <div class="field"><label for="nCodigo">Código de conexión para los demás equipos</label><div class="row" style="flex-wrap:nowrap"><input id="nCodigo" readonly value="${esc(codigoConexion())}" style="flex:1;font-family:var(--f-mono);font-size:.8rem"><button class="btn" data-act="nubeCopiar">Copiar</button></div><span class="hint">En cada equipo nuevo: pantalla de acceso → <b>Conectar a Google Drive</b> → pegue este código. Guárdelo como una contraseña.</span></div>
+   <div class="row"><button class="btn btn-primary" data-act="nubeAhora">${ic('cloud',16)}Sincronizar ahora</button><button class="btn" data-act="nubeSubirTodo">Volver a subir todo</button><button class="btn btn-ghost" data-act="nubeDesc" style="color:var(--a)">Desconectar este equipo</button></div></section>`;
+}
+['online','focus'].forEach(t=>addEventListener(t,()=>nubeProgramar(400)));
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')nubeProgramar(300)});
+
 /* ---------- Control de entrada (alto volumen) ---------- */
 const K={tVisto:{},tDesc:0,feed:[],idx:null,lect:[],saveT:0,tab:'ult',q:''};
 const normNie=x=>String(x||'').replace(/\D/g,'').replace(/^0+/,'');
 function idx(){const n=DB.estudiantes.length;if(K.idx&&K.idx.n===n&&K.idx.db===DB)return K.idx;
-  const qr=new Map(),nie=new Map(),rel=new Map();
-  for(const e of DB.estudiantes){if(e.qr){qr.set(e.qr,e);qr.set(e.qr.slice(0,6),e)}if(e.nie)nie.set(normNie(e.nie),e);if(e.reloj)rel.set(normNie(e.reloj),e)}
-  return K.idx={qr,nie,rel,n,db:DB}}
-const qrPayload=e=>`LSM:${normNie(e.nie)||'0'}:${e.qr.slice(0,6)}`;
+  const qr=new Map(),nie=new Map(),rel=new Map(),car=new Map();
+  for(const e of DB.estudiantes){if(e.qr){qr.set(e.qr,e);qr.set(e.qr.slice(0,6),e)}if(e.nie)nie.set(normNie(e.nie),e);if(e.reloj)rel.set(normNie(e.reloj),e);if(e.carnet)car.set(String(e.carnet).toUpperCase().replace(/[^A-Z0-9]/g,''),e)}
+  return K.idx={qr,nie,rel,car,n,db:DB}}
+// Código del carnet: solo letras y números (no se altera con teclados en español): LSM + NIE + K + verificación
+const idTxt=e=>e.carnet?'Carnet '+esc(e.carnet):'NIE '+esc(e.nie||'—');
+const codEst=e=>e.carnet?String(e.carnet).toUpperCase().replace(/[^A-Z0-9]/g,''):(normNie(e.nie)||'0');
+const qrPayload=e=>`LSM${codEst(e)}K${e.qr.slice(0,6)}`;
 function buscarCodigo(code,origen){
-  code=String(code||'').trim().toUpperCase().replace(/\s+/g,'');if(!code)return null;const I=idx();
-  let m=code.match(/^LSM:(\d+):([A-Z0-9]{6})$/);
-  if(m){const e=I.qr.get(m[2]);if(e&&(m[1]==='0'||normNie(e.nie)===m[1]))return {e,via:'qr'};return {e:null,via:'qr',err:e?'El NIE impreso no coincide con el registro del estudiante.':'Carnet anulado o de otra institución. Imprima uno nuevo.'}}
-  m=code.match(/^LA1-([A-Z0-9]{10})$/);if(m){const e=I.qr.get(m[1]);return e?{e,via:'qr'}:{e:null,via:'qr',err:'Carnet anulado. Imprima uno nuevo.'}}
-  const dig=code.replace(/\D/g,'');
-  if(dig.length>=4&&dig.length===code.length){const e=I.nie.get(normNie(dig))||I.rel.get(normNie(dig));
-    if(!e)return {e:null,via:origen==='teclado'?'manual':'qr',err:`El NIE ${dig} no está matriculado.`};
+  const raw=String(code||'').trim();if(!raw)return null;const I=idx(),estricto=DB.config.qrValidar==='estricto';
+  const c=raw.toUpperCase().replace(/[^A-Z0-9]/g,'');if(!c)return {e:null,via:'qr',err:'No se pudo leer el contenido del código.'};
+  if(I.car.has(c)){const e=I.car.get(c);if(origen!=='teclado'&&!DB.config.qrSoloNie)return {e:null,via:'qr',err:'El código solo trae el carnet. Actívelo en Configuración.'};return {e,via:origen==='teclado'?'manual':'qr'}}
+  if(c.startsWith('LSM')&&c.length>=10){
+    const tok=c.slice(-6),idQR=c.slice(3,-6).replace(/K$/,''),nieQR=/^\d+$/.test(idQR)?normNie(idQR):'';const e=I.qr.get(tok);
+    const coincide=x=>!idQR||idQR==='0'||(nieQR&&normNie(x.nie)===nieQR)||codEst(x)===idQR;
+    if(e&&coincide(e))return {e,via:'qr'};
+    const pn=(idQR&&idQR!=='0')?(I.car.get(idQR)||(nieQR?I.nie.get(nieQR):null)):null;
+    if(pn&&!estricto)return {e:pn,via:'qr'};
+    if(pn)return {e:null,via:'qr',err:`Carnet ${idQR} anulado o impreso en otro equipo. Imprima uno nuevo desde este equipo.`};
+    return {e:null,via:'qr',err:idQR&&idQR!=='0'?`El carnet o NIE ${idQR} no está matriculado en este equipo.`:'Carnet no registrado en este equipo.'};
+  }
+  if(c.startsWith('LA1')&&c.length===13){const e=I.qr.get(c.slice(3));return e?{e,via:'qr'}:{e:null,via:'qr',err:'Carnet de formato anterior impreso en otro equipo o anulado. Imprima uno nuevo.'}}
+  if(/^\d{4,}$/.test(c)){const e=I.nie.get(normNie(c))||I.rel.get(normNie(c));
+    if(!e)return {e:null,via:origen==='teclado'?'manual':'qr',err:`El NIE ${c} no está matriculado en este equipo.`};
     if(origen!=='teclado'&&!DB.config.qrSoloNie)return {e:null,via:'qr',err:'El código solo trae el NIE. Use el carnet del sistema o actívelo en Configuración.'};
     return {e,via:origen==='teclado'?'manual':'qr'}}
   return {e:null,via:'qr',err:'El código leído no es un carnet de la institución.'};
@@ -917,9 +1117,10 @@ function registrarEntrada(e,via,f=hoy(),hhmm=null){
   const s=sec(e.seccionId),ahora=hhmm||horaAhora();DB.asistencia[f]=DB.asistencia[f]||{};const r=DB.asistencia[f][e.id];
   if(r&&r.in&&r.e!=='A')return {t:'ya',msg:`Ya ingresó a las ${r.in}`,e,r};
   const lim=sumarMin(DB.config.entrada[s.turno]||'07:00',+DB.config.tolerancia||0);
-  if(r&&r.e!=='A'&&!r.in){r.in=ahora;r.via=via;return {t:'ya',msg:`Lista ya tomada como ${ESTADOS[r.e].toLowerCase()}`,e,r,guardar:true}}
+  tocar(f);
+  if(r&&r.e!=='A'&&!r.in){r.in=ahora;r.via=via;r.u=Date.now();return {t:'ya',msg:`Lista ya tomada como ${ESTADOS[r.e].toLowerCase()}`,e,r,guardar:true}}
   const v=ahora<=lim?'P':'T';
-  DB.asistencia[f][e.id]={e:v,h:v==='T'?ahora:'',o:r&&r.o||'',in:ahora,via};
+  DB.asistencia[f][e.id]={e:v,h:v==='T'?ahora:'',o:r&&r.o||'',in:ahora,via,u:Date.now()};
   return {t:v,msg:v==='P'?'Ingresado a tiempo':'Ingresado con tardanza',sub:v==='T'?`Límite ${lim}`:`Entrada ${DB.config.entrada[s.turno]}`,e,h:ahora,guardar:true};
 }
 function guardarPronto(){clearTimeout(K.saveT);K.saveT=setTimeout(()=>{K.saveT=0;save()},1200)}
@@ -933,6 +1134,8 @@ function procesar(b,codigo){
   K.lect.push(now);K.lect=K.lect.filter(t=>now-t<60000);
   K.feed.unshift({t:r.t,e,msg:r.msg,sub:r.sub,h:horaAhora(),via:b.via,code:codigo,n:1});K.feed.length=Math.min(K.feed.length,60);
   mostrarResultado(r,b.via);anunciar(r);
+  K.errSeg=r.t==='err'?(K.errSeg||0)+1:0;
+  if(K.errSeg===3&&!K.avisoErr){K.avisoErr=true;toast('Varias lecturas rechazadas. Si los carnets se imprimieron en otro equipo, restaure aquí el respaldo de ese equipo o vuelva a imprimirlos desde este.','err')}
 }
 /* Sonido, voz y vibración */
 function tono(seq){audioOn();const ctx=_beep;if(!ctx)return;const t0=ctx.currentTime+.01;
@@ -954,10 +1157,10 @@ const iconoT=t=>t==='P'||t==='T'?ic('check',18,2.6):t==='ya'?ic('clock',16,2.2):
 function mostrarResultado(r,via){
   const el=$('#kRes');if(!el)return;const s=r.e&&sec(r.e.seccionId),cls=r.t;
   el.className='result pop r-'+cls;void el.offsetWidth;
-  el.innerHTML=r.e?`${avatar(r.e)}<div style="min-width:0;flex:1"><div class="result-s">${esc(r.msg)}${r.h?` · ${r.h}`:''}</div><div class="result-nie">NIE ${esc(r.e.nie||'—')}</div><div class="result-n">${esc(r.e.nombres)} ${esc(r.e.apellidos)}</div><div class="small muted">${esc(secNombre(s))} · ${esc(s?s.turno:'')}${r.sub?' · '+esc(r.sub):''} · ${VIAS[via]}</div></div>`
+  el.innerHTML=r.e?`${avatar(r.e)}<div style="min-width:0;flex:1"><div class="result-s">${esc(r.msg)}${r.h?` · ${r.h}`:''}</div><div class="result-nie">${idTxt(r.e)}</div><div class="result-n">${esc(r.e.nombres)} ${esc(r.e.apellidos)}</div><div class="small muted">${esc(secNombre(s))} · ${esc(s?s.turno:'')}${r.sub?' · '+esc(r.sub):''} · ${VIAS[via]}</div></div>`
     :`<span class="av" style="background:var(--a);color:#fff">${ic('x',26,2.4)}</span><div style="min-width:0"><div class="result-s">${esc(r.msg)}</div>${r.code?`<div class="result-nie" style="font-size:1.05rem;word-break:break-all">${esc(String(r.code).slice(0,40))}</div>`:''}<div class="small muted">${esc(r.sub||'')}</div></div>`;
   const fl=$('#kFlash');if(fl){fl.style.background=r.t==='P'?'#2FB36B':r.t==='T'?'#E3A33A':r.t==='err'?'#E2574E':'#6F8FEA';fl.classList.remove('on');void fl.offsetWidth;fl.classList.add('on')}
-  const hit=$('#kHit');if(hit){hit.className='stage-hit '+cls;hit.innerHTML=`<span class="hi">${iconoT(cls)}</span><span>${r.e?`<span class="mono">NIE ${esc(r.e.nie||'—')}</span> · ${esc(r.e.nombres.split(' ')[0])} ${esc(r.e.apellidos.split(' ')[0])}`:esc(r.msg)}</span><span class="mono" style="opacity:.75">${esc(r.t==='ya'?(r.r&&r.r.in)||'':r.h||'')}</span>`;void hit.offsetWidth;hit.classList.add('on')}
+  const hit=$('#kHit');if(hit){hit.className='stage-hit '+cls;hit.innerHTML=`<span class="hi">${iconoT(cls)}</span><span>${r.e?`<span class="mono">${idTxt(r.e)}</span> · ${esc(r.e.nombres.split(' ')[0])} ${esc(r.e.apellidos.split(' ')[0])}`:esc(r.msg)}</span><span class="mono" style="opacity:.75">${esc(r.t==='ya'?(r.r&&r.r.in)||'':r.h||'')}</span>`;void hit.offsetWidth;hit.classList.add('on')}
   pintarPanel();
 }
 function datosHoy(){const h=hoy(),a=DB.asistencia[h]||{},tu=UI.k.turno||'';
@@ -973,12 +1176,12 @@ function pintarPanel(){
    <div class="kstats"><div class="kstat"><b style="color:var(--p)">${d.ing-d.t}</b><span>A tiempo</span></div><div class="kstat"><b style="color:var(--t)">${d.t}</b><span>Tarde</span></div><div class="kstat"><b>${d.falt.length}</b><span>Faltan</span></div><div class="kstat"><b style="color:var(--accent)">${rpm}</b><span>Por minuto</span></div></div>`;
   const tabs=$('#kTabs');if(tabs)tabs.querySelectorAll('button').forEach(b=>b.setAttribute('aria-selected',b.dataset.v===K.tab));
   const box=$('#kList');if(!box)return;
-  if(K.tab==='ult'){box.innerHTML=K.feed.length?K.feed.slice(0,25).map((f,i)=>`<div class="feed-r ${i===0?'new':''}"><span class="feed-i ${f.t}">${iconoT(f.t)}</span><div style="min-width:0">${f.e?`<div style="font-weight:600;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(f.e.nombres)} ${esc(f.e.apellidos)}</div><div class="small muted"><span class="mono">NIE ${esc(f.e.nie||'—')}</span> · ${esc(secNombre(sec(f.e.seccionId)))}</div>`:`<div style="font-weight:600;font-size:.9rem">${esc(f.msg)}</div><div class="small muted" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(f.sub||f.code||'')}</div>`}</div>
+  if(K.tab==='ult'){box.innerHTML=K.feed.length?K.feed.slice(0,25).map((f,i)=>`<div class="feed-r ${i===0?'new':''}"><span class="feed-i ${f.t}">${iconoT(f.t)}</span><div style="min-width:0">${f.e?`<div style="font-weight:600;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(f.e.nombres)} ${esc(f.e.apellidos)}</div><div class="small muted"><span class="mono">${idTxt(f.e)}</span> · ${esc(secNombre(sec(f.e.seccionId)))}</div>`:`<div style="font-weight:600;font-size:.9rem">${esc(f.msg)}</div><div class="small muted" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(f.sub||f.code||'')}</div>`}</div>
       <div style="text-align:right"><div class="mono small" style="font-weight:600">${esc(f.h)}</div><div class="via" style="justify-content:flex-end">${f.t==='ya'?'Repetido':f.t==='err'?'Rechazado':f.t==='T'?'Tardanza':'Presente'}</div></div></div>`).join('')
     :`<div class="empty small">${ic('door',32,1.5)}Las lecturas aparecerán aquí al instante.</div>`}
   else if(K.tab==='sec'){box.innerHTML=d.porSec.map(p=>`<div class="sec-r"><div style="min-width:0"><b style="font-size:.9rem">${esc(secNombre(p.s))}</b> <span class="small muted">${esc(p.s.turno)}</span></div><span class="mono small"><b>${p.ing}</b>/${p.tot}${p.t?` · <span style="color:var(--t)">${p.t} T</span>`:''}</span><div class="progress"><i style="width:${p.tot?(p.ing-p.t)/p.tot*100:0}%;background:var(--p)"></i><i style="width:${p.tot?p.t/p.tot*100:0}%;background:var(--t)"></i></div></div>`).join('')||'<div class="empty small">No hay secciones.</div>'}
-  else{const q=K.q.toLowerCase();const fl=d.falt.filter(e=>!q||(e.nombres+' '+e.apellidos+' '+e.nie).toLowerCase().includes(q)).sort((a,b)=>gIdx(sec(a.seccionId).grado)-gIdx(sec(b.seccionId).grado)||porNombre(a,b));
-    box.innerHTML=`<div class="search" style="margin-bottom:6px">${ic('search',16)}<input id="kQ" type="search" placeholder="Buscar por nombre o NIE" value="${esc(K.q)}" aria-label="Buscar estudiante sin ingreso"></div>`+(fl.length?fl.slice(0,80).map(e=>`<div class="feed-r"><span class="feed-i" style="background:var(--sunk);color:var(--muted)">${ic('clock',14)}</span><div style="min-width:0"><div style="font-weight:600;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(nombreEst(e))}</div><div class="small muted"><span class="mono">NIE ${esc(e.nie||'—')}</span> · ${esc(secNombre(sec(e.seccionId)))}</div></div><button class="btn btn-sm" data-act="kManual" data-id="${e.id}">Marcar ingreso</button></div>`).join('')+(fl.length>80?`<p class="small muted" style="padding-top:8px">Mostrando 80 de ${fl.length}. Use la búsqueda.</p>`:'')
+  else{const q=K.q.toLowerCase();const fl=d.falt.filter(e=>!q||(e.nombres+' '+e.apellidos+' '+e.nie+' '+(e.carnet||'')).toLowerCase().includes(q)).sort((a,b)=>gIdx(sec(a.seccionId).grado)-gIdx(sec(b.seccionId).grado)||porNombre(a,b));
+    box.innerHTML=`<div class="search" style="margin-bottom:6px">${ic('search',16)}<input id="kQ" type="search" placeholder="Buscar por nombre o NIE" value="${esc(K.q)}" aria-label="Buscar estudiante sin ingreso"></div>`+(fl.length?fl.slice(0,80).map(e=>`<div class="feed-r"><span class="feed-i" style="background:var(--sunk);color:var(--muted)">${ic('clock',14)}</span><div style="min-width:0"><div style="font-weight:600;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(nombreEst(e))}</div><div class="small muted"><span class="mono">${idTxt(e)}</span> · ${esc(secNombre(sec(e.seccionId)))}</div></div><button class="btn btn-sm" data-act="kManual" data-id="${e.id}">Marcar ingreso</button></div>`).join('')+(fl.length>80?`<p class="small muted" style="padding-top:8px">Mostrando 80 de ${fl.length}. Use la búsqueda.</p>`:'')
       :`<div class="empty small">${ic('check',30,1.5)}${q?'Sin coincidencias.':'Todos ingresaron.'}</div>`);
     const kq=$('#kQ');if(kq){kq.oninput=ev=>{K.q=ev.target.value;clearTimeout(K.qt);K.qt=setTimeout(()=>{pintarPanel();const n=$('#kQ');n.focus();n.setSelectionRange(n.value.length,n.value.length)},250)}}}
 }
@@ -1025,8 +1228,8 @@ VIEWS.entrada=()=>{
 /* Pistola lectora global (USB/Bluetooth = teclado muy rápido terminado en Enter) */
 let _wb='',_wt=0;
 document.addEventListener('keydown',e=>{if(_vista!=='entrada'||!YO||dlg.open||dlg2.open)return;const t=e.target;if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.tagName==='SELECT'))return;
-  const now=performance.now();if(now-_wt>60)_wb='';_wt=now;
-  if(e.key==='Enter'){if(_wb.length>=4){e.preventDefault();const c=_wb;_wb='';procesar(buscarCodigo(c,'lector'),c)}_wb='';return}
+  const now=performance.now();if(now-_wt>110)_wb='';_wt=now;
+  if(e.key==='Enter'||e.key==='Tab'){if(_wb.length>=4){e.preventDefault();const c=_wb;_wb='';procesar(buscarCodigo(c,'lector'),c)}_wb='';return}
   if(e.key.length===1&&!e.ctrlKey&&!e.metaKey&&!e.altKey)_wb+=e.key});
 async function kIniciar(){
   const m=UI.k.modo,v=$('#kVideo'),idle=$('#kIdle'),msg=t=>{const e=$('#kMsg');if(e)e.textContent=t};
@@ -1125,23 +1328,25 @@ VIEWS.estudiantes=()=>{
   let ests=estudiantesVisibles();
   if(f.sec)ests=ests.filter(e=>e.seccionId===f.sec);
   if(f.estado)ests=ests.filter(e=>e.estado===f.estado);
-  if(f.q){const q=f.q.toLowerCase();ests=ests.filter(e=>(e.nombres+' '+e.apellidos+' '+e.nie).toLowerCase().includes(q))}
+  if(f.q){const q=f.q.toLowerCase();ests=ests.filter(e=>(e.nombres+' '+e.apellidos+' '+e.nie+' '+(e.carnet||'')).toLowerCase().includes(q))}
   ests.sort((a,b)=>gIdx(sec(a.seccionId).grado)-gIdx(sec(b.seccionId).grado)||sec(a.seccionId).seccion.localeCompare(sec(b.seccionId).seccion)||porNombre(a,b));
-  main(`${cabecera('Matrícula','Estudiantes',`<button class="btn" data-act="imprimir">${ic('print',17)}Imprimir nómina</button>`+(edit?`<button class="btn" data-act="importar">${ic('up',17)}Importar lista</button><button class="btn btn-primary" data-act="nuevoEst">${ic('plus',17)}Nuevo estudiante</button>`:''))}
+  main(`${cabecera('Matrícula','Estudiantes',`<button class="btn" data-act="imprimir">${ic('print',17)}Imprimir nómina</button>`+(edit?`<button class="btn" data-act="importar">${ic('up',17)}Importar desde Excel</button><button class="btn btn-primary" data-act="nuevoEst">${ic('plus',17)}Nuevo estudiante</button>`:''))}
   ${printHead('Nómina de estudiantes',`${f.sec?esc(secNombre(sec(f.sec))):'Todas las secciones'} · ${f.estado==='activo'?'Activos':f.estado==='retirado'?'Retirados':'Todos'} · ${ests.length} estudiantes (${ests.filter(e=>e.sexo==='M').length} M, ${ests.filter(e=>e.sexo==='F').length} F)`)}
   <div class="toolbar">
    <div class="field" style="flex:1;min-width:220px"><label for="eQ">Buscar</label><div class="search">${ic('search',16)}<input id="eQ" type="search" placeholder="Nombre, apellido o NIE" value="${esc(f.q)}"></div></div>
    <div class="field"><label for="eSec">Sección</label><select id="eSec">${optSecs(secs,f.sec,'Todas las secciones')}</select></div>
    <div class="field"><label for="eEst">Estado</label><select id="eEst"><option value="activo" ${f.estado==='activo'?'selected':''}>Activos</option><option value="retirado" ${f.estado==='retirado'?'selected':''}>Retirados</option><option value="" ${!f.estado?'selected':''}>Todos</option></select></div>
   </div>
-  ${ests.length?`<div class="tbl-wrap"><table><thead><tr><th class="n">N.°</th><th>Estudiante</th><th>NIE</th><th class="c">Sexo</th><th>Sección</th><th>Responsable</th><th class="c np">Identificación</th><th>Asistencia del año</th><th class="np"></th></tr></thead><tbody>
+  ${ests.length?`<div class="tbl-wrap"><table><thead><tr><th class="n">N.°</th><th>Estudiante</th><th>Carnet / NIE</th><th class="c">Sexo</th><th>Sección</th><th>Responsable</th><th class="c np">Identificación</th><th>Asistencia del año</th><th class="np"></th></tr></thead><tbody>
    ${ests.map((e,i)=>{const s=stats(e.id,DB.config.inicio,h);return `<tr><td class="n muted">${i+1}</td>
     <td><div class="who">${avatar(e)}<div><button class="linkbtn" data-act="ficha" data-id="${e.id}">${esc(nombreEst(e))}</button>${e.estado==='retirado'?' <span class="chip">Retirado</span>':''}</div></div></td>
-    <td class="mono small">${esc(e.nie||'—')}</td><td class="c">${e.sexo}</td><td class="small">${esc(secNombre(sec(e.seccionId)))}</td><td class="small">${esc(e.encargado)}<div class="mono muted">${esc(e.telefono)}</div></td>
+    <td class="mono small">${e.carnet?esc(e.carnet)+(e.nie?'<div class="muted">NIE '+esc(e.nie)+'</div>':''):esc(e.nie||'—')}</td><td class="c">${e.sexo||'<span class="muted">—</span>'}</td><td class="small">${esc(secNombre(sec(e.seccionId)))}</td><td class="small">${esc(e.encargado)}<div class="mono muted">${esc(e.telefono)}</div></td>
     <td class="c np"><span class="row" style="justify-content:center;gap:6px;color:var(--muted)"><span title="${e.qr?'Carnet QR generado':'Sin carnet QR'}" style="opacity:${e.qr?1:.3}">${ic('qr',16)}</span><span title="${e.rostro?'Rostro registrado':'Sin rostro'}" style="opacity:${e.rostro?1:.3}">${ic('face',16)}</span></span></td>
     <td>${pctBar(s.pct)}</td><td class="np">${edit?`<button class="btn btn-sm btn-ghost" data-act="editEst" data-id="${e.id}">Editar</button>`:''}</td></tr>`}).join('')}
   </tbody></table></div><p class="small muted">${ests.length} estudiante${ests.length===1?'':'s'} · ${ests.filter(e=>e.sexo==='M').length} M · ${ests.filter(e=>e.sexo==='F').length} F</p>`
-  :`<div class="panel"><div class="empty">${ic('users',36,1.5)}<b>No hay estudiantes con esos filtros</b>${edit&&!DB.secciones.length?'<span class="small">Primero cree una sección en Grados y secciones.</span>':''}</div></div>`}`);
+  :!DB.estudiantes.length&&edit?`<div class="panel"><div class="empty" style="padding:44px 16px">${ic('users',44,1.4)}<b style="font-size:1.1rem">Aún no hay estudiantes matriculados</b><span class="small" style="max-width:52ch">Importe el listado completo desde Excel: el sistema crea las secciones y ubica a cada estudiante en su grado.</span>
+    <div class="row" style="justify-content:center;margin-top:8px"><button class="btn btn-primary btn-lg" data-act="importar">${ic('up',18)}Importar desde Excel</button><button class="btn" data-act="plantillaExcel">${ic('dl',16)}Descargar plantilla</button></div></div></div>`
+  :`<div class="panel"><div class="empty">${ic('users',36,1.5)}<b>No hay estudiantes con esos filtros</b></div></div>`}`);
   let tq;$('#eQ').oninput=e=>{clearTimeout(tq);tq=setTimeout(()=>{f.q=e.target.value;VIEWS.estudiantes();const q=$('#eQ');q.focus();q.setSelectionRange(q.value.length,q.value.length)},250)};
   $('#eSec').onchange=e=>{f.sec=e.target.value;VIEWS.estudiantes()};
   $('#eEst').onchange=e=>{f.estado=e.target.value;VIEWS.estudiantes()};
@@ -1150,11 +1355,12 @@ function formEst(e){
   const nuevo=!e;e=e||{nie:'',apellidos:'',nombres:'',sexo:'F',seccionId:UI.est.sec||'',encargado:'',telefono:'',estado:'activo',reloj:''};
   openDlg(`<h2>${nuevo?'Nuevo estudiante':'Editar estudiante'}</h2>
   <form id="fEst" class="form">
+   <div class="field"><label for="fCar">Carnet</label><input id="fCar" value="${esc(e.carnet||'')}" placeholder="Código de carnet del Liceo" autocapitalize="characters"></div>
    <div class="field"><label for="fNie">NIE</label><input id="fNie" value="${esc(e.nie)}" inputmode="numeric" placeholder="Número de Identificación del Estudiante"></div>
    <div class="field"><label for="fSec">Sección</label><select id="fSec" required>${optSecs(ordenSecs(DB.secciones),e.seccionId,'Seleccione…')}</select></div>
    <div class="field"><label for="fApe">Apellidos</label><input id="fApe" value="${esc(e.apellidos)}" required></div>
    <div class="field"><label for="fNom">Nombres</label><input id="fNom" value="${esc(e.nombres)}" required></div>
-   <div class="field"><label for="fSexo">Sexo</label><select id="fSexo"><option value="F" ${e.sexo==='F'?'selected':''}>Femenino</option><option value="M" ${e.sexo==='M'?'selected':''}>Masculino</option></select></div>
+   <div class="field"><label for="fSexo">Sexo</label><select id="fSexo"><option value="" ${!e.sexo?'selected':''}>Sin dato</option><option value="F" ${e.sexo==='F'?'selected':''}>Femenino</option><option value="M" ${e.sexo==='M'?'selected':''}>Masculino</option></select></div>
    <div class="field"><label for="fEstado">Estado</label><select id="fEstado"><option value="activo" ${e.estado==='activo'?'selected':''}>Activo</option><option value="retirado" ${e.estado==='retirado'?'selected':''}>Retirado</option></select></div>
    <div class="field"><label for="fEnc">Madre, padre o responsable</label><input id="fEnc" value="${esc(e.encargado)}"></div>
    <div class="field"><label for="fTel">Teléfono del responsable</label><input id="fTel" value="${esc(e.telefono)}" inputmode="tel" placeholder="7000-0000"></div>
@@ -1164,12 +1370,13 @@ function formEst(e){
    <div class="dlg-actions full">${!nuevo&&esDir()?`<button type="button" class="btn btn-ghost" data-act="borrarEst" data-id="${e.id}" style="margin-right:auto;color:var(--a)">Eliminar</button>`:''}<button type="button" class="btn" data-act="cerrar">Cancelar</button><button class="btn btn-primary">${nuevo?'Agregar':'Guardar'}</button></div>
   </form>`);
   $('#fEst').onsubmit=ev=>{ev.preventDefault();
-    const d={nie:$('#fNie').value.trim(),seccionId:$('#fSec').value,apellidos:$('#fApe').value.trim(),nombres:$('#fNom').value.trim(),sexo:$('#fSexo').value,estado:$('#fEstado').value,encargado:$('#fEnc').value.trim(),telefono:$('#fTel').value.trim(),reloj:$('#fRel').value.trim()};
+    const d={carnet:$('#fCar').value.trim().toUpperCase().replace(/\s+/g,''),nie:$('#fNie').value.trim(),seccionId:$('#fSec').value,apellidos:$('#fApe').value.trim(),nombres:$('#fNom').value.trim(),sexo:$('#fSexo').value,estado:$('#fEstado').value,encargado:$('#fEnc').value.trim(),telefono:$('#fTel').value.trim(),reloj:$('#fRel').value.trim()};
     if(!d.seccionId){$('#fErr').textContent='Seleccione la sección del estudiante.';return}
     if(d.nie&&DB.estudiantes.some(x=>x.nie===d.nie&&x.id!==(e.id||''))){$('#fErr').textContent='Ya existe un estudiante con ese NIE.';return}
+    if(d.carnet&&DB.estudiantes.some(x=>x.carnet===d.carnet&&x.id!==(e.id||''))){$('#fErr').textContent='Ya existe un estudiante con ese carnet.';return}
     if(nuevo){DB.estudiantes.push({id:uid(),...d,qr:token(),ingreso:hoy()});log(`Agregó a ${d.apellidos}, ${d.nombres}`)}
     else{Object.assign(DB.estudiantes.find(x=>x.id===e.id),d);log(`Editó a ${d.apellidos}, ${d.nombres}`)}
-    save();closeDlg();toast(nuevo?'Estudiante agregado.':'Cambios guardados.');render();
+    K.idx=null;save();closeDlg();toast(nuevo?'Estudiante agregado.':'Cambios guardados.');render();
   };
 }
 function fichaEst(id){
@@ -1186,13 +1393,152 @@ function fichaEst(id){
   ${jus.length?`<h3>Justificaciones</h3><div class="list">${jus.map(j=>`<div class="list-r"><div class="small"><b>${esc(j.tipo)}</b> · ${fCorta(j.desde)}${j.hasta!==j.desde?' al '+fCorta(j.hasta):''}<div class="muted">${esc(j.detalle)}</div></div>${chipJus(j.estado)}</div>`).join('')}</div>`:''}
   <p class="print-only print-note">Se extiende la presente constancia a solicitud de la parte interesada. Asistencia = (presentes + tardanzas) ÷ días registrados.</p>${printSign(['Dirección',DB.config.institucion])}`);
 }
+/* ---------- Importación masiva (Excel, CSV o pegado) ---------- */
+const sinAc=s=>String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().trim();
+const ORD={primer:1,primero:1,'1':1,segundo:2,'2':2,tercer:3,tercero:3,'3':3,cuarto:4,'4':4,quinto:5,'5':5,sexto:6,'6':6,septimo:7,'7':7,octavo:8,'8':8,noveno:9,'9':9};
+function mapGrado(g,nivel){
+  const s=sinAc(g).replace(/[°º.]/g,' ').replace(/\s+/g,' ').trim(),n=sinAc(nivel);
+  if(!s)return null;
+  if(GRADOS.some(x=>sinAc(x[0])===s))return GRADOS.find(x=>sinAc(x[0])===s)[0];
+  if(/inicial|maternal/.test(s))return 'Inicial';
+  let m=s.match(/(kinder|k|parvularia|pre ?kinder)\s*(\d)/);if(m)return 'Parvularia '+m[2];
+  if(/preparatoria|prepa/.test(s))return 'Parvularia 6';
+  const w=s.split(' ')[0].replace(/(er|ro|do|to|vo|no|mo)$/,'');const num=ORD[s.split(' ')[0]]||ORD[w]||ORD[(s.match(/^\d/)||[''])[0]];
+  if(!num)return null;
+  if(/ano|bachiller/.test(s)||/bachiller|media/.test(n))return num<=3?['1.er año de bachillerato','2.° año de bachillerato','3.er año de bachillerato'][num-1]:null;
+  return ['1.er grado','2.° grado','3.er grado','4.° grado','5.° grado','6.° grado','7.° grado','8.° grado','9.° grado'][num-1];
+}
+const mapTurno=t=>/vesp|tarde/i.test(t||'')?'Vespertino':'Matutino';
+const CAMPOS={carnet:/^(carnet|carne|codigo|cod|matricula)$/,nie:/^nie$/,apellidos:/^apellidos?$/,nombres:/^nombres?$/,sexo:/^(sexo|genero)$/,grado:/^grado$/,seccion:/^(seccion|secc|sec)$/,nivel:/^nivel$/,turno:/^(jornada|turno)$/,encargado:/^(responsable|encargado|padre|madre|tutor)$/,telefono:/^(telefono|tel|celular)$/};
+const CAMPOS_UI=[['carnet','Carnet'],['nie','NIE'],['apellidos','Apellidos *'],['nombres','Nombres *'],['sexo','Sexo'],['nivel','Nivel'],['grado','Grado'],['seccion','Sección'],['turno','Jornada'],['encargado','Responsable'],['telefono','Teléfono']];
+function detectarCols(filas){
+  for(let i=0;i<Math.min(filas.length,30);i++){const c={};(filas[i]||[]).forEach((v,j)=>{const t=sinAc(v).replace(/[^a-z ]/g,'').trim();for(const k in CAMPOS)if(CAMPOS[k].test(t)&&c[k]==null)c[k]=j});
+    if(c.apellidos!=null&&c.nombres!=null)return {h:i,col:c,heads:(filas[i]||[]).map(x=>String(x||'').trim())}}
+  const ancho=Math.max(...filas.slice(0,20).map(f=>f.length));return {h:-1,col:{nie:0,apellidos:1,nombres:2,sexo:3,encargado:4,telefono:5},heads:Array.from({length:ancho},(_,j)=>'Columna '+String.fromCharCode(65+j))};
+}
+function construirFilas(filas,h,col){
+  const out=[];
+  for(let i=h+1;i<filas.length;i++){const f=filas[i]||[],g=k=>col[k]==null||col[k]===''?'':String(f[col[k]]==null?'':f[col[k]]).trim();
+    if(!g('apellidos')&&!g('nombres'))continue;if(/apellido/i.test(g('apellidos'))||f.some(x=>/^ejemplo/i.test(String(x||''))))continue;
+    out.push({carnet:g('carnet').toUpperCase().replace(/\s+/g,''),nie:g('nie').replace(/\D/g,''),apellidos:g('apellidos'),nombres:g('nombres'),sexo:/^(m|masc|h|hombre|varon|niño|nino)/i.test(g('sexo'))?'M':/^(f|fem|mujer|niña|nina)/i.test(g('sexo'))?'F':'',
+      grado:g('grado'),seccion:g('seccion').toUpperCase(),nivel:g('nivel'),turno:g('turno'),encargado:g('encargado'),telefono:g('telefono'),fila:i+1})}
+  return {filas:out,conUbicacion:col.grado!=null&&col.grado!==''&&col.seccion!=null&&col.seccion!=='',conEncabezado:h>=0};
+}
+function leerTabla(filas){const d=detectarCols(filas);return construirFilas(filas,d.h,d.col)}
+function textoAFilas(txt){return txt.split(/\r?\n/).filter(l=>l.trim()).map(l=>l.split(l.includes('\t')?'\t':/;/).map(x=>x.trim()))}
+async function leerLibro(file){
+  if(/\.(xlsx|xls|ods)$/i.test(file.name)){await cargarLib('xlsx');const wb=XLSX.read(await file.arrayBuffer(),{type:'array'});
+    const hojas={};wb.SheetNames.forEach(n=>hojas[n]=XLSX.utils.sheet_to_json(wb.Sheets[n],{header:1,defval:'',raw:false}));
+    const pref=wb.SheetNames.find(n=>/estudiante|alumno|lista|matricula/i.test(n))||wb.SheetNames.find(n=>detectarCols(hojas[n]).h>=0)||wb.SheetNames[0];
+    return {hojas,hoja:pref}}
+  return {hojas:{[file.name]:textoAFilas(await file.text())},hoja:file.name};
+}
+async function archivoAFilas(file){const l=await leerLibro(file);return l.hojas[l.hoja]}
+function planImport(datos,secFija){
+  const plan={nuevos:[],actualizar:[],nuevasSec:[],sinGrado:[],repetidos:[],invalidas:0,datos,porFila:new Map(),porSec:new Map()};
+  const porCar=new Map(DB.estudiantes.filter(e=>e.carnet).map(e=>[e.carnet,e])),porNie=new Map(DB.estudiantes.filter(e=>e.nie).map(e=>[e.nie,e]));
+  const nomKey=x=>sinAc(x.apellidos+'|'+x.nombres),porNom=new Map(DB.estudiantes.map(e=>[nomKey(e),e]));
+  const vistos=new Set(),secKey=new Map(DB.secciones.map(s=>[s.grado+'|'+s.seccion+'|'+s.turno,s]));
+  for(const r of datos.filas){
+    if(!r.apellidos||!r.nombres){plan.invalidas++;plan.porFila.set(r,{t:'omit',m:'Faltan nombres o apellidos'});continue}
+    let secId=secFija,s=null;
+    if(!secFija){const g=mapGrado(r.grado,r.nivel);if(!g||!r.seccion){plan.sinGrado.push(r);plan.porFila.set(r,{t:'omit',m:`Grado no reconocido: ${r.grado||'vacío'}`});continue}
+      const t=mapTurno(r.turno),k=g+'|'+r.seccion+'|'+t;s=secKey.get(k);
+      if(!s){s={id:uid(),grado:g,seccion:r.seccion,turno:t,docenteId:'',nueva:true};secKey.set(k,s);plan.nuevasSec.push(s)}secId=s.id}
+    else s=sec(secFija);
+    const ps=plan.porSec.get(secId)||{s,n:0};ps.n++;plan.porSec.set(secId,ps);
+    if(r.carnet&&vistos.has(r.carnet)){plan.repetidos.push(r);r.carnet='';r.carnetRep=true}
+    if(r.carnet)vistos.add(r.carnet);
+    let ex=(r.carnet&&porCar.get(r.carnet))||(r.nie&&porNie.get(r.nie));
+    if(!ex){const pn=porNom.get(nomKey(r));if(pn&&(!r.carnet||!pn.carnet))ex=pn}
+    (ex?plan.actualizar:plan.nuevos).push({r,secId,ex});plan.porFila.set(r,{t:ex?'act':'nuevo',sec:s});
+  }
+  return plan;
+}
+function setPaso(n){document.querySelectorAll('.wz-step').forEach((el,i)=>{el.classList.toggle('on',i===n-1);el.classList.toggle('done',i<n-1)})}
 function importarDlg(){
-  openDlg(`<h2>Importar lista de estudiantes</h2>
-   <p class="small muted">Pegue una fila por estudiante, con columnas separadas por punto y coma o tabulación (puede copiarlas directo de Excel):<br><span class="mono">NIE ; Apellidos ; Nombres ; Sexo (M/F) ; Responsable ; Teléfono</span></p>
-   <div class="field"><label for="iSec">Sección destino</label><select id="iSec">${optSecs(ordenSecs(DB.secciones),UI.est.sec,'Seleccione…')}</select></div>
-   <div class="field"><label for="iTxt">Filas</label><textarea id="iTxt" placeholder="4387120;Hernández Flores;María José;F;Ana Flores;7123-4567"></textarea></div>
+  UI.imp=null;UI.impLibro=null;
+  openDlg(`<div class="panel-h"><div class="head-t"><span class="eyebrow">Matrícula</span><h2>Importar estudiantes desde Excel</h2></div><button class="icon-btn" data-act="cerrar" aria-label="Cerrar">${ic('x',20)}</button></div>
+   <ol class="wz"><li class="wz-step on"><span>1</span>Archivo</li><li class="wz-step"><span>2</span>Revisar</li><li class="wz-step"><span>3</span>Listo</li></ol>
+   <div id="wzBody"></div>`);
+  dlg.classList.add('wide');pasoArchivo();
+}
+function pasoArchivo(){
+  setPaso(1);
+  $('#wzBody').innerHTML=`<label class="drop" id="iDrop" for="iFile">${ic('up',34,1.5)}<b>Arrastre aquí su archivo de Excel</b><span>o toque para elegirlo · .xlsx, .xls, .csv</span><input type="file" id="iFile" accept=".xlsx,.xls,.ods,.csv,.txt" hidden></label>
    <p class="err" id="iErr"></p>
-   <div class="dlg-actions"><button class="btn" data-act="cerrar">Cancelar</button><button class="btn btn-primary" data-act="hacerImport">Importar</button></div>`);
+   <div class="grid2" style="gap:14px">
+    <div class="note note-info">${ic('info',18)}<span>Use el mismo formato del listado <b>Estudiantes_LISAM</b>: columnas <b>Carnet, Apellidos, Nombres, Nivel, Grado, Sección, Jornada</b>. Opcionales: Sexo, NIE, Responsable, Teléfono. Las secciones que no existan se crean solas.</span></div>
+    <div class="panel" style="padding:14px;gap:10px;box-shadow:none"><b class="small">¿No tiene el archivo?</b><span class="small muted">Descargue la plantilla, llénela en Excel y súbala aquí.</span><button class="btn" data-act="plantillaExcel" style="align-self:flex-start">${ic('dl',16)}Descargar plantilla Excel</button></div>
+   </div>
+   <details class="small"><summary style="cursor:pointer;font-weight:600">Pegar filas copiadas de Excel</summary>
+    <div class="field" style="margin-top:10px"><textarea id="iTxt" placeholder="Copie en Excel desde la fila de títulos (Carnet, Apellidos, Nombres, …) y pegue aquí"></textarea></div>
+    <button class="btn btn-sm" data-act="impPegado" style="margin-top:8px">Continuar con lo pegado</button></details>`;
+  const dz=$('#iDrop'),fi=$('#iFile');
+  const usar=async f=>{if(!f)return;$('#iErr').textContent='';dz.classList.add('busy');dz.querySelector('b').textContent='Leyendo '+f.name+'…';
+    try{UI.impLibro=await leerLibro(f);UI.impLibro.nombre=f.name;pasoRevisar(true)}catch(x){dz.classList.remove('busy');dz.querySelector('b').textContent='Arrastre aquí su archivo de Excel';$('#iErr').textContent='No se pudo leer el archivo: '+(x.message||x)}};
+  fi.onchange=e=>usar(e.target.files[0]);
+  ['dragenter','dragover'].forEach(t=>dz.addEventListener(t,e=>{e.preventDefault();dz.classList.add('over')}));
+  ['dragleave','drop'].forEach(t=>dz.addEventListener(t,e=>{e.preventDefault();dz.classList.remove('over')}));
+  dz.addEventListener('drop',e=>usar(e.dataTransfer.files[0]));
+}
+function pasoRevisar(nuevo){
+  setPaso(2);const L=UI.impLibro,filas=L.hojas[L.hoja];
+  if(nuevo||!UI.impMap){const d=detectarCols(filas);UI.impMap={h:d.h,col:d.col,heads:d.heads}}
+  const M=UI.impMap,datos=construirFilas(filas,M.h,M.col),secF=UI.impSec||'';
+  const ok=datos.conUbicacion||secF;
+  const p=UI.imp=ok&&datos.filas.length?planImport(datos,datos.conUbicacion?'':secF):null;
+  const opt=k=>`<option value="">— No usar —</option>`+M.heads.map((h,j)=>`<option value="${j}" ${String(M.col[k])===String(j)?'selected':''}>${esc(h||('Columna '+String.fromCharCode(65+j)))}</option>`).join('');
+  const muestra=datos.filas.slice(0,8);
+  $('#wzBody').innerHTML=`
+   <div class="row" style="justify-content:space-between"><span class="small"><b>${esc(L.nombre||'Datos pegados')}</b> · ${datos.filas.length} estudiantes encontrados</span>
+    <span class="row">${Object.keys(L.hojas).length>1?`<label class="small" for="iHoja">Hoja</label><select id="iHoja">${Object.keys(L.hojas).map(n=>`<option ${n===L.hoja?'selected':''}>${esc(n)}</option>`).join('')}</select>`:''}<button class="btn btn-sm btn-ghost" data-act="impOtro">Cambiar archivo</button></span></div>
+   <details class="map" ${M.h<0||!datos.conUbicacion?'open':''}><summary><b>Columnas reconocidas</b> <span class="small muted">${CAMPOS_UI.filter(([k])=>M.col[k]!=null&&M.col[k]!=='').map(([,l])=>l.replace(' *','')).join(' · ')||'ninguna'}</span></summary>
+    <div class="map-grid">${CAMPOS_UI.map(([k,l])=>`<div class="field"><label for="m_${k}">${l}</label><select id="m_${k}" data-campo="${k}">${opt(k)}</select></div>`).join('')}</div></details>
+   ${datos.conUbicacion?'':`<div class="field"><label for="iSec">Sección destino <span class="muted">(el archivo no trae Grado y Sección)</span></label><select id="iSec">${optSecs(ordenSecs(DB.secciones),secF,'Seleccione…')}</select></div>`}
+   ${!datos.filas.length?`<div class="note">${ic('alert',18)}<span>No se encontraron estudiantes. Indique arriba qué columnas tienen los <b>Apellidos</b> y <b>Nombres</b>.</span></div>`:''}
+   ${p?`<div class="kstats wz-stats"><div class="kstat"><b style="color:var(--p)">${p.nuevos.length}</b><span>Nuevos</span></div><div class="kstat"><b style="color:var(--accent)">${p.actualizar.length}</b><span>Se actualizan</span></div><div class="kstat"><b>${p.nuevasSec.length}</b><span>Secciones nuevas</span></div><div class="kstat"><b style="color:${p.sinGrado.length+p.invalidas?'var(--a)':'inherit'}">${p.sinGrado.length+p.invalidas}</b><span>Omitidos</span></div></div>
+   <div class="tbl-wrap" style="max-height:290px;overflow:auto"><table><thead><tr><th class="n">Fila</th><th>Carnet</th><th>Apellidos</th><th>Nombres</th><th>Grado en el archivo</th><th>Queda en</th><th>Estado</th></tr></thead><tbody>
+    ${muestra.map(r=>{const st=p.porFila.get(r)||{t:'omit'};return `<tr><td class="n muted">${r.fila}</td><td class="mono small">${esc(r.carnet||'—')}${r.carnetRep?' <span class="chip chip-warn nodot">repetido</span>':''}</td><td>${esc(r.apellidos)}</td><td>${esc(r.nombres)}</td><td class="small muted">${esc([r.grado,r.seccion].filter(Boolean).join(' ')||'—')}</td><td class="small">${st.sec?esc(secNombre(st.sec))+' · '+esc(st.sec.turno):'—'}</td><td>${st.t==='nuevo'?'<span class="chip chip-ok">Nuevo</span>':st.t==='act'?'<span class="chip chip-acc">Actualiza</span>':`<span class="chip chip-crit" title="${esc(st.m||'')}">Omitido</span>`}</td></tr>`}).join('')}
+   </tbody></table></div><p class="small muted">Se muestran las primeras ${muestra.length} de ${datos.filas.length} filas.</p>
+   <details><summary class="small" style="cursor:pointer;font-weight:600">Estudiantes por sección (${p.porSec.size})</summary><div class="sec-chips">${ordenSecs([...p.porSec.values()].map(x=>Object.assign({},x.s,{_n:x.n}))).map(s=>`<span class="chip ${s.nueva?'chip-acc':''} nodot">${esc(secNombre(s))} · ${s.turno==='Vespertino'?'V':'M'} <b class="mono">${s._n}</b>${s.nueva?' · nueva':''}</span>`).join('')}</div></details>
+   ${p.repetidos.length?`<div class="note">${ic('alert',18)}<span><b>Carnet repetido en el archivo:</b> ${p.repetidos.map(r=>esc(r.apellidos+', '+r.nombres)).join('; ')}. Se importa sin carnet; asígnelo luego en su ficha.</span></div>`:''}
+   ${p.sinGrado.length?`<div class="note">${ic('alert',18)}<span><b>${p.sinGrado.length} sin grado reconocido</b> (no se importan): ${p.sinGrado.slice(0,6).map(r=>esc(`${r.apellidos}, ${r.nombres} (${r.grado||'?'})`)).join('; ')}${p.sinGrado.length>6?'…':''}</span></div>`:''}`:''}
+   <p class="err" id="iErr"></p>
+   <div class="dlg-actions"><button class="btn" data-act="impOtro">Atrás</button><button class="btn btn-primary" data-act="hacerImport" ${p&&(p.nuevos.length||p.actualizar.length)?'':'disabled'}>${ic('check',16)}Importar ${p?p.nuevos.length+p.actualizar.length:0} estudiantes</button></div>`;
+  document.querySelectorAll('[data-campo]').forEach(sel=>sel.onchange=()=>{UI.impMap.col[sel.dataset.campo]=sel.value===''?null:+sel.value;if(UI.impMap.h<0&&sel.value!=='')UI.impMap.h=-1;pasoRevisar(false)});
+  const hs=$('#iHoja');if(hs)hs.onchange=()=>{L.hoja=hs.value;pasoRevisar(true)};
+  const is=$('#iSec');if(is)is.onchange=()=>{UI.impSec=is.value;pasoRevisar(false)};
+}
+function revisarImport(){if(UI.impLibro)pasoRevisar(false)}
+function hacerImport(){
+  const p=UI.imp;if(!p)return;
+  p.nuevasSec.forEach(s=>{delete s.nueva;DB.secciones.push(s)});
+  for(const {r,secId} of p.nuevos)DB.estudiantes.push({id:uid(),carnet:r.carnet,nie:r.nie,apellidos:r.apellidos,nombres:r.nombres,sexo:r.sexo,seccionId:secId,encargado:r.encargado,telefono:r.telefono,estado:'activo',qr:token(),reloj:'',ingreso:hoy()});
+  for(const {r,secId,ex} of p.actualizar)Object.assign(ex,{apellidos:r.apellidos,nombres:r.nombres,seccionId:secId,estado:'activo'},r.carnet?{carnet:r.carnet}:{},r.nie?{nie:r.nie}:{},r.sexo?{sexo:r.sexo}:{},r.encargado?{encargado:r.encargado}:{},r.telefono?{telefono:r.telefono}:{});
+  K.idx=null;log(`Importó estudiantes desde Excel: ${p.nuevos.length} nuevos, ${p.actualizar.length} actualizados, ${p.nuevasSec.length} secciones creadas`);save();
+  setPaso(3);
+  $('#wzBody').innerHTML=`<div class="wz-done"><span class="wz-ok">${ic('check',38,2.6)}</span><h2>Importación completa</h2>
+    <div class="kstats wz-stats" style="width:100%"><div class="kstat"><b style="color:var(--p)">${p.nuevos.length}</b><span>Estudiantes nuevos</span></div><div class="kstat"><b style="color:var(--accent)">${p.actualizar.length}</b><span>Actualizados</span></div><div class="kstat"><b>${p.nuevasSec.length}</b><span>Secciones creadas</span></div><div class="kstat"><b>${DB.estudiantes.filter(e=>e.estado==='activo').length}</b><span>Matrícula activa</span></div></div>
+    <p class="small muted">${nubeOn()?'Los datos se están subiendo a Google Drive para los demás equipos.':'Si usa varios equipos, conéctelos a Google Drive para compartir esta matrícula.'} Siguiente paso recomendado: asignar el docente guía de cada sección.</p>
+    <div class="row" style="justify-content:center"><button class="btn" data-act="impIr" data-v="secciones">${ic('layers',16)}Asignar docentes</button><button class="btn" data-act="impIr" data-v="identificacion">${ic('qr',16)}Imprimir carnets</button><button class="btn btn-primary" data-act="impIr" data-v="estudiantes">Ver estudiantes</button></div></div>`;
+  UI.imp=null;
+}
+async function plantillaExcel(){
+  try{await cargarLib('xlsx')}catch(e){toast(e.message,'err');return}
+  const enc=['N.°','Carnet','Apellidos','Nombres','Nivel','Grado','Sección','Jornada','Sexo','NIE','Responsable','Teléfono'];
+  const filas=[[`${DB.config.institucion} — Listado de estudiantes`],['Llene una fila por estudiante. Borre las filas de EJEMPLO antes de importar.'],[],enc,
+    [1,'EJEMPLO1','Aguirre Palacios','Brenda Estefanía','Bachillerato General','Primer Año','A','Matutina','F','','Ana Palacios','7123-4567'],
+    [2,'EJEMPLO2','Benítez Mondragón','Jesús Antonio','Tercer Ciclo','Septimo','B','Matutina','M','','','']];
+  const ws=XLSX.utils.aoa_to_sheet(filas);ws['!cols']=[6,12,24,24,22,14,9,11,7,11,22,12].map(w=>({wch:w}));ws['!autofilter']={ref:'A4:L4'};
+  const ins=XLSX.utils.aoa_to_sheet([['Cómo llenar la plantilla'],[],['Columna','Obligatoria','Valores aceptados'],
+    ['Carnet','Recomendada','Código del carnet del Liceo (ej.: A002347). Se usa para escanear en la entrada.'],['Apellidos','Sí','Ambos apellidos'],['Nombres','Sí','Nombres completos'],
+    ['Nivel','No','Parvularia, Primer Ciclo, Segundo Ciclo, Tercer Ciclo, Bachillerato General'],
+    ['Grado','Sí (si no se elige sección al importar)','Inicial, Kinder 4, Kinder 5, Preparatoria, Primero … Noveno, Primer Año, Segundo Año, Tercer Año'],
+    ['Sección','Sí (si no se elige sección al importar)','A, B, C…'],['Jornada','No','Matutina o Vespertina (si se deja vacía: Matutina)'],['Sexo','No','M o F'],['NIE','No','Número de Identificación del Estudiante'],['Responsable / Teléfono','No','Datos de contacto']]);
+  ins['!cols']=[{wch:24},{wch:34},{wch:90}];
+  const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'Estudiantes');XLSX.utils.book_append_sheet(wb,ins,'Instrucciones');
+  XLSX.writeFile(wb,'Plantilla_Estudiantes.xlsx');toast('Plantilla descargada.');
 }
 
 /* ---------- Identificación: carnets, rostros y reloj de huella ---------- */
@@ -1214,8 +1560,8 @@ async function idCarnets(){
   const c=DB.config;
   $('#cards').innerHTML=ests.length?ests.map(e=>{const q=qrcode(0,'M');q.addData(qrPayload(e),'Alphanumeric');q.make();const s=sec(e.seccionId);
     return `<article class="carnet"><div class="carnet-h"><span class="row"><img class="carnet-logo" src="${logoMini()}" alt=""><b>${esc(c.institucion)}</b></span><span>Carnet estudiantil ${c.anio}</span></div>
-    <div class="carnet-b"><div style="min-width:0">${avatar(e)}<div class="carnet-n">${esc(e.nombres)}<br>${esc(e.apellidos)}</div><div class="carnet-g">${esc(secNombre(s))} · ${esc(s.turno)}</div><div class="carnet-nie">Código ${esc(e.qr.slice(0,6))}</div></div>
-    <div class="carnet-qr">${q.createSvgTag({cellSize:4,margin:0,scalable:true})}<div class="carnet-nieqr">NIE ${esc(e.nie||'—')}</div></div></div>
+    <div class="carnet-b"><div style="min-width:0">${avatar(e)}<div class="carnet-n">${esc(e.nombres)}<br>${esc(e.apellidos)}</div><div class="carnet-g">${esc(secNombre(s))} · ${esc(s.turno)}</div><div class="carnet-nie">${e.carnet&&e.nie?'NIE '+esc(e.nie):'Código '+esc(e.qr.slice(0,6))}</div></div>
+    <div class="carnet-qr">${q.createSvgTag({cellSize:4,margin:0,scalable:true})}<div class="carnet-nieqr">${idTxt(e)}</div></div></div>
     <div class="carnet-f"><span>Presente este código al ingresar</span><span class="mono">${esc(DB.config.lema||'')}</span></div></article>`}).join('')
     :`<div class="empty">No hay estudiantes activos en esta sección.</div>`;
 }
@@ -1466,7 +1812,7 @@ VIEWS.admin=()=>{
   const f=UI.bit||(UI.bit={q:'',u:''});
   let bit=DB.bitacora;if(f.u)bit=bit.filter(x=>x.u===f.u);if(f.q){const q=f.q.toLowerCase();bit=bit.filter(x=>x.acc.toLowerCase().includes(q))}
   const usuariosBit=[...new Set(DB.bitacora.map(x=>x.u))];
-  main(`${cabecera('Superusuario · control total','Panel de administrador',`<button class="btn" data-act="exportar">${ic('dl',17)}Respaldo</button><button class="btn btn-primary" data-act="nuevoUsr">${ic('plus',17)}Nuevo usuario</button>`,'Cuentas y accesos, seguridad, identidad institucional, datos y bitácora completa del sistema.')}
+  main(`${cabecera('Superusuario · control total','Panel de administrador',`<button class="btn" data-act="exportar">${ic('dl',17)}Respaldo</button><button class="btn btn-primary" data-act="nuevoUsr">${ic('plus',17)}Nuevo usuario</button>`,`Cuentas y accesos, seguridad, identidad institucional, datos y bitácora completa del sistema. Versión ${VERSION_APP}.`)}
   <section class="metrics">
     <div class="metric"><span class="metric-l">Usuarios activos</span><span class="metric-v">${act}<small> / ${DB.usuarios.length}</small></span><span class="metric-i">${ic('ucog',20)}</span><span class="metric-s">${adminsActivos().length} administrador${adminsActivos().length===1?'':'es'}</span></div>
     <div class="metric"><span class="metric-l">Estudiantes</span><span class="metric-v">${DB.estudiantes.filter(e=>e.estado==='activo').length}</span><span class="metric-i p">${ic('users',20)}</span><span class="metric-s">${DB.secciones.length} secciones · ${DB.estudiantes.filter(e=>e.rostro).length} con rostro</span></div>
@@ -1498,6 +1844,7 @@ VIEWS.admin=()=>{
      <div class="dlg-actions full"><button class="btn btn-primary">Guardar seguridad</button></div></form>
      <p class="small muted">Los datos viven en este equipo: quien tenga acceso al navegador podría manipularlos con herramientas técnicas. Proteja el equipo con contraseña de Windows o bloqueo de pantalla.</p></section>
   </div>
+  ${panelNube()}
   <section class="panel"><div class="panel-h"><h2>Datos del sistema</h2><span class="chip nodot mono">${tot.toLocaleString('es-SV')} KB</span></div>
    <div class="store">${partes.map(p=>`<div class="store-r"><span>${p[0]}</span><span class="mono small">${p[1].toLocaleString('es-SV')} KB</span><div class="progress"><i style="width:${Math.min(100,p[1]/lim*100)}%;background:var(--accent)"></i></div></div>`).join('')}</div>
    <div class="row"><button class="btn btn-primary" data-act="exportar">${ic('dl',16)}Descargar respaldo</button><label class="btn" for="impFile">${ic('up',16)}Restaurar respaldo</label><input type="file" id="impFile" accept=".json,application/json" hidden>
@@ -1549,7 +1896,7 @@ function bindImport(){const inp=$('#impFile');if(!inp)return;inp.onchange=e=>{co
   let d;try{d=JSON.parse(rd.result)}catch(x){toast('El archivo no es un respaldo válido.','err');return}
   if(!d||!d.config||!Array.isArray(d.usuarios)||!Array.isArray(d.estudiantes)){toast('El archivo no tiene la estructura de un respaldo del Libro de Asistencia.','err');return}
   if(!await confirmar('¿Restaurar este respaldo?',`Reemplazará todos los datos actuales por los del archivo (${d.estudiantes.length} estudiantes, ${Object.keys(d.asistencia||{}).length} días con asistencia).`,'Restaurar',true))return;
-  DB=Object.assign(dbVacia(),d);DB.config=Object.assign(configBase(),d.config);asegurarAdmin();save();const yo=DB.usuarios.find(u=>u.id===YO.id&&u.activo);toast('Respaldo restaurado.');if(yo){YO=yo;render()}else salir()};rd.readAsText(file)}}
+  DB=Object.assign(dbVacia(),d);DB.config=Object.assign(configBase(),d.config);asegurarAdmin();tocar('*');save();const yo=DB.usuarios.find(u=>u.id===YO.id&&u.activo);toast('Respaldo restaurado.');if(yo){YO=yo;render()}else salir()};rd.readAsText(file)}}
 function asegurarAdmin(){if(!DB.usuarios.length||DB.usuarios.some(u=>u.rol==='admin'))return false;const d=DB.usuarios.find(u=>u.rol==='direccion'&&u.activo)||DB.usuarios.find(u=>u.activo);if(!d)return false;
   d.rol='admin';DB.bitacora.unshift({at:new Date().toISOString(),u:'Sistema',acc:`Asignó el rol de Administrador del sistema a ${d.usuario} (no había superusuario)`});return true}
 let _ultimaAct=Date.now();['pointerdown','keydown','touchstart'].forEach(t=>document.addEventListener(t,()=>{_ultimaAct=Date.now()},{passive:true}));
@@ -1577,6 +1924,7 @@ VIEWS.config=()=>{
    <label class="check full"><input type="checkbox" id="cS" ${c.sonido?'checked':''}> Sonido de confirmación en cada lectura</label>
    <div class="field"><label for="cVz">Voz al registrar</label><select id="cVz">${[['no','Sin voz'],['ingresado','Decir “Ingresado”'],['nombre','Decir el nombre y “ingresado”']].map(o=>`<option value="${o[0]}" ${(c.voz||'no')===o[0]?'selected':''}>${o[1]}</option>`).join('')}</select></div>
    <div class="field"><label for="cPz">Ignorar el mismo carnet durante</label><select id="cPz">${[2,4,8,15].map(n=>`<option value="${n}" ${(+c.qrPausa||4)===n?'selected':''}>${n} segundos</option>`).join('')}</select></div>
+   <div class="field full"><label for="cVal">Validación del carnet QR</label><select id="cVal"><option value="nie" ${c.qrValidar!=='estricto'?'selected':''}>Por NIE: acepta carnets impresos en cualquier equipo (recomendado)</option><option value="estricto" ${c.qrValidar==='estricto'?'selected':''}>Estricta: solo carnets impresos en este equipo; reponer un carnet anula el anterior</option></select></div>
    <label class="check full"><input type="checkbox" id="cNie" ${c.qrSoloNie?'checked':''}> Aceptar códigos QR o de barras que contienen solo el NIE (por ejemplo, carnets hechos en otro sistema)</label>
    <div class="dlg-actions full"><button class="btn btn-primary">Guardar configuración</button></div></form></section>
   <section class="panel"><div class="panel-h"><h2>Feriados y días sin clases</h2><span class="chip nodot">${c.feriados.length}</span></div>
@@ -1590,7 +1938,7 @@ VIEWS.config=()=>{
   <section class="panel"><h2>Bitácora de cambios</h2>${DB.bitacora.length?`<div class="tbl-wrap" style="max-height:420px;overflow:auto"><table><thead><tr><th>Fecha y hora</th><th>Usuario</th><th>Acción</th></tr></thead><tbody>${DB.bitacora.slice(0,60).map(b=>`<tr><td class="mono small" style="white-space:nowrap">${new Date(b.at).toLocaleString('es-SV',{dateStyle:'short',timeStyle:'short'})}</td><td class="small">${esc(b.u)}</td><td class="small">${esc(b.acc)}</td></tr>`).join('')}</tbody></table></div>`:'<p class="small muted">Sin movimientos todavía.</p>'}</section>`);
   $('#fCfg').onsubmit=ev=>{ev.preventDefault();
     Object.assign(c,{institucion:$('#cI').value.trim(),anio:+$('#cA').value,inicio:$('#cIni').value,fin:$('#cFin').value,umbral:+$('#cU').value,consecutivas:+$('#cC').value,tardanzas:+$('#cT').value,docenteEditaAnteriores:$('#cE').checked,
-      entrada:{Matutino:$('#cEM').value||'07:00',Vespertino:$('#cEV').value||'13:00'},tolerancia:+$('#cTol').value||0,umbralRostro:+$('#cR').value,sonido:$('#cS').checked,voz:$('#cVz').value,qrPausa:+$('#cPz').value,qrSoloNie:$('#cNie').checked});
+      entrada:{Matutino:$('#cEM').value||'07:00',Vespertino:$('#cEV').value||'13:00'},tolerancia:+$('#cTol').value||0,umbralRostro:+$('#cR').value,sonido:$('#cS').checked,voz:$('#cVz').value,qrPausa:+$('#cPz').value,qrSoloNie:$('#cNie').checked,qrValidar:$('#cVal').value});
     log('Actualizó la configuración');save();toast('Configuración guardada.');render();};
   $('#fFer').onsubmit=ev=>{ev.preventDefault();const f=$('#feF').value,n=$('#feN').value.trim();if(c.feriados.some(x=>x.fecha===f)){toast('Esa fecha ya está registrada.','err');return}
     c.feriados.push({fecha:f,nombre:n});log(`Agregó día sin clases ${fCorta(f)}: ${n}`);save();render()};
@@ -1618,6 +1966,11 @@ const ACT={
   csvBit:()=>{const rows=[['Fecha','Hora','Usuario','Acción']];DB.bitacora.forEach(x=>{const d=new Date(x.at);rows.push([iso(d),d.toLocaleTimeString('es-SV'),x.u,x.acc])});descargar(`bitacora-${hoy()}.csv`,aCSV(rows),'text/csv;charset=utf-8')},
   logoDef:()=>{delete DB.config.logo;delete DB.config.logoMini;log('Restauró el escudo original');save();toast('Escudo original restaurado.');render()},
   slide:b=>irSlide(+b.dataset.i),
+  nubeAhora:()=>{if(NUBE.nuevo){NUBE.nuevo=false;if(!dlg.open)render()}nubeProgramar(0);toast('Sincronizando con Google Drive…')},
+  nubeConectar:()=>dlgConectar(),
+  nubeCopiar:async()=>{const i=$('#nCodigo');try{await navigator.clipboard.writeText(i.value);toast('Código copiado.')}catch(e){i.select();toast('Seleccionado: cópielo con Ctrl+C.')}},
+  nubeSubirTodo:async()=>{if(!await confirmar('¿Volver a subir todo?','Se enviará de nuevo toda la información de este equipo a Google Drive. Úselo si otro equipo no recibe algún dato.','Subir todo'))return;NUBE.st.snap={};NUBE.st.bitAt='';tocar('*');nubeDiff();toast('Subiendo toda la información…')},
+  nubeDesc:async()=>{if(!await confirmar('¿Desconectar este equipo?','Este equipo dejará de recibir y enviar cambios. Los datos que ya tiene se conservan.','Desconectar',true))return;log('Desconectó este equipo de Google Drive');nubeDesconectar();saveLocal();render()},
   verPass:b=>{const i=$('#lP');const ver=i.type==='password';i.type=ver?'text':'password';b.innerHTML=ic(ver?'eyeoff':'eye',18);b.setAttribute('aria-label',ver?'Ocultar contraseña':'Mostrar contraseña');i.focus()},
   irLista:b=>{UI.lista={fecha:hoy(),sec:b.dataset.sec||(UI.lista&&UI.lista.sec)||''};go('lista')},
   verAlertas:()=>{UI.repTab='alertas';go('reportes')},
@@ -1640,7 +1993,7 @@ const ACT={
     if(!pend.length){toast('Todas las secciones ya tienen su lista registrada hoy.');return}
     if(!await confirmar('¿Cerrar la jornada de hoy?',`${n} estudiantes sin marcación de ingreso quedarán como ausentes en ${pend.length} secciones sin lista. Los docentes aún pueden corregir hoy en Pasar lista.`,'Cerrar jornada'))return;
     DB.asistencia[h]=a;DB.listas[h]=DB.listas[h]||{};const at=new Date().toISOString();
-    pend.forEach(p=>{p.falt.forEach(e=>{a[e.id]={e:'A',h:'',o:'Sin marcación de ingreso',via:'cierre'}});DB.listas[h][p.s.id]={por:YO.id,at,cierre:true}});
+    pend.forEach(p=>{p.falt.forEach(e=>{a[e.id]={e:'A',h:'',o:'Sin marcación de ingreso',via:'cierre',u:Date.now()};tocar(h)});DB.listas[h][p.s.id]={por:YO.id,at,cierre:true}});
     log(`Cerró la jornada: ${n} ausencias registradas`);save();toast(`Jornada cerrada: ${n} ausencias registradas.`);VIEWS.entrada()},
   marca:b=>{const id=b.dataset.id,v=b.dataset.v,br=UI.borrador[id];br.e=v;
     if(v==='T'&&!br.h&&UI.lista.fecha===hoy())br.h=horaAhora();
@@ -1649,25 +2002,25 @@ const ACT={
   todosP:()=>{for(const id in UI.borrador){const b=UI.borrador[id];if(b.e!=='J'){b.e='P';b.h='';if(b.o==='Sin marcación de ingreso')b.o=''}}const st=UI.lista;
     $('#roll').innerHTML=estudiantesDe(st.sec).map((e,i)=>filaLista(e,i,true)).join('');contarLista()},
   guardarLista:()=>{const st=UI.lista,f=st.fecha;DB.asistencia[f]=DB.asistencia[f]||{};
-    for(const id in UI.borrador){const b=UI.borrador[id],p=DB.asistencia[f][id]||{};DB.asistencia[f][id]={e:b.e,h:b.e==='T'?b.h:'',o:b.o.trim(),in:p.in||'',via:p.via&&p.via!=='cierre'?p.via:'lista'}}
+    for(const id in UI.borrador){const b=UI.borrador[id],p=DB.asistencia[f][id]||{};DB.asistencia[f][id]={e:b.e,h:b.e==='T'?b.h:'',o:b.o.trim(),in:p.in||'',via:p.via&&p.via!=='cierre'?p.via:'lista',u:Date.now()}}tocar(f);
     DB.listas[f]=DB.listas[f]||{};const prev=DB.listas[f][st.sec];DB.listas[f][st.sec]={por:YO.id,at:new Date().toISOString()};
     log(`${prev?'Corrigió':'Registró'} la lista de ${secNombre(sec(st.sec))} del ${fCorta(f)}`);
     if(save()){toast(`Lista guardada: ${secNombre(sec(st.sec))}.`);render()}},
   nuevoEst:()=>formEst(),
   editEst:b=>formEst(DB.estudiantes.find(e=>e.id===b.dataset.id)),
-  regenQR:async b=>{const e=DB.estudiantes.find(x=>x.id===b.dataset.id);if(!await confirmar('¿Reponer el carnet QR?','El código actual dejará de funcionar. Deberá imprimir un carnet nuevo para este estudiante.','Generar nuevo código'))return;
+  regenQR:async b=>{const e=DB.estudiantes.find(x=>x.id===b.dataset.id);if(!await confirmar('¿Reponer el carnet QR?',DB.config.qrValidar==='estricto'?'El código actual dejará de funcionar. Deberá imprimir un carnet nuevo para este estudiante.':'Se generará un código nuevo. Con la validación "por NIE" el carnet anterior seguirá funcionando; para anularlo, cambie a validación estricta en Configuración.','Generar nuevo código'))return;
     e.qr=token();log(`Repuso el carnet QR de ${nombreEst(e)}`);save();toast('Nuevo código generado. Imprímalo en Identificación.')},
   borrarEst:async b=>{const e=DB.estudiantes.find(x=>x.id===b.dataset.id);
     if(!await confirmar('¿Eliminar estudiante?',`Se borrará a ${nombreEst(e)} con todo su historial de asistencia. Si solo dejó de asistir, cámbielo a "Retirado".`,'Eliminar',true))return;
-    DB.estudiantes=DB.estudiantes.filter(x=>x.id!==e.id);for(const f in DB.asistencia)delete DB.asistencia[f][e.id];DB.justificaciones=DB.justificaciones.filter(j=>j.estudianteId!==e.id);
+    DB.estudiantes=DB.estudiantes.filter(x=>x.id!==e.id);for(const f in DB.asistencia)delete DB.asistencia[f][e.id];tocar('*');DB.justificaciones=DB.justificaciones.filter(j=>j.estudianteId!==e.id);
     log(`Eliminó a ${nombreEst(e)}`);save();closeDlg();toast('Estudiante eliminado.');render()},
   importar:()=>importarDlg(),
-  hacerImport:()=>{const s=$('#iSec').value,txt=$('#iTxt').value.trim();if(!s){$('#iErr').textContent='Seleccione la sección destino.';return}
-    let ok=0,mal=0;for(const ln of txt.split(/\r?\n/)){if(!ln.trim())continue;const c=ln.split(/[;\t]/).map(x=>x.trim());if(/apellido/i.test(ln))continue;
-      if(c.length<3||!c[1]||!c[2]){mal++;continue}if(c[0]&&DB.estudiantes.some(e=>e.nie===c[0])){mal++;continue}
-      DB.estudiantes.push({id:uid(),nie:c[0]||'',apellidos:c[1],nombres:c[2],sexo:/^m/i.test(c[3]||'')?'M':'F',seccionId:s,encargado:c[4]||'',telefono:c[5]||'',estado:'activo',qr:token(),ingreso:hoy()});ok++}
-    if(!ok){$('#iErr').textContent=mal?`Ninguna fila válida (${mal} con datos incompletos o NIE repetido).`:'Pegue al menos una fila.';return}
-    log(`Importó ${ok} estudiantes a ${secNombre(sec(s))}`);save();closeDlg();toast(`${ok} estudiantes importados${mal?`, ${mal} filas omitidas`:''}.`);render()},
+  revisarImport:()=>revisarImport(),
+  hacerImport:()=>hacerImport(),
+  impOtro:()=>{UI.impLibro=null;UI.impMap=null;pasoArchivo()},
+  impPegado:()=>{const t=$('#iTxt').value;if(!t.trim()){$('#iErr').textContent='Pegue primero las filas.';return}UI.impLibro={hojas:{'Datos pegados':textoAFilas(t)},hoja:'Datos pegados',nombre:'Datos pegados'};pasoRevisar(true)},
+  impIr:b=>{closeDlg();go(b.dataset.v)},
+  plantillaExcel:()=>plantillaExcel(),
   idTab:b=>{UI.idTab=b.dataset.v;VIEWS.identificacion()},
   regRostro:b=>dlgRostro(DB.estudiantes.find(e=>e.id===b.dataset.id)),
   delRostro:async b=>{const e=DB.estudiantes.find(x=>x.id===b.dataset.id);if(!await confirmar('¿Quitar el rostro registrado?',`${nombreEst(e)} ya no podrá ingresar por reconocimiento facial.`,'Quitar',true))return;
@@ -1703,8 +2056,8 @@ const ACT={
   editUsr:b=>formUsr(usuario(b.dataset.id)),
   quitarFer:b=>{DB.config.feriados=DB.config.feriados.filter(f=>f.fecha!==b.dataset.f);save();render()},
   exportar:()=>{descargar(`respaldo-asistencia-${hoy()}.json`,JSON.stringify(DB),'application/json');log('Descargó un respaldo');save();toast('Respaldo descargado.')},
-  empezarReal:async()=>{if(!await confirmar('¿Borrar todos los datos?','Se eliminarán estudiantes, secciones, asistencias, justificaciones, rostros y usuarios. Se conserva la configuración. Luego creará el superusuario (Administrador del sistema). Si tiene datos reales, descargue un respaldo antes.','Borrar todo',true))return;
-    const cfg=DB.config;DB=dbVacia(cfg);save();salir()},
+  empezarReal:async()=>{if(!await confirmar('¿Borrar todos los datos?',`Se eliminarán estudiantes, secciones, asistencias, justificaciones, rostros y usuarios. Se conserva la configuración. ${nubeOn()?'ATENCIÓN: este equipo está conectado a Google Drive, así que también se borrarán en la nube y en todos los equipos. ':''}Luego creará el superusuario (Administrador del sistema). Si tiene datos reales, descargue un respaldo antes.`,'Borrar todo',true))return;
+    const cfg=DB.config;DB=dbVacia(cfg);tocar('*');save();salir()},
   demoUser:async b=>{if(_tecleando||$('#lBtn').disabled)return;_tecleando=true;try{await teclear($('#lU'),b.dataset.u,45);await teclear($('#lP'),'1234',70);await espera(sinAnim()?0:150);$('#fLog').requestSubmit()}finally{_tecleando=false}},
 };
 document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b||b.disabled)return;const f=ACT[b.dataset.act];if(f){e.preventDefault();f(b,e)}});
@@ -1761,9 +2114,9 @@ function renderLogin(){
       <p class="err" id="lErr" role="alert"></p>
       <button class="btn btn-primary btn-login" id="lBtn"><span>Entrar</span>${ic('arrow',18)}</button></form>
      ${DB.demo?`<div class="demo-box" style="--i:2"><span class="eyebrow">Cuentas de ejemplo · contraseña 1234</span><div class="demo-chips">${[['admin','Superusuario · control total'],['direccion','Dirección'],['coordinacion','Coordinación académica'],['kmejia','Docente de Parvularia y 3.er grado'],['dportillo','Docente de 7.° y bachillerato'],['porteria','Control de entrada']].map(x=>`<button type="button" class="demo-chip" data-act="demoUser" data-u="${x[0]}"><b>${x[0]}</b><span>${x[1]}</span></button>`).join('')}</div></div>`:''}`}
-     <p class="login-foot" style="--i:3">${ic('lock',14)}<span>La información se guarda solo en este equipo. ${esIOS&&!esStandalone()?'En iPhone, instálelo desde Safari con Compartir → Agregar a pantalla de inicio.':''}</span></p>
+     <p class="login-foot" style="--i:3">${ic(nubeOn()?'cloud':'lock',14)}<span>${nubeOn()?'Conectado a Google Drive: la información se comparte entre todos los equipos del Liceo.':'La información se guarda solo en este equipo. <button type="button" class="linkbtn" data-act="nubeConectar" style="color:var(--accent)">Conectar a Google Drive</button>'} ${esIOS&&!esStandalone()?'En iPhone, instálelo desde Safari con Compartir → Agregar a pantalla de inicio.':''}</span></p>
     </div></section></div>`;
-  pintarTema();pintarInstalar();
+  pintarTema();pintarInstalar();pintarNube();
   document.querySelectorAll('.lg-slide').forEach(el=>{const im=new Image();im.onload=()=>{el.style.backgroundImage=`url('${el.dataset.src}')`};im.onerror=()=>{el.remove();const d=document.querySelectorAll('.la-dots button');if(d.length)d[d.length-1].remove();if(!document.querySelector('.lg-slide')){const f=$('.la-foot');if(f)f.hidden=true}};im.src=el.dataset.src});
   let tk=0;_loginTimer=setInterval(()=>{const cl=$('#laClock');if(!cl){clearInterval(_loginTimer);return}cl.textContent=horaAhora();if(++tk%3===0)irSlide(_slide+1)},2000);irSlide(0);
   const err=(m)=>{$('#lErr').innerHTML=m?`${m}`:'';if(m){const cd=$('#lCard');cd.classList.remove('shake');void cd.offsetWidth;cd.classList.add('shake')}};
@@ -1835,7 +2188,7 @@ async function semilla(){
 
 /* ---------- Arranque ---------- */
 (async()=>{
-  aplicarTema(temaActual());
+  aplicarTema(temaActual());nubeCargar();
   DB=load();
   if(!DB){DB=await semilla();save()}
   else{const b=dbVacia();for(const k in b)if(DB[k]==null)DB[k]=b[k];DB.config=Object.assign(configBase(),DB.config);if(!DB.config.entrada)DB.config.entrada=configBase().entrada;
@@ -1844,7 +2197,7 @@ async function semilla(){
     if(DB.demo&&!DB.usuarios.some(u=>u.rol==='porteria'))DB.usuarios.push({id:uid(),nombre:'Sr. Julio Canales',usuario:'porteria',rol:'porteria',activo:true,hash:await hash('1234')});
     let c=false;DB.estudiantes.forEach(e=>{if(!e.qr){e.qr=token();c=true}});if(c)save()}
   try{const id=sessionStorage.getItem(SKEY);YO=DB.usuarios.find(u=>u.id===id&&u.activo)||null}catch(e){}
-  const sp=splash();render();await sp;
+  const sp=splash();render();if(nubeOn())nubeProgramar(600);await sp;
 })();
 </script>
 </body>
